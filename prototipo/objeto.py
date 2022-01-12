@@ -6,3 +6,9 @@ class Obstaculo(pygame.sprite.Sprite):
         super().__init__()
         self.surface = 'image()'
         self.rect = 'get_rect()'
+
+    def draw():
+        pass
+
+    def update():
+        pass
