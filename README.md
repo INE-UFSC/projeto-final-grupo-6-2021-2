@@ -13,7 +13,7 @@ Os grupos serão avaliados de forma objetiva (aplicação de conceitos, entregas
 
 Aqui vai um exemplo de TODO list contendo as etapas.
 - [x] Descrição do jogo
-- [ ] Diagramas UML (18-dez-2021)
+- [X] Diagramas UML (18-dez-2021)
 - [ ] Interface Gráfica (13-fev-2022)
 - [ ] Protótipo do jogo (13-fev-2022)
 - [ ] Versão final com relatório e vídeo (13-mar-2022)
