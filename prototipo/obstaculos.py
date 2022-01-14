@@ -5,9 +5,9 @@ from sys import exit
 
 
 #Cada objeto recebe uma imagem, a posição dele e de que grupo ele faz parte.
-#É necessário criar o grupo préviamente usando pygame.sprite.Group(), exemplo na linha 47
-#Cada objeto é adicionado a esse grupo automaticamente pelo pygame ao ser intanciado
-#No loop principal usa-se nome_do_grupo.draw(tela_em_que_vai_ser_desenhado), exemplo linha 114
+#É necessário criar o grupo préviamente usando pygame.sprite.Group(), exemplo na linha 50
+#Cada objeto é adicionado a esse grupo automaticamente pelo pygame ao ser instanciado
+#No loop principal usa-se nome_do_grupo.draw(tela_em_que_vai_ser_desenhado), exemplo linha 115
 
 class Obstaculo(pygame.sprite.Sprite):
 
