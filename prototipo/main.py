@@ -2,7 +2,6 @@ import pygame
 from pygame.locals import *
 from sys import exit
 from jogador import Jogador
-import os
 
 pygame.init()
 
@@ -19,7 +18,7 @@ y_chao = 500
 # Criação da janela de jogo
 display = pygame.display.set_mode((LARGURA, ALTURA))
 display.fill(BRANCO)
-pygame.display.set_caption("Geometry Dash")
+pygame.display.set_caption("Geometry Dash MVP")
 
 # Grupo que armazena os objetos e sprites 
 sprites = pygame.sprite.Group()
@@ -32,6 +31,7 @@ while True:
     display.fill(BRANCO)
     pygame.draw.line(display, PRETO, (0, y_chao), (800, y_chao))
     
+    # Evento de fechamento da janela
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()

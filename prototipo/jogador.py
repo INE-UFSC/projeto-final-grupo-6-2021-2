@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+import os
 
 
 class Jogador(pygame.sprite.Sprite):
@@ -8,8 +9,9 @@ class Jogador(pygame.sprite.Sprite):
         self.x = 50
         self.y = 468
         self.velocidade_pulo = 8
+        self.altura_pulo = 410
         self.pulando = False
-        self.image = pygame.image.load('quadrado preto.png')
+        self.image = pygame.image.load(os.path.join('Imagens', 'quadrado preto.png'))
         self.rect = self.image.get_rect()
         self.rect.topleft = (self.x, self.y)
 
@@ -20,7 +22,7 @@ class Jogador(pygame.sprite.Sprite):
         
         '''Mecanica de movimento do pulo'''
         if self.pulando:
-            if self.rect.y <= 410:
+            if self.rect.y <= self.altura_pulo:
                 self.pulando = False
             self.rect.y -= self.velocidade_pulo
         
