@@ -41,10 +41,14 @@ class Coin(Obstaculo):
         super().__init__(image, pos)
 
 
-
-# A partir daqui é apenas codigo para teste, apagar futuramente
-
 '''
+import json
+import os
+current_directory = os.path.dirname(__file__)
+file_path_image = os.path.join(current_directory, 'imagens')
+file_path_mapa = os.path.join(current_directory, 'Mapas')
+
+
 pygame.init()
 
 elements = pygame.sprite.Group()
@@ -54,10 +58,13 @@ clock = pygame.time.Clock()
 PRETO = (34, 40, 49)
 BRANCO = (240, 240, 240)
 
-screen = pygame.display.set_mode((800, 400))
-bg_surface = pygame.image.load('C:/1Principal/Projects/Python/ProjetoFinalPOO2/Img/bg.png')
-block = pygame.image.load('C:/1Principal/Projects/Python/ProjetoFinalPOO2/Img/FakeSpike01.png')
-block = pygame.transform.smoothscale(block, (32, 32))
+screen = pygame.display.set_mode((1280, 960))
+bg_surface = pygame.image.load(f'{file_path_image}/bg.png')
+bg_surface = pygame.transform.smoothscale(bg_surface, (1280, 960))
+spike = pygame.image.load(f'{file_path_image}/FakeSpike01.png')
+spike = pygame.transform.smoothscale(spike, (48, 48))
+block = pygame.image.load(f'{file_path_image}/block1.png')
+block = pygame.transform.smoothscale(block, (48, 48))
 pygame.display.set_caption("Geometry Dash")
 
 def init_level(map):
@@ -68,24 +75,35 @@ def init_level(map):
 
     for row in map:
         for col in row:
-
-            if col == "0":
-                Block(block, (x, 300), elements)
-            x += 32
-        y += 16
+            
+            if col == 1:
+                Block(block, (x, y), elements)
+            if col == 2:
+                Spike(spike, (x, y), elements)
+            x += 48
+        y += 48
         x = 0
 
-def block_map(level_num):
+def block_map(file):
     """
     :type level_num: rect(screen, BLACK, (0, 0, 32, 32))
     open a csv file that contains the right level map
     """
-    lvl = []
-    with open(level_num, newline='') as csvfile:
-        trash = csv.reader(csvfile, delimiter=',', quotechar='"')
-        for row in trash:
-            lvl.append(row)
-    return lvl
+    with open(file) as f:
+        data = json.load(f)
+        linha = []
+        mapa = []
+        count = 0
+        for x in data["layers"][1]['data']:
+            linha.append(x)
+            count += 1
+            if count == 80:
+                count = 0
+                mapa.append(linha[:])
+                linha.clear()
+        f.close()
+    return mapa
+     
 
 def resize(img, size=(32, 32)):
     """resize images
@@ -99,7 +117,7 @@ def resize(img, size=(32, 32)):
     resized = pygame.transform.smoothscale(img, size)
     return resized
 
-level_list = block_map('C:/1Principal/Projects/Python/ProjetoFinalPOO2/Mapas/mapa_teste.csv')
+level_list = block_map(f'{file_path_mapa}/mapa_teste2.json')
 init_level(level_list)
 
 print(elements)
