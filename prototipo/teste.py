@@ -35,9 +35,9 @@ def init_level(map):
         for col in row:
             
             if col == 1:
-                Block(block, (x, y), elements)
+                Block((x, y), elements)
             if col == 2:
-                Spike(spike, (x, y), elements)
+                Spike((x, y), elements)
             x += 48
         y += 48
         x = 0
@@ -77,8 +77,6 @@ def resize(img, size=(32, 32)):
 
 level_list = block_map(f'{file_path_mapa}/mapa_teste2.json')
 init_level(level_list)
-
-print(elements)
 
 while True: 
     pygame.display.update()

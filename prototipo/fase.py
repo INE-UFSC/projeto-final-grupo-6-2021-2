@@ -2,8 +2,6 @@ import os, json
 
 
 #Global directory
-current_directory = os.path.dirname(__file__)
-file_path_mapa = os.path.join(current_directory, 'Mapas')
 
 class Fase():
 
@@ -22,7 +20,7 @@ class Fase():
             for x in data["layers"][1]['data']:
                 linha.append(x)
                 count += 1
-                if count == 80:
+                if count == 160:
                     count = 0
                     mapa.append(linha[:])
                     linha.clear()

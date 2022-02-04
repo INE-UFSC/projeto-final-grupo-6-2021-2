@@ -1,34 +1,40 @@
 import pygame
 from pygame.locals import *
+import os
 
 
-class Obstaculo(pygame.sprite.Sprite):
+current_directory = os.path.dirname(__file__)
+file_path_image = os.path.join(current_directory, 'imagens')
 
-    def __init__(self, image, pos, *groups) -> None:
-        super().__init__(*groups)
+class Obstaculo():
+
+    def __init__(self, image, pos) -> None:
+        image = pygame.transform.smoothscale(image, (24, 24))
         self.image = image
         self.rect = self.image.get_rect(topleft=pos)
 
 
 class Spike(Obstaculo):
 
-    def __init__(self, image, pos, *groups) -> None:
-        super().__init__(image, pos, *groups)
+    def __init__(self, pos) -> None:
+        image = pygame.image.load(f'{file_path_image}/FakeSpike01.png')
+        super().__init__(image, pos)
 
 
 class Block(Obstaculo):
 
-    def __init__(self, image, pos, *groups) -> None:
-        super().__init__(image, pos, *groups)
+    def __init__(self, pos) -> None:
+        image = pygame.image.load(f'{file_path_image}/block1.png')
+        super().__init__(image, pos)
 
 
 class Orb(Obstaculo):
 
-    def __init__(self, image, pos, *groups) -> None:
-        super().__init__(image, pos, groups)
+    def __init__(self, image, pos) -> None:
+        super().__init__(image, pos)
 
 
 class Coin(Obstaculo):
 
-    def __init__(self, image, pos, *groups) -> None:
-        super().__init__(image, pos, groups)
+    def __init__(self, image, pos) -> None:
+        super().__init__(image, pos)
