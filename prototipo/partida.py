@@ -45,7 +45,7 @@ class Partida():
 
             self.screen.blit(bg_surface,(0,0))
             self.desenhar_elementos()
-            self.atualizar_level(self.player.vel.x)
+            self.atualizar_level(self.player.velocidade.x)
             jogador_group.draw(self.screen)
             jogador_group.update(self.elements)
             clock.tick(FPS)

@@ -13,16 +13,15 @@ class Jogador(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.__x = 100
-        self.__y = 424
-        self.__velocidade_pulo = 8
-        self.__altura_pulo = 410
+        self.__y = 432
+        self.__velocidade = Vector2(1, 0)
         self.__gravidade = 0.5
         self.__pulando = False
         self.__nochao = True
-        self.vel = Vector2(1, 0)
 
         # Criação do retângulo
-        self.__image = pygame.image.load(f"{file_path_image}/quadrado preto.png")
+        self.__image = pygame.image.load(f"{file_path_image}/geo.png")
+        self.__image = pygame.transform.scale(self.__image, (24, 24))
         self.__rect = self.image.get_rect()
 
         # Posicionamento do retângulo
@@ -56,38 +55,41 @@ class Jogador(pygame.sprite.Sprite):
     def gravidade(self):
         return self.__gravidade
 
+    @property
+    def velocidade(self):
+        return self.__velocidade
+
     def pular(self):
         if self.nochao:
             self.__pulando = True
-            self.vel.y = -8
+            self.__velocidade.y = -8
     
     def collide(self, yvel, grupo):
 
+        # Verificação das colisões 
         for x in grupo:
             if pygame.sprite.collide_rect(self, x):
                 if isinstance(x, Block):
                     if yvel > 0:
                         self.rect.bottom = x.rect.top
-                        self.vel.y =  0
+                        self.__velocidade.y =  0
                         self.__pulando = False
                         self.__nochao = True
                     elif yvel < 0:
-                        """if yvel is (-),player collided while jumping"""
-                        self.rect.top = x.rect.bottom  # player top is set the bottom of block like it hits it head
+                        self.rect.top = x.rect.bottom 
                     else:
-                        """otherwise, if player collides with a block, he/she dies."""
-                        self.vel.x = 0
-                        self.rect.right = x.rect.left  # dont let player go through walls
+                        self.__velocidade.x = 0
+                        self.rect.right = x.rect.left
                         self.died = True
 
     def update(self, grupo):
             
+        # Caso não encoste no chão, a gravidade começa a agir no jogador
         if not self.nochao:
-            self.vel.y += self.__gravidade
+            self.__velocidade.y += self.__gravidade
             self.collide(0, grupo)
 
-        self.rect.top += self.vel.y
+        self.rect.top += self.__velocidade.y
         self.__nochao = False
-        self.collide(self.vel.y, grupo)
-      
-      
+        self.collide(self.__velocidade.y, grupo)
+            
