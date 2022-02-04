@@ -40,10 +40,7 @@ while True:
     # Detecção da tecla para o pulo
     keys_pressed = pygame.key.get_pressed()
     if keys_pressed[pygame.K_SPACE]:
-        if jogador.rect.y != jogador.y:
-            pass
-        else:
-            jogador.pular()
+        jogador.pular()
 
     # Desenho e update do grupo de sprites
     sprites.draw(display)
