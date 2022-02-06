@@ -18,8 +18,11 @@ class ControleJogo():
     def __init__(self):
         self.__jogador = Jogador()
         self.__fase = Fase(
-            'Fase 1', f'{file_path_musica}/undertale-megalovania.mp3', f'{file_path_mapa}/mapa_teste4.json')
+            'Fase 1',
+            f'{file_path_musica}/undertale-megalovania.mp3',
+            f'{file_path_mapa}/mapa_teste4.json')
         self.__partida = Partida(self.__fase, self.__jogador)
+        self.__end_game = pygame.display.set_mode((800, 480))
 
     @property
     def jogador(self):
@@ -35,8 +38,15 @@ class ControleJogo():
 
     def tela_de_morte(self):
         pygame.mixer.music.stop()
-        self.__partida.elements.clear()
-        # opcoes: tirar o jogador da tela também? mensagem explicando para apertar R?
+        texto_morte = 'MoRrEuU'
+        texto_opcoes = 'Aperte R para reiniciar e ESC para sair'
+        fontesys60 = pygame.font.SysFont(pygame.font.get_default_font(), 60)
+        fontesys40 = pygame.font.SysFont(pygame.font.get_default_font(), 24)
+        tela_texto_morte = fontesys60.render(texto_morte, 1, (255, 255, 255))
+        tela_texto_opcoes = fontesys40.render(texto_opcoes, 1, (255, 255, 255))
+        self.__end_game.blit(tela_texto_morte, (300, 200))
+        self.__end_game.blit(tela_texto_opcoes, (250, 260))
+        pygame.display.update()
 
     def iniciar_partida(self):
         pygame.init()
@@ -60,24 +70,32 @@ class ControleJogo():
 
             for event in pygame.event.get():
                 if event.type == QUIT:
+                    pygame.display.quit()
                     pygame.quit()
                     exit()
 
             keys_pressed = pygame.key.get_pressed()
-            if keys_pressed[pygame.K_SPACE]:
-                self.__jogador.pular()
 
-            if self.jogador.morte:  # estado morto do jogador
+            if self.jogador.morte:
                 self.tela_de_morte()
 
-            if keys_pressed[pygame.K_r] and self.jogador.morte:
-                self.__jogador.resetar()
-                self.iniciar_partida()
+            else:
+                if keys_pressed[pygame.K_SPACE]:
+                    self.__jogador.pular()
 
-            self.__partida.screen.blit(bg_surface, (0, 0))
-            self.__partida.desenhar_elementos()
-            self.__partida.atualizar_level(self.jogador.velocidade.x)
-            jogador_group.draw(self.__partida.screen)
-            jogador_group.update(self.__partida.elements)
+                self.__partida.screen.blit(bg_surface, (0, 0))
+                self.__partida.desenhar_elementos()
+                self.__partida.atualizar_level(self.jogador.velocidade.x)
+                jogador_group.draw(self.__partida.screen)
+                jogador_group.update(self.__partida.elements)
+
+            if keys_pressed[pygame.K_ESCAPE]:
+                pygame.display.quit()
+                pygame.quit()
+                exit()
+
+            if keys_pressed[pygame.K_r]:
+                self.jogador.resetar()
+                self.iniciar_partida()
 
             clock.tick(FPS)

@@ -1,9 +1,6 @@
 import os
 from obstaculos import *
 
-current_directory = os.path.dirname(__file__)
-file_path_mapa = os.path.join(current_directory, 'Mapas')
-
 
 class Partida():
 
