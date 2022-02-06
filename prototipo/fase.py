@@ -1,5 +1,5 @@
-import os, json
-
+import os
+import json
 
 
 class Fase():

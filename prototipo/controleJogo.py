@@ -6,7 +6,6 @@ from fase import Fase
 from partida import Partida
 
 
-
 current_directory = os.path.dirname(__file__)
 file_path_image = os.path.join(current_directory, 'imagens')
 file_path_mapa = os.path.join(current_directory, 'Mapas')
@@ -21,7 +20,7 @@ class ControleJogo():
     @property
     def jogador(self):
         return self.__jogador
-        
+
     @property
     def fase(self):
         return self.__fase
@@ -45,14 +44,14 @@ class ControleJogo():
         jogador_group = pygame.sprite.Group()
         jogador_group.add(self.__jogador)
 
-        while True: 
-            
+        while True:
+
             pygame.display.update()
 
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
-                    exit() 
+                    exit()
 
             keys_pressed = pygame.key.get_pressed()
             if keys_pressed[pygame.K_SPACE]:
@@ -61,7 +60,7 @@ class ControleJogo():
                 self.__jogador.resetar()
                 self.iniciar_partida()
 
-            self.__partida.screen.blit(bg_surface,(0,0))
+            self.__partida.screen.blit(bg_surface, (0, 0))
             self.__partida.desenhar_elementos()
             self.__partida.atualizar_level(self.jogador.velocidade.x)
             jogador_group.draw(self.__partida.screen)
