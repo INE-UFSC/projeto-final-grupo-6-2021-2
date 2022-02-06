@@ -1,5 +1,6 @@
-import os, json
-
+import os
+import json
+from pygame import mixer
 
 
 class Fase():
@@ -25,6 +26,11 @@ class Fase():
     @property
     def mapeamento(self):
         return self.__mapeamento
+
+    def toca_musica(self):
+        mixer.init()
+        mixer.music.load(self.musica)
+        mixer.music.play()
 
     def mapear_fase(self):
         with open(self.arquivo) as f:
