@@ -1,3 +1,5 @@
-#from ControleJogo import *
+from controleJogo import *
 
-#controle_jogo.iniciar()
+controle_jogo = ControleJogo()
+
+controle_jogo.iniciar()
