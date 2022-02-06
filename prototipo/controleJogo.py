@@ -11,6 +11,7 @@ current_directory = os.path.dirname(__file__)
 file_path_image = os.path.join(current_directory, 'imagens')
 file_path_mapa = os.path.join(current_directory, 'Mapas')
 file_path_musica = os.path.join(current_directory, 'musicas')
+file_path_fonts = os.path.join(current_directory, 'fonts')
 
 
 class ControleJogo():
@@ -31,6 +32,11 @@ class ControleJogo():
     @property
     def partida(self):
         return self.__partida
+
+    def tela_de_morte(self):
+        pygame.mixer.music.stop()
+        self.__partida.elements.clear()
+        # opcoes: tirar o jogador da tela também? mensagem explicando para apertar R?
 
     def iniciar_partida(self):
         pygame.init()
@@ -61,7 +67,7 @@ class ControleJogo():
                 self.__jogador.pular()
 
             if self.jogador.morte:  # estado morto do jogador
-                pygame.mixer.music.stop()  # para a musica
+                self.tela_de_morte()
 
             if keys_pressed[pygame.K_r] and self.jogador.morte:
                 self.__jogador.resetar()
