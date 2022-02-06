@@ -29,14 +29,6 @@ class Jogador(pygame.sprite.Sprite):
         self.__rect.topleft = (self.__x, self.__y)
 
     @property
-    def morte(self):
-        return self.__morte
-    
-    @morte.setter
-    def morte(self, status):
-        self.__morte = status
-
-    @property
     def x(self):
         return self.__x
 
@@ -49,32 +41,40 @@ class Jogador(pygame.sprite.Sprite):
         return self.__y
 
     @property
-    def image(self):
-        return self.__image
-
-    @property
-    def rect(self):
-        return self.__rect
-
-    @property
-    def nochao(self):
-        return self.__nochao
-
-    @property
-    def pulando(self):
-        return self.__pulando
-
-    @property
-    def gravidade(self):
-        return self.__gravidade
-
-    @property
     def velocidade(self):
         return self.__velocidade
 
     @velocidade.setter
     def velocidade(self, valor):
         self.__velocidade = valor
+
+    @property
+    def gravidade(self):
+        return self.__gravidade
+
+    @property
+    def pulando(self):
+        return self.__pulando
+
+    @property
+    def nochao(self):
+        return self.__nochao
+
+    @property
+    def morte(self):
+        return self.__morte
+    
+    @morte.setter
+    def morte(self, status):
+        self.__morte = status
+
+    @property
+    def image(self):
+        return self.__image
+
+    @property
+    def rect(self):
+        return self.__rect
 
     def pular(self):
         if self.nochao:
@@ -108,8 +108,6 @@ class Jogador(pygame.sprite.Sprite):
 
     def update(self, grupo):
 
-
-    
         # Caso não encoste no chão, a gravidade começa a agir no jogador
         if not self.__morte:
             if not self.nochao:

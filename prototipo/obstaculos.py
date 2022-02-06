@@ -10,8 +10,16 @@ class Obstaculo():
 
     def __init__(self, image, pos) -> None:
         image = pygame.transform.smoothscale(image, (24, 24))
-        self.image = image
-        self.rect = self.image.get_rect(topleft=pos)
+        self.__image = image
+        self.__rect = self.image.get_rect(topleft=pos)
+
+    @property
+    def image(self):
+        return self.__image
+
+    @property
+    def rect(self):
+        return self.__rect
 
 
 class Spike(Obstaculo):
