@@ -7,8 +7,8 @@ from partida import Partida
 
 
 current_directory = os.path.dirname(__file__)
-file_path_image = os.path.join(current_directory, 'imagens')
-file_path_mapa = os.path.join(current_directory, 'Mapas')
+file_path_image = os.path.join(current_directory, 'imagens/tinified')
+file_path_mapa = os.path.join(current_directory, 'mapas')
 
 
 class ControleJogo():
@@ -37,7 +37,7 @@ class ControleJogo():
 
         self.__partida.elements.clear()
         bg_surface = pygame.image.load(f'{file_path_image}/bg.png')
-        bg_surface = pygame.transform.smoothscale(bg_surface, (800, 480))
+        bg_surface = pygame.transform.smoothscale(bg_surface.convert(), (800, 480))
         mapa = self.__partida.fase.mapear_fase()
         self.__partida.desenhar_level(mapa)
 
