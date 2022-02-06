@@ -5,9 +5,9 @@ from pygame.math import Vector2
 from obstaculos import *
 
 
-
 current_directory = os.path.dirname(__file__)
 file_path_image = os.path.join(current_directory, 'imagens')
+
 
 class Jogador(pygame.sprite.Sprite):
     def __init__(self):
@@ -35,7 +35,7 @@ class Jogador(pygame.sprite.Sprite):
     @x.setter
     def x(self, valor):
         self.__x = valor
-    
+
     @property
     def y(self):
         return self.__y
@@ -63,7 +63,7 @@ class Jogador(pygame.sprite.Sprite):
     @property
     def morte(self):
         return self.__morte
-    
+
     @morte.setter
     def morte(self, status):
         self.__morte = status
@@ -80,16 +80,16 @@ class Jogador(pygame.sprite.Sprite):
         if self.nochao:
             self.__pulando = True
             self.__velocidade.y = -8
-    
+
     def collide(self, yvel, grupo):
 
-        # Verificação das colisões 
+        # Verificação das colisões
         for x in grupo:
             if pygame.sprite.collide_rect(self, x):
                 if isinstance(x, Block):
                     if yvel > 0:
                         self.rect.bottom = x.rect.top
-                        self.__velocidade.y =  0
+                        self.__velocidade.y = 0
                         self.__pulando = False
                         self.__nochao = True
                     elif yvel < 0:

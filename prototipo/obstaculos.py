@@ -6,6 +6,7 @@ import os
 current_directory = os.path.dirname(__file__)
 file_path_image = os.path.join(current_directory, 'imagens')
 
+
 class Obstaculo():
 
     def __init__(self, image, pos) -> None:
