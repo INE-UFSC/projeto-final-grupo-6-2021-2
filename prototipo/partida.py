@@ -18,7 +18,7 @@ class Partida():
         y = 0
         for row in mapa:
             for col in row:
-                
+
                 if col == 2:
                     objeto = Block((x, y))
                     self.elements.append(objeto)
