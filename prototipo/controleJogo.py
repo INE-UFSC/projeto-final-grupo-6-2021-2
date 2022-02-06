@@ -54,15 +54,15 @@ class ControleJogo():
         FPS = 60
         clock = pygame.time.Clock()
 
-        self.__partida.elements.clear()
+        self.partida.elementos.clear()
         bg_surface = pygame.image.load(f'{file_path_image}/bg.png')
         bg_surface = pygame.transform.smoothscale(
             bg_surface.convert(), (800, 480))
-        mapa = self.__partida.fase.mapear_fase()
-        self.__partida.desenhar_level(mapa)
-        self.__partida.fase.toca_musica()  # toca a musica especifica da fase
+        mapa = self.partida.fase.mapear_fase()
+        self.partida.desenhar_nivel(mapa)
+        self.partida.fase.toca_musica()
         jogador_group = pygame.sprite.Group()
-        jogador_group.add(self.__jogador)
+        jogador_group.add(self.jogador)
 
         while True:
 
@@ -81,13 +81,13 @@ class ControleJogo():
 
             else:
                 if keys_pressed[pygame.K_SPACE]:
-                    self.__jogador.pular()
+                    self.jogador.pular()
 
-                self.__partida.screen.blit(bg_surface, (0, 0))
-                self.__partida.desenhar_elementos()
-                self.__partida.atualizar_level(self.jogador.velocidade.x)
-                jogador_group.draw(self.__partida.screen)
-                jogador_group.update(self.__partida.elements)
+                self.partida.tela.blit(bg_surface, (0, 0))
+                self.partida.desenhar_elementos()
+                self.partida.atualizar_nivel(self.jogador.velocidade.x)
+                jogador_group.draw(self.partida.tela)
+                jogador_group.update(self.partida.elementos)
 
             if keys_pressed[pygame.K_ESCAPE]:
                 pygame.display.quit()
