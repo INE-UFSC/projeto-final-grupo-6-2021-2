@@ -14,10 +14,11 @@ class Jogador(pygame.sprite.Sprite):
         super().__init__()
         self.__x = 100
         self.__y = 432
-        self.__velocidade = Vector2(1, 0)
+        self.__velocidade = Vector2(3, 0)
         self.__gravidade = 0.5
         self.__pulando = False
         self.__nochao = True
+        self.__morte = False
 
         # Criação do retângulo
         self.__image = pygame.image.load(f"{file_path_image}/geo.png")
@@ -76,14 +77,22 @@ class Jogador(pygame.sprite.Sprite):
                         self.__pulando = False
                         self.__nochao = True
                     elif yvel < 0:
-                        self.rect.top = x.rect.bottom 
+                        self.rect.top = x.rect.bottom
+                        self.__morte = True
                     else:
-                        self.__velocidade.x = 0
                         self.rect.right = x.rect.left
-                        self.died = True
+                        self.__morte = True
+
+                if isinstance(x, Spike):
+                    self.__morte = True
+
 
     def update(self, grupo):
-            
+
+        # Caso o personagem morra, ele fica parado
+        if self.__morte:
+            self.__velocidade.x = 0
+        
         # Caso não encoste no chão, a gravidade começa a agir no jogador
         if not self.nochao:
             self.__velocidade.y += self.__gravidade
