@@ -29,8 +29,20 @@ class Jogador(pygame.sprite.Sprite):
         self.__rect.topleft = (self.__x, self.__y)
 
     @property
+    def morte(self):
+        return self.__morte
+    
+    @morte.setter
+    def morte(self, status):
+        self.__morte = status
+
+    @property
     def x(self):
         return self.__x
+
+    @x.setter
+    def x(self, valor):
+        self.__x = valor
     
     @property
     def y(self):
@@ -60,6 +72,10 @@ class Jogador(pygame.sprite.Sprite):
     def velocidade(self):
         return self.__velocidade
 
+    @velocidade.setter
+    def velocidade(self, valor):
+        self.__velocidade = valor
+
     def pular(self):
         if self.nochao:
             self.__pulando = True
@@ -79,26 +95,37 @@ class Jogador(pygame.sprite.Sprite):
                     elif yvel < 0:
                         self.rect.top = x.rect.bottom
                         self.__morte = True
+                        self.__velocidade.x = 0
                     else:
                         self.rect.right = x.rect.left
                         self.__morte = True
+                        # Caso o personagem morra, ele fica parado
+                        self.__velocidade.x = 0
 
                 if isinstance(x, Spike):
                     self.__morte = True
-
+                    self.__velocidade.x = 0
 
     def update(self, grupo):
 
-        # Caso o personagem morra, ele fica parado
-        if self.__morte:
-            self.__velocidade.x = 0
-        
-        # Caso não encoste no chão, a gravidade começa a agir no jogador
-        if not self.nochao:
-            self.__velocidade.y += self.__gravidade
-            self.collide(0, grupo)
 
-        self.rect.top += self.__velocidade.y
-        self.__nochao = False
-        self.collide(self.__velocidade.y, grupo)
-            
+    
+        # Caso não encoste no chão, a gravidade começa a agir no jogador
+        if not self.__morte:
+            if not self.nochao:
+                self.__velocidade.y += self.__gravidade
+                self.collide(0, grupo)
+
+            self.rect.top += self.__velocidade.y
+            self.__nochao = False
+            self.collide(self.__velocidade.y, grupo)
+
+    def resetar(self):
+        self.__x = 100
+        self.__y = 432
+        self.__velocidade = Vector2(3, 0)
+        self.__gravidade = 0.5
+        self.__pulando = False
+        self.__nochao = True
+        self.__morte = False
+        self.__rect.topleft = (self.__x, self.__y)

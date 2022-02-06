@@ -36,6 +36,7 @@ class ControleJogo():
         FPS = 60
         clock = pygame.time.Clock()
 
+        self.__partida.elements.clear()
         bg_surface = pygame.image.load(f'{file_path_image}/bg.png')
         bg_surface = pygame.transform.smoothscale(bg_surface, (800, 480))
         mapa = self.__partida.fase.mapear_fase()
@@ -56,10 +57,13 @@ class ControleJogo():
             keys_pressed = pygame.key.get_pressed()
             if keys_pressed[pygame.K_SPACE]:
                 self.__jogador.pular()
+            if keys_pressed[pygame.K_r] and self.jogador.morte:
+                self.__jogador.resetar()
+                self.iniciar_partida()
 
             self.__partida.screen.blit(bg_surface,(0,0))
             self.__partida.desenhar_elementos()
-            self.__partida.atualizar_level(self.player.velocidade.x)
+            self.__partida.atualizar_level(self.jogador.velocidade.x)
             jogador_group.draw(self.__partida.screen)
             jogador_group.update(self.__partida.elements)
 

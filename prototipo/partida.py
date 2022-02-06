@@ -10,10 +10,10 @@ file_path_mapa = os.path.join(current_directory, 'Mapas')
 class Partida():
 
 
-    def __init__(self, fase, player) -> None:
+    def __init__(self, fase, jogador) -> None:
         self.fase = fase
         self.elements = []
-        self.player = player
+        self.jogador = jogador
         self.screen = pygame.display.set_mode((800, 480))
 
     def iniciar_partida(self):
@@ -24,34 +24,33 @@ class Partida():
 
         PRETO = (34, 40, 49)
         BRANCO = (240, 240, 240)
-
+        
         bg_surface = pygame.image.load(f'{file_path_image}/bg.png')
         bg_surface = pygame.transform.smoothscale(bg_surface, (800, 480))
         mapa = self.fase.mapear_fase()
         self.desenhar_level(mapa)
         jogador_group = pygame.sprite.Group()
-        jogador_group.add(self.player)
+        jogador_group.add(self.jogador)
         while True: 
             pygame.display.update()
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
-                    exit()
-            
+                    exit()    
 
             keys_pressed = pygame.key.get_pressed()
             if keys_pressed[pygame.K_SPACE]:
-                self.player.pular()
+                self.jogador.pular()
+            
 
             self.screen.blit(bg_surface,(0,0))
             self.desenhar_elementos()
-            self.atualizar_level(self.player.velocidade.x)
+            self.atualizar_level(self.jogador.velocidade.x)
             jogador_group.draw(self.screen)
             jogador_group.update(self.elements)
             clock.tick(FPS)
 
     def desenhar_level(self, mapa):
-
         """this is similar to 2d lists. it goes through a list of lists, and creates instances of certain obstacles
         depending on the item in the list"""
         x = 0
@@ -76,10 +75,3 @@ class Partida():
     def desenhar_elementos(self):
         for x in self.elements:
             self.screen.blit(x.image, (x.rect.x, x.rect.y))
-
-player = Jogador()
-fase = Fase('teste', '', f'{file_path_mapa}/mapa_teste3.json')
-
-JOGO = Partida(fase, player)
-
-JOGO.iniciar_partida()
