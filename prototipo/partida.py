@@ -72,9 +72,7 @@ class Partida():
     def atualizar_level(self, velocidade):
         for sprite in self.elements:
             sprite.rect.x -= velocidade
-            #if sprite.rect.x <= -50:
-            #    self.elements.remove(sprite)
-        
+
     def desenhar_elementos(self):
         for x in self.elements:
             self.screen.blit(x.image, (x.rect.x, x.rect.y))
