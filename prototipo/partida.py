@@ -19,10 +19,10 @@ class Partida():
         for row in mapa:
             for col in row:
                 
-                if col == 1:
+                if col == 2:
                     objeto = Block((x, y))
                     self.elements.append(objeto)
-                if col == 2:
+                if col == 1:
                     objeto = Spike((x, y))
                     self.elements.append(objeto)
                 x += 24

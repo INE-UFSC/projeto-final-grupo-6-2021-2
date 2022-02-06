@@ -15,7 +15,7 @@ file_path_mapa = os.path.join(current_directory, 'Mapas')
 class ControleJogo():
     def __init__(self):
         self.__jogador = Jogador()
-        self.__fase = Fase('Fase 1', '', f'{file_path_mapa}/mapa_teste3.json')
+        self.__fase = Fase('Fase 1', '', f'{file_path_mapa}/mapa_teste4.json')
         self.__partida = Partida(self.__fase, self.__jogador)
 
     @property

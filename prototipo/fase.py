@@ -32,7 +32,7 @@ class Fase():
             linha = []
             mapa = []
             count = 0
-            for x in data["layers"][1]['data']:
+            for x in data["layers"][0]['data']:
                 linha.append(x)
                 count += 1
                 if count == 160:
