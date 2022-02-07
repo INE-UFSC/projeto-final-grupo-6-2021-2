@@ -39,7 +39,7 @@ class Jogador(pygame.sprite.Sprite):
     @property
     def y(self):
         return self.__y
-    
+
     @y.setter
     def y(self, valor):
         self.__y = valor
@@ -55,7 +55,7 @@ class Jogador(pygame.sprite.Sprite):
     @property
     def gravidade(self):
         return self.__gravidade
-    
+
     @gravidade.setter
     def gravidade(self, valor):
         self.__gravidade = valor
@@ -63,7 +63,7 @@ class Jogador(pygame.sprite.Sprite):
     @property
     def pulando(self):
         return self.__pulando
-    
+
     @pulando.setter
     def pulando(self, valor):
         self.__pulando = valor
@@ -71,7 +71,7 @@ class Jogador(pygame.sprite.Sprite):
     @property
     def nochao(self):
         return self.__nochao
-    
+
     @nochao.setter
     def nochao(self, valor):
         self.__nochao = valor
@@ -91,7 +91,7 @@ class Jogador(pygame.sprite.Sprite):
     @property
     def rect(self):
         return self.__rect
-    
+
     @rect.setter
     def rect(self, status):
         self.__rect = status
@@ -105,7 +105,7 @@ class Jogador(pygame.sprite.Sprite):
 
         # Verificação das colisões
         for x in grupo:
-            if pygame.sprite.collide_rect(self, x):
+            if pygame.sprite.spritecollide(self, [x], False, pygame.sprite.collide_mask):
                 if isinstance(x, Block):
                     if yvel > 0:
                         self.rect.bottom = x.rect.top

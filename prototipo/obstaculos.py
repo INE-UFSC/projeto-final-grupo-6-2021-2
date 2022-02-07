@@ -13,6 +13,7 @@ class Obstaculo():
         image = pygame.transform.smoothscale(image, (24, 24))
         self.__image = image
         self.__rect = self.image.get_rect(topleft=pos)
+        self.__mask = pygame.mask.from_surface(self.image)
 
     @property
     def image(self):
@@ -21,6 +22,18 @@ class Obstaculo():
     @property
     def rect(self):
         return self.__rect
+
+    @rect.setter
+    def rect(self, value):
+        self.__rect = value
+
+    @property
+    def mask(self):
+        return self.__mask
+
+    @mask.setter
+    def mask(self, value):
+        self.__mask = value
 
 
 class Spike(Obstaculo):
