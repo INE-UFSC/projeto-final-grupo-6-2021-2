@@ -9,7 +9,6 @@ class Fase():
         self.__nome = nome
         self.__musica = musica
         self.__arquivo = arquivo
-        self.__mapeamento = self.mapear_fase()
 
     @property
     def nome(self):
@@ -22,10 +21,6 @@ class Fase():
     @property
     def arquivo(self):
         return self.__arquivo
-
-    @property
-    def mapeamento(self):
-        return self.__mapeamento
 
     def toca_musica(self):
         mixer.init()

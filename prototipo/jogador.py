@@ -19,11 +19,14 @@ class Jogador(pygame.sprite.Sprite):
         self.__pulando = False
         self.__nochao = True
         self.__morte = False
+        self.__angulo = 0
 
         # Criação do retângulo
         self.__image = pygame.image.load(f"{file_path_image}/geo.png")
         self.__image = pygame.transform.scale(self.__image, (24, 24))
         self.__rect = self.image.get_rect()
+
+        self.__mask = pygame.mask.Mask(fill=True, size=self.__image.get_size())
 
         # Posicionamento do retângulo
         self.__rect.topleft = (self.__x, self.__y)
@@ -40,6 +43,10 @@ class Jogador(pygame.sprite.Sprite):
     def y(self):
         return self.__y
 
+    @y.setter
+    def y(self, valor):
+        self.__y = valor
+
     @property
     def velocidade(self):
         return self.__velocidade
@@ -52,13 +59,25 @@ class Jogador(pygame.sprite.Sprite):
     def gravidade(self):
         return self.__gravidade
 
+    @gravidade.setter
+    def gravidade(self, valor):
+        self.__gravidade = valor
+
     @property
     def pulando(self):
         return self.__pulando
 
+    @pulando.setter
+    def pulando(self, valor):
+        self.__pulando = valor
+
     @property
     def nochao(self):
         return self.__nochao
+
+    @nochao.setter
+    def nochao(self, valor):
+        self.__nochao = valor
 
     @property
     def morte(self):
@@ -72,58 +91,93 @@ class Jogador(pygame.sprite.Sprite):
     def image(self):
         return self.__image
 
+    @image.setter
+    def image(self, status):
+        self.__image = status
+
+    @property
+    def angulo(self):
+        return self.__angulo
+
+    @angulo.setter
+    def angulo(self, status):
+        self.__angulo = status
+
     @property
     def rect(self):
         return self.__rect
 
+    @rect.setter
+    def rect(self, status):
+        self.__rect = status
+
+    @property
+    def mask(self):
+        return self.__mask
+
+    @mask.setter
+    def mask(self, value):
+        self.__mask = value
+
     def pular(self):
         if self.nochao:
-            self.__pulando = True
-            self.__velocidade.y = -8
+            self.pulando = True
+            self.velocidade.y = -8
+
+    def rotate(self, image, rect, angulo):
+        new_image = pygame.transform.rotate(image, angulo)
+        self.angulo += angulo
+        rect = new_image.get_rect(center=rect.center)
+        return new_image, rect
 
     def collide(self, yvel, grupo):
 
         # Verificação das colisões
         for x in grupo:
-            if pygame.sprite.collide_rect(self, x):
+            if pygame.sprite.spritecollide(self, [x], False, pygame.sprite.collide_mask):
                 if isinstance(x, Block):
                     if yvel > 0:
                         self.rect.bottom = x.rect.top
-                        self.__velocidade.y = 0
-                        self.__pulando = False
-                        self.__nochao = True
+                        self.velocidade.y = 0
+                        self.pulando = False
+                        self.nochao = True
                     elif yvel < 0:
                         self.rect.top = x.rect.bottom
-                        self.__morte = True
-                        self.__velocidade.x = 0
+                        self.morte = True
+                        self.velocidade.x = 0
                     else:
                         self.rect.right = x.rect.left
-                        self.__morte = True
+                        self.morte = True
                         # Caso o personagem morra, ele fica parado
-                        self.__velocidade.x = 0
+                        self.velocidade.x = 0
 
                 if isinstance(x, Spike):
-                    self.__morte = True
-                    self.__velocidade.x = 0
+                    self.morte = True
+                    self.velocidade.x = 0
 
     def update(self, grupo):
 
         # Caso não encoste no chão, a gravidade começa a agir no jogador
-        if not self.__morte:
+        if not self.morte:
             if not self.nochao:
-                self.__velocidade.y += self.__gravidade
+                self.velocidade.y += self.gravidade
                 self.collide(0, grupo)
 
-            self.rect.top += self.__velocidade.y
-            self.__nochao = False
-            self.collide(self.__velocidade.y, grupo)
+            if self.velocidade.y == -8:
+                self.image, self.rect = self.rotate(self.image, self.rect, -90)
+
+            self.rect.top += self.velocidade.y
+            self.nochao = False
+            self.collide(self.velocidade.y, grupo)
 
     def resetar(self):
-        self.__x = 100
-        self.__y = 432
-        self.__velocidade = Vector2(3, 0)
-        self.__gravidade = 0.5
-        self.__pulando = False
-        self.__nochao = True
-        self.__morte = False
-        self.__rect.topleft = (self.__x, self.__y)
+        self.x = 100
+        self.y = 432
+        self.velocidade = Vector2(3, 0)
+        self.gravidade = 0.5
+        self.pulando = False
+        self.nochao = True
+        self.morte = False
+        self.rect.topleft = (self.x, self.y)
+        self.image, self.rect = self.rotate(
+            self.image, self.rect, -self.angulo)
