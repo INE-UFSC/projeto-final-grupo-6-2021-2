@@ -22,7 +22,7 @@ class ControleJogo():
             f'{file_path_musica}/undertale-megalovania.mp3',
             f'{file_path_mapa}/mapa_teste4.json')
         self.__partida = Partida(self.__fase, self.__jogador)
-        self.__end_game = pygame.display.set_mode((800, 480))
+        self.__fim_jogo = pygame.display.set_mode((800, 480))
 
     @property
     def jogador(self):
@@ -41,11 +41,11 @@ class ControleJogo():
         texto_morte = 'Você morreu!'
         texto_opcoes = 'Aperte R para reiniciar e ESC para sair'
         fontesys60 = pygame.font.SysFont('calibri', 60)
-        fontesys40 = pygame.font.SysFont('calibri', 24)
+        fontesys24 = pygame.font.SysFont('calibri', 24)
         tela_texto_morte = fontesys60.render(texto_morte, 1, (255, 255, 255))
-        tela_texto_opcoes = fontesys40.render(texto_opcoes, 1, (255, 255, 255))
-        self.__end_game.blit(tela_texto_morte, (240, 200))
-        self.__end_game.blit(tela_texto_opcoes, (220, 280))
+        tela_texto_opcoes = fontesys24.render(texto_opcoes, 1, (255, 255, 255))
+        self.__fim_jogo.blit(tela_texto_morte, (240, 200))
+        self.__fim_jogo.blit(tela_texto_opcoes, (220, 280))
         pygame.display.update()
 
     def iniciar_partida(self):
