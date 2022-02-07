@@ -19,11 +19,14 @@ class Jogador(pygame.sprite.Sprite):
         self.__pulando = False
         self.__nochao = True
         self.__morte = False
+        self.__angulo = 0
 
         # Criação do retângulo
         self.__image = pygame.image.load(f"{file_path_image}/geo.png")
         self.__image = pygame.transform.scale(self.__image, (24, 24))
         self.__rect = self.image.get_rect()
+
+        self.__mask = pygame.mask.Mask(fill=True, size=self.__image.get_size())
 
         # Posicionamento do retângulo
         self.__rect.topleft = (self.__x, self.__y)
@@ -88,6 +91,18 @@ class Jogador(pygame.sprite.Sprite):
     def image(self):
         return self.__image
 
+    @image.setter
+    def image(self, status):
+        self.__image = status
+
+    @property
+    def angulo(self):
+        return self.__angulo
+
+    @angulo.setter
+    def angulo(self, status):
+        self.__angulo = status
+
     @property
     def rect(self):
         return self.__rect
@@ -96,10 +111,24 @@ class Jogador(pygame.sprite.Sprite):
     def rect(self, status):
         self.__rect = status
 
+    @property
+    def mask(self):
+        return self.__mask
+
+    @mask.setter
+    def mask(self, value):
+        self.__mask = value
+
     def pular(self):
         if self.nochao:
             self.pulando = True
             self.velocidade.y = -8
+
+    def rotate(self, image, rect, angulo):
+        new_image = pygame.transform.rotate(image, angulo)
+        self.angulo += angulo
+        rect = new_image.get_rect(center=rect.center)
+        return new_image, rect
 
     def collide(self, yvel, grupo):
 
@@ -134,6 +163,9 @@ class Jogador(pygame.sprite.Sprite):
                 self.velocidade.y += self.gravidade
                 self.collide(0, grupo)
 
+            if self.velocidade.y == -8:
+                self.image, self.rect = self.rotate(self.image, self.rect, -90)
+
             self.rect.top += self.velocidade.y
             self.nochao = False
             self.collide(self.velocidade.y, grupo)
@@ -147,3 +179,5 @@ class Jogador(pygame.sprite.Sprite):
         self.nochao = True
         self.morte = False
         self.rect.topleft = (self.x, self.y)
+        self.image, self.rect = self.rotate(
+            self.image, self.rect, -self.angulo)

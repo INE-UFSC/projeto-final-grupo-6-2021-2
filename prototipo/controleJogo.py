@@ -38,14 +38,14 @@ class ControleJogo():
 
     def tela_de_morte(self):
         pygame.mixer.music.stop()
-        texto_morte = 'MoRrEuU'
+        texto_morte = 'Você morreu!'
         texto_opcoes = 'Aperte R para reiniciar e ESC para sair'
-        fontesys60 = pygame.font.SysFont(pygame.font.get_default_font(), 60)
-        fontesys40 = pygame.font.SysFont(pygame.font.get_default_font(), 24)
+        fontesys60 = pygame.font.SysFont('calibri', 60)
+        fontesys40 = pygame.font.SysFont('calibri', 24)
         tela_texto_morte = fontesys60.render(texto_morte, 1, (255, 255, 255))
         tela_texto_opcoes = fontesys40.render(texto_opcoes, 1, (255, 255, 255))
-        self.__end_game.blit(tela_texto_morte, (300, 200))
-        self.__end_game.blit(tela_texto_opcoes, (250, 260))
+        self.__end_game.blit(tela_texto_morte, (240, 200))
+        self.__end_game.blit(tela_texto_opcoes, (220, 280))
         pygame.display.update()
 
     def iniciar_partida(self):
