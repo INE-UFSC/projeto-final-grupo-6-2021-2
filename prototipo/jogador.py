@@ -15,7 +15,7 @@ class Jogador(pygame.sprite.Sprite):
         self.__x = 100
         self.__y = 432
         self.__velocidade = Vector2(3, 0)
-        self.__gravidade = 0.5
+        self.__gravidade = 0.7
         self.__pulando = False
         self.__nochao = True
         self.__morte = False
@@ -174,7 +174,7 @@ class Jogador(pygame.sprite.Sprite):
         self.x = 100
         self.y = 432
         self.velocidade = Vector2(3, 0)
-        self.gravidade = 0.5
+        self.gravidade = 0.7
         self.pulando = False
         self.nochao = True
         self.morte = False
