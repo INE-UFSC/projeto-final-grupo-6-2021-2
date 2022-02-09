@@ -19,6 +19,7 @@ class Jogador(pygame.sprite.Sprite):
         self.__pulando = False
         self.__nochao = True
         self.__morte = False
+        self.__vitoria = False
         self.__angulo = 0
 
         # Criação do retângulo
@@ -88,6 +89,14 @@ class Jogador(pygame.sprite.Sprite):
         self.__morte = status
 
     @property
+    def vitoria(self):
+        return self.__vitoria
+
+    @vitoria.setter
+    def vitoria(self, status):
+        self.__vitoria = status
+
+    @property
     def image(self):
         return self.__image
 
@@ -148,12 +157,17 @@ class Jogador(pygame.sprite.Sprite):
                     else:
                         self.rect.right = x.rect.left
                         self.morte = True
-                        # Caso o personagem morra, ele fica parado
-                        self.velocidade.x = 0
+                        self.velocidade.x = 0 # Caso o personagem morra, ele fica parado
 
                 if isinstance(x, Spike):
                     self.morte = True
                     self.velocidade.x = 0
+
+                '''tirar o comentário e preencher após a criação do obstáculo de vitória
+                if isinstance(x, (Preencher com classe do obstáculo de vitória)):
+                    self.vitoria = True
+                    self.velocidade.x = 0
+                '''
 
     def update(self, grupo):
 

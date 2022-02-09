@@ -36,15 +36,18 @@ class ControleJogo():
     def partida(self):
         return self.__partida
 
-    def tela_de_morte(self):
+    def tela_fim_de_jogo(self):
         pygame.mixer.music.stop()
-        texto_morte = 'Você morreu!'
+        if self.jogador.morte:
+            texto_mensagem = 'Você morreu!'
+        else:
+            texto_mensagem = 'Você venceu!'
         texto_opcoes = 'Aperte R para reiniciar e ESC para sair'
         fontesys60 = pygame.font.SysFont('calibri', 60)
         fontesys24 = pygame.font.SysFont('calibri', 24)
-        tela_texto_morte = fontesys60.render(texto_morte, 1, (255, 255, 255))
+        tela_texto_mensagem = fontesys60.render(texto_mensagem, 1, (255, 255, 255))
         tela_texto_opcoes = fontesys24.render(texto_opcoes, 1, (255, 255, 255))
-        self.__fim_jogo.blit(tela_texto_morte, (240, 200))
+        self.__fim_jogo.blit(tela_texto_mensagem, (240, 200))
         self.__fim_jogo.blit(tela_texto_opcoes, (220, 280))
         pygame.display.update()
 
@@ -76,8 +79,8 @@ class ControleJogo():
 
             keys_pressed = pygame.key.get_pressed()
 
-            if self.jogador.morte:
-                self.tela_de_morte()
+            if self.jogador.morte or self.jogador.vitoria:
+                self.tela_fim_de_jogo()
 
             else:
                 if keys_pressed[pygame.K_SPACE]:
