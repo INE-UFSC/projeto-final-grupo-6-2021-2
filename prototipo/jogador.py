@@ -131,7 +131,7 @@ class Jogador(pygame.sprite.Sprite):
     def pular(self):
         if self.nochao:
             self.pulando = True
-            self.velocidade.y = -8
+            self.velocidade.y = - 8.5
 
     def rotate(self, image, rect, angulo):
         new_image = pygame.transform.rotate(image, angulo)
@@ -162,6 +162,10 @@ class Jogador(pygame.sprite.Sprite):
                 if isinstance(x, Spike):
                     self.morte = True
                     self.velocidade.x = 0
+                
+                if isinstance(x, Win):
+                    self.vitoria = True
+                    self.velocidade.x = 0
 
                 '''tirar o comentário e preencher após a criação do obstáculo de vitória
                 if isinstance(x, (Preencher com classe do obstáculo de vitória)):
@@ -178,7 +182,7 @@ class Jogador(pygame.sprite.Sprite):
                 #Verifica colisão no eixo X
                 self.collide(0, grupo)
 
-            if self.velocidade.y == -8:
+            if self.velocidade.y == - 8.5:
                 self.image, self.rect = self.rotate(self.image, self.rect, -90)
 
             self.rect.top += self.velocidade.y

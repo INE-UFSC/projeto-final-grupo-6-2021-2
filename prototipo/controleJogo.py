@@ -20,7 +20,8 @@ class ControleJogo():
         self.__fase = Fase(
             'Fase 1',
             f'{file_path_musica}/undertale-megalovania.mp3',
-            f'{file_path_mapa}/mapa_teste4.json')
+            f'{file_path_mapa}/mapa_teste4.json',
+            f'{file_path_image}/bg.png')
         self.__partida = Partida(self.__fase, self.__jogador)
         self.__fim_jogo = pygame.display.set_mode((800, 480))
 
@@ -58,9 +59,9 @@ class ControleJogo():
         clock = pygame.time.Clock()
 
         self.partida.elementos.clear()
-        bg_surface = pygame.image.load(f'{file_path_image}/bg.png')
-        bg_surface = pygame.transform.smoothscale(
-            bg_surface.convert(), (800, 480))
+        #bg_surface = pygame.image.load(f'{file_path_image}/bg.png')
+        self.fase.bg = pygame.transform.smoothscale(
+           self.fase.bg.convert(), (1000, 480))
         mapa = self.partida.fase.mapear_fase()
         self.partida.desenhar_nivel(mapa)
         self.partida.fase.toca_musica()
@@ -86,7 +87,8 @@ class ControleJogo():
                 if keys_pressed[pygame.K_SPACE]:
                     self.jogador.pular()
 
-                self.partida.tela.blit(bg_surface, (0, 0))
+                #self.partida.tela.blit(bg_surface, (0, 0))
+                self.partida.draw_bg()
                 self.partida.desenhar_elementos()
                 self.partida.atualizar_nivel(self.jogador.velocidade.x)
                 jogador_group.draw(self.partida.tela)
