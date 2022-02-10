@@ -175,6 +175,7 @@ class Jogador(pygame.sprite.Sprite):
         if not self.morte:
             if not self.nochao:
                 self.velocidade.y += self.gravidade
+                #Verifica colisão no eixo X
                 self.collide(0, grupo)
 
             if self.velocidade.y == -8:
@@ -182,9 +183,11 @@ class Jogador(pygame.sprite.Sprite):
 
             self.rect.top += self.velocidade.y
             self.nochao = False
+            #Verifica colisão no eixo Y
             self.collide(self.velocidade.y, grupo)
 
     def resetar(self):
+        #Reseta todos os valores para os padrão para resetar a fase
         self.x = 100
         self.y = 432
         self.velocidade = Vector2(3, 0)

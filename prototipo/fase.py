@@ -28,6 +28,7 @@ class Fase():
         mixer.music.play()
 
     def mapear_fase(self):
+        #Carrega a lista com os dados do mapa e converte em uma matriz
         with open(self.arquivo) as f:
             data = json.load(f)
             linha = []

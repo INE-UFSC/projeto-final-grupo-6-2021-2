@@ -11,6 +11,7 @@ class Partida():
         self.tela = pygame.display.set_mode((800, 480))
 
     def desenhar_nivel(self, mapa):
+        #Lê a matriz do mapa e instancia os objetos 
         x = 0
         y = 0
         for row in mapa:
@@ -27,6 +28,7 @@ class Partida():
             x = 0
 
     def atualizar_nivel(self, velocidade):
+        #Movimenta o mapa inteiro para dar impressão de movimento
         for sprite in self.elementos:
             sprite.rect.x -= velocidade
 
