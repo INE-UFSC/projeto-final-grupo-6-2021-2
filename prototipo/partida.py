@@ -40,9 +40,9 @@ class Partida():
         #Movimenta o mapa inteiro para dar impressão de movimento
         for sprite in self.elementos:
             sprite.rect.x -= velocidade
-        self.bg_x -= velocidade
-        if self.bg_x <= -990:
-            self.bg_x = 0
+        #self.bg_x -= velocidade
+        #if self.bg_x <= -990:
+        #    self.bg_x = 0
 
     def desenhar_elementos(self):
         for x in self.elementos:
