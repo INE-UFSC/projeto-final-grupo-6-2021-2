@@ -1,3 +1,31 @@
-Nesse diretório, o grupo irá trabalhar em cima do primeiro protótipo do jogo.
+# Grupo 6 - Jogo baseado no Geometry Dash
 
-A ideia do protótipo não é que ele seja uma versão demo do jogo completo, mas sim que o principal mecanismo do jogo esteja implementado com certo grau de sucesso. Exemplo: em um jogo do tipo plataforma 2D, basta mostrar um retângulo colidindo com objetos e saltando/destruindo com alguma comando do usuário. A interface gráfica (com sprites) é opcional nessa etapa.
+Este jogo tem como modelo o estilo de jogo de Geometry Dash, tendo jogabilidade similiar. O jogador precisa atravessar uma série de obstáculos, sem colisão e assim conseguir chegar ao final da fase.
+
+## Instruções de jogo
+
+> **Pular:** Para pular você deve apertar a tecla `ESPAÇO` do teclado. <br>
+> **Reiniciar fase:** Para reiniciar a fase atual você deve apertar a tecla `R` do teclado. <br>
+> **Fechar o jogo:** Para fechar o jogo você deve apertar a tecla `ESC` do teclado. <br>
+
+## Instalação
+
+Para a instalação você precisa utilizar o gerenciador de pacotes [pip](https://pip.pypa.io/en/stable/)  
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install.
+
+```bash
+pip install -r requirements.txt
+```
+
+## Uso
+Para abrir o jogo você deve abrir o terminal de comando no seu computador e digitar o seguindo comando dentro da pasta do jogo (lugar onde se encontra esse arquivo).
+
+```python
+python main.py
+```
+
+## Contribuições
+Pull requests são bem-vindos. Para grandes mudanças, por favor, abra um issue primeiro para discutir o que você gostaria de mudar.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
