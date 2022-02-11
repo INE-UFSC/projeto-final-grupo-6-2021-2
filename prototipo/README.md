@@ -10,8 +10,7 @@ Este jogo tem como modelo o estilo de jogo de Geometry Dash, tendo jogabilidade 
 
 ## Instalação
 
-Para a instalação você precisa utilizar o gerenciador de pacotes [pip](https://pip.pypa.io/en/stable/)  
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install.
+Para a instalação você precisa utilizar o gerenciador de pacotes [pip](https://pip.pypa.io/en/stable/).
 
 ```bash
 pip install -r requirements.txt
