@@ -16,7 +16,6 @@ class Obstaculo(ABC):
         self.__rect = self.image.get_rect(topleft=pos)
         self.__mask = pygame.mask.from_surface(self.image)
 
-
     @property
     def image(self):
         return self.__image
@@ -51,13 +50,15 @@ class Block(Obstaculo):
         image = pygame.image.load(f'{file_path_image}/block1.png')
         super().__init__(image, pos)
 
+
 class Win(Obstaculo):
 
     def __init__(self, pos) -> None:
         image = pygame.image.load(f'{file_path_image}/win.png')
         image = pygame.transform.smoothscale(
-           image.convert(), (16, 16))
+            image.convert(), (16, 16))
         super().__init__(image, pos)
+
 
 class Orb(Obstaculo):
 
@@ -69,5 +70,3 @@ class Coin(Obstaculo):
 
     def __init__(self, image, pos) -> None:
         super().__init__(image, pos)
-
-

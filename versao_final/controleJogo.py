@@ -55,28 +55,12 @@ class ControleJogo():
 
     def inicia_jogo(self):
         '''metodo para abrir a janela e dar switch entre modos'''
-        pass
-
-    def inicia_menu(self):
-        '''metodo com o menu'''
-        pass
-
-    def iniciar_partida(self):
         pygame.init()
 
         FPS = 60
         clock = pygame.time.Clock()
-
-        self.partida.elementos.clear()
-        #bg_surface = pygame.image.load(f'{file_path_image}/bg.png')
-        self.fase.bg = pygame.transform.smoothscale(
-            self.fase.bg.convert(), (1000, 480))
-        mapa = self.partida.fase.mapear_fase()
-        self.partida.desenhar_nivel(mapa)
-        self.partida.fase.toca_musica()
-        jogador_group = pygame.sprite.Group()
-        jogador_group.add(self.jogador)
-
+        on_menu = True
+        reinicia = False
         while True:
 
             pygame.display.update()
@@ -89,27 +73,55 @@ class ControleJogo():
 
             keys_pressed = pygame.key.get_pressed()
 
-            if self.jogador.morte or self.jogador.vitoria:
-                self.tela_fim_de_jogo()
-
-            else:
-                if keys_pressed[pygame.K_SPACE]:
-                    self.jogador.pular()
-
-                #self.partida.tela.blit(bg_surface, (0, 0))
-                self.partida.draw_bg()
-                self.partida.desenhar_elementos()
-                self.partida.atualizar_nivel(self.jogador.velocidade.x)
-                jogador_group.draw(self.partida.tela)
-                jogador_group.update(self.partida.elementos)
-
             if keys_pressed[pygame.K_ESCAPE]:
                 pygame.display.quit()
                 pygame.quit()
                 exit()
+            if (keys_pressed[pygame.K_TAB] and on_menu) or reinicia:
+                jogador_group, on_menu = self.inicia_variaveis_partida(on_menu)
 
-            if keys_pressed[pygame.K_r]:
-                self.jogador.resetar()
-                self.iniciar_partida()
+            if on_menu == False or reinicia:
+                reinicia = self.iniciar_partida(
+                    jogador_group, keys_pressed)
 
             clock.tick(FPS)
+
+    def inicia_menu(self):
+        '''metodo com o menu'''
+        pass
+
+    def inicia_variaveis_partida(self, on_menu):
+        on_menu = False
+        self.partida.elementos.clear()
+        # bg_surface = pygame.image.load(f'{file_path_image}/bg.png')
+        self.fase.bg = pygame.transform.smoothscale(
+            self.fase.bg.convert(), (1000, 480))
+        mapa = self.partida.fase.mapear_fase()
+        self.partida.desenhar_nivel(mapa)
+        self.partida.fase.toca_musica()
+        jogador_group = pygame.sprite.Group()
+        jogador_group.add(self.jogador)
+        return jogador_group, on_menu
+
+    def iniciar_partida(self, jogador_group, keys_pressed):
+        if self.jogador.morte or self.jogador.vitoria:
+            self.tela_fim_de_jogo()
+
+        else:
+            if keys_pressed[pygame.K_SPACE]:
+                self.jogador.pular()
+
+            # self.partida.tela.blit(bg_surface, (0, 0))
+            self.partida.draw_bg()
+            self.partida.desenhar_elementos()
+            self.partida.atualizar_nivel(self.jogador.velocidade.x)
+            jogador_group.draw(self.partida.tela)
+            jogador_group.update(self.partida.elementos)
+
+        if keys_pressed[pygame.K_ESCAPE]:
+            pygame.display.quit()
+            pygame.quit()
+            exit()
+        if keys_pressed[pygame.K_r]:
+            self.jogador.resetar()
+            return True
