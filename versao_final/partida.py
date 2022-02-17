@@ -1,5 +1,6 @@
 import os
 from obstaculos import *
+from fase import Fase
 
 
 class Partida():
@@ -47,3 +48,15 @@ class Partida():
     def desenhar_elementos(self):
         for x in self.elementos:
             self.tela.blit(x.image, (x.rect.x, x.rect.y))
+
+    def inicia_variaveis(self, fase: Fase):
+        self.fase = fase
+        self.elementos.clear()
+        self.fase.bg = pygame.transform.smoothscale(
+            self.fase.bg.convert(), (1000, 480))
+        mapa = self.fase.mapear_fase()
+        self.desenhar_nivel(mapa)
+        self.fase.toca_musica()
+        jogador_group = pygame.sprite.Group()
+        jogador_group.add(self.jogador)
+        return jogador_group
