@@ -83,11 +83,13 @@ class ControleJogo():
 
             keys_pressed = pygame.key.get_pressed()
 
+            # ativacao de partida
             if (keys_pressed[pygame.K_TAB] and gamemode == 'on_menu') or reinicia:
                 # no inicia_variaveis eu seto uma fase para self.partida !
                 jogador_group = self.partida.inicia_variaveis(self.__fase)
                 gamemode = 'on_partida'
 
+            # loops
             if gamemode == 'on_partida':
                 reinicia = self.iniciar_partida(
                     jogador_group, keys_pressed)
