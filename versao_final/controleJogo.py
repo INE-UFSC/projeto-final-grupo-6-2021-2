@@ -22,8 +22,10 @@ class ControleJogo():
             f'{file_path_musica}/undertale-megalovania.mp3',
             f'{file_path_mapa}/mapa_teste4.json',
             f'{file_path_image}/bg.png')
-        self.__partida = Partida(self.__fase, self.__jogador)
+        self.__partida = Partida('fase nao setada', self.__jogador)
         self.__fim_jogo = pygame.display.set_mode((800, 480))
+        self.__tela_menu = pygame.display.set_mode(
+            (800, 480))  # provavel mudar para classe view
 
     @property
     def jogador(self):
@@ -82,7 +84,8 @@ class ControleJogo():
             keys_pressed = pygame.key.get_pressed()
 
             if (keys_pressed[pygame.K_TAB] and gamemode == 'on_menu') or reinicia:
-                jogador_group = self.inicia_variaveis_partida()
+                # no inicia_variaveis eu seto uma fase para self.partida !
+                jogador_group = self.partida.inicia_variaveis(self.__fase)
                 gamemode = 'on_partida'
 
             if gamemode == 'on_partida':
@@ -96,7 +99,7 @@ class ControleJogo():
         '''metodo com o menu. APENAS PARA TESTES, MODIFICAR, TALVEZ CRIAR CLASSE.'''
         self.jogador.resetar()
         pygame.mixer.music.stop()
-        self.partida.tela.fill((0, 0, 0))
+        self.__tela_menu.fill((0, 0, 0))
         texto_mensagem = 'MENU'
         texto_opcoes = 'Aperte tab para iniciar e ESC para sair'
         fontesys60 = pygame.font.SysFont('calibri', 60)
@@ -104,23 +107,9 @@ class ControleJogo():
         tela_texto_mensagem = fontesys60.render(
             texto_mensagem, 1, (255, 255, 255))
         tela_texto_opcoes = fontesys24.render(texto_opcoes, 1, (255, 255, 255))
-        self.__fim_jogo.blit(tela_texto_mensagem, (240, 200))
-        self.__fim_jogo.blit(tela_texto_opcoes, (220, 280))
+        self.__tela_menu.blit(tela_texto_mensagem, (240, 200))
+        self.__tela_menu.blit(tela_texto_opcoes, (220, 280))
         pygame.display.update()  # tela
-
-    def inicia_variaveis_partida(self):
-        '''inicia variaveis antes de rodar o loop da partida:
-        metodo leva em conta que partida já tem fase escolhida'''
-        self.partida.elementos.clear()
-        # bg_surface = pygame.image.load(f'{file_path_image}/bg.png')
-        self.fase.bg = pygame.transform.smoothscale(
-            self.fase.bg.convert(), (1000, 480))
-        mapa = self.partida.fase.mapear_fase()
-        self.partida.desenhar_nivel(mapa)
-        self.partida.fase.toca_musica()
-        jogador_group = pygame.sprite.Group()
-        jogador_group.add(self.jogador)
-        return jogador_group
 
     def iniciar_partida(self, jogador_group, keys_pressed):
         if self.jogador.morte or self.jogador.vitoria:
