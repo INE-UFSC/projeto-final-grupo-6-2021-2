@@ -10,14 +10,14 @@ class Partida():
         self.jogador = jogador
         self.tela = pygame.display.set_mode((800, 480))
         self.bg_x = 0
-    
+
     def draw_bg(self):
-        #desenha o fundo da fase com x variavel para dar movimento
-        self.tela.blit(self.fase.bg ,(self.bg_x, 0))
-        self.tela.blit(self.fase.bg ,(self.bg_x+990, 0))  
+        # desenha o fundo da fase com x variavel para dar movimento
+        self.tela.blit(self.fase.bg, (self.bg_x, 0))
+        self.tela.blit(self.fase.bg, (self.bg_x+990, 0))
 
     def desenhar_nivel(self, mapa):
-        #Lê a matriz do mapa e instancia os objetos 
+        # Lê a matriz do mapa e instancia os objetos
         x = 0
         y = 0
         for row in mapa:
@@ -37,11 +37,11 @@ class Partida():
             x = 0
 
     def atualizar_nivel(self, velocidade):
-        #Movimenta o mapa inteiro para dar impressão de movimento
+        # Movimenta o mapa inteiro para dar impressão de movimento
         for sprite in self.elementos:
             sprite.rect.x -= velocidade
         #self.bg_x -= velocidade
-        #if self.bg_x <= -990:
+        # if self.bg_x <= -990:
         #    self.bg_x = 0
 
     def desenhar_elementos(self):
