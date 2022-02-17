@@ -59,10 +59,10 @@ class ControleJogo():
 
         FPS = 60
         clock = pygame.time.Clock()
-        on_menu = True
+        gamemode = 'on_menu'
         reinicia = False
         while True:
-
+            print(gamemode)
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -70,28 +70,47 @@ class ControleJogo():
                     pygame.display.quit()
                     pygame.quit()
                     exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        if gamemode == 'on_menu':
+                            pygame.display.quit()
+                            pygame.quit()
+                            exit()
+                        elif gamemode == 'on_partida':
+                            gamemode = 'on_menu'
 
             keys_pressed = pygame.key.get_pressed()
 
-            if keys_pressed[pygame.K_ESCAPE]:
-                pygame.display.quit()
-                pygame.quit()
-                exit()
-            if (keys_pressed[pygame.K_TAB] and on_menu) or reinicia:
-                jogador_group, on_menu = self.inicia_variaveis_partida(on_menu)
+            if (keys_pressed[pygame.K_TAB] and gamemode == 'on_menu') or reinicia:
+                jogador_group = self.inicia_variaveis_partida()
+                gamemode = 'on_partida'
 
-            if on_menu == False or reinicia:
+            if gamemode == 'on_partida':
                 reinicia = self.iniciar_partida(
                     jogador_group, keys_pressed)
-
+            elif gamemode == 'on_menu':
+                self.inicia_menu()
             clock.tick(FPS)
 
     def inicia_menu(self):
-        '''metodo com o menu'''
-        pass
+        '''metodo com o menu. APENAS PARA TESTES, MODIFICAR, TALVEZ CRIAR CLASSE.'''
+        self.jogador.resetar()
+        pygame.mixer.music.stop()
+        self.partida.tela.fill((0, 0, 0))
+        texto_mensagem = 'MENU'
+        texto_opcoes = 'Aperte tab para iniciar e ESC para sair'
+        fontesys60 = pygame.font.SysFont('calibri', 60)
+        fontesys24 = pygame.font.SysFont('calibri', 24)
+        tela_texto_mensagem = fontesys60.render(
+            texto_mensagem, 1, (255, 255, 255))
+        tela_texto_opcoes = fontesys24.render(texto_opcoes, 1, (255, 255, 255))
+        self.__fim_jogo.blit(tela_texto_mensagem, (240, 200))
+        self.__fim_jogo.blit(tela_texto_opcoes, (220, 280))
+        pygame.display.update()  # tela
 
-    def inicia_variaveis_partida(self, on_menu):
-        on_menu = False
+    def inicia_variaveis_partida(self):
+        '''inicia variaveis antes de rodar o loop da partida:
+        metodo leva em conta que partida já tem fase escolhida'''
         self.partida.elementos.clear()
         # bg_surface = pygame.image.load(f'{file_path_image}/bg.png')
         self.fase.bg = pygame.transform.smoothscale(
@@ -101,7 +120,7 @@ class ControleJogo():
         self.partida.fase.toca_musica()
         jogador_group = pygame.sprite.Group()
         jogador_group.add(self.jogador)
-        return jogador_group, on_menu
+        return jogador_group
 
     def iniciar_partida(self, jogador_group, keys_pressed):
         if self.jogador.morte or self.jogador.vitoria:
@@ -118,10 +137,8 @@ class ControleJogo():
             jogador_group.draw(self.partida.tela)
             jogador_group.update(self.partida.elementos)
 
-        if keys_pressed[pygame.K_ESCAPE]:
-            pygame.display.quit()
-            pygame.quit()
-            exit()
         if keys_pressed[pygame.K_r]:
             self.jogador.resetar()
             return True
+        else:
+            return False
