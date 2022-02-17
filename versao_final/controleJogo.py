@@ -46,11 +46,20 @@ class ControleJogo():
         texto_opcoes = 'Aperte R para reiniciar e ESC para sair'
         fontesys60 = pygame.font.SysFont('calibri', 60)
         fontesys24 = pygame.font.SysFont('calibri', 24)
-        tela_texto_mensagem = fontesys60.render(texto_mensagem, 1, (255, 255, 255))
+        tela_texto_mensagem = fontesys60.render(
+            texto_mensagem, 1, (255, 255, 255))
         tela_texto_opcoes = fontesys24.render(texto_opcoes, 1, (255, 255, 255))
         self.__fim_jogo.blit(tela_texto_mensagem, (240, 200))
         self.__fim_jogo.blit(tela_texto_opcoes, (220, 280))
         pygame.display.update()
+
+    def inicia_jogo(self):
+        '''metodo para abrir a janela e dar switch entre modos'''
+        pass
+
+    def inicia_menu(self):
+        '''metodo com o menu'''
+        pass
 
     def iniciar_partida(self):
         pygame.init()
@@ -61,7 +70,7 @@ class ControleJogo():
         self.partida.elementos.clear()
         #bg_surface = pygame.image.load(f'{file_path_image}/bg.png')
         self.fase.bg = pygame.transform.smoothscale(
-           self.fase.bg.convert(), (1000, 480))
+            self.fase.bg.convert(), (1000, 480))
         mapa = self.partida.fase.mapear_fase()
         self.partida.desenhar_nivel(mapa)
         self.partida.fase.toca_musica()
