@@ -22,7 +22,7 @@ class ControleJogo():
             f'{file_path_musica}/undertale-megalovania.mp3',
             f'{file_path_mapa}/mapa_teste4.json',
             f'{file_path_image}/bg.png')
-        self.__partida = Partida('fase nao setada', self.__jogador)
+        self.__partida = Partida(self.__fase, self.__jogador)
         self.__fim_jogo = pygame.display.set_mode((800, 480))
         self.__tela_menu = pygame.display.set_mode(
             (800, 480))  # provavel mudar para classe view
@@ -55,50 +55,8 @@ class ControleJogo():
         self.__fim_jogo.blit(tela_texto_opcoes, (220, 280))
         pygame.display.update()
 
-    def inicia_jogo(self):
-        '''metodo para abrir a janela e dar switch entre modos'''
-        pygame.init()
-
-        FPS = 60
-        clock = pygame.time.Clock()
-        gamemode = 'on_menu'
-        reinicia = False
-        while True:
-            print(gamemode)
-            pygame.display.update()
-
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.display.quit()
-                    pygame.quit()
-                    exit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        if gamemode == 'on_menu':
-                            pygame.display.quit()
-                            pygame.quit()
-                            exit()
-                        elif gamemode == 'on_partida':
-                            gamemode = 'on_menu'
-
-            keys_pressed = pygame.key.get_pressed()
-
-            # ativacao de partida
-            if (keys_pressed[pygame.K_TAB] and gamemode == 'on_menu') or reinicia:
-                # no inicia_variaveis eu seto uma fase para self.partida !
-                jogador_group = self.partida.inicia_variaveis(self.__fase)
-                gamemode = 'on_partida'
-
-            # loops
-            if gamemode == 'on_partida':
-                reinicia = self.iniciar_partida(
-                    jogador_group, keys_pressed)
-            elif gamemode == 'on_menu':
-                self.inicia_menu()
-            clock.tick(FPS)
-
-    def inicia_menu(self):
-        '''metodo com o menu. APENAS PARA TESTES, MODIFICAR, TALVEZ CRIAR CLASSE.'''
+    def view_menu(self):
+        '''metodo a view do menu.'''
         self.jogador.resetar()
         pygame.mixer.music.stop()
         self.__tela_menu.fill((0, 0, 0))
@@ -113,23 +71,79 @@ class ControleJogo():
         self.__tela_menu.blit(tela_texto_opcoes, (220, 280))
         pygame.display.update()  # tela
 
-    def iniciar_partida(self, jogador_group, keys_pressed):
-        if self.jogador.morte or self.jogador.vitoria:
-            self.tela_fim_de_jogo()
+    def inicio_jogo(self):
+        pygame.init()
 
-        else:
-            if keys_pressed[pygame.K_SPACE]:
-                self.jogador.pular()
+        FPS = 60
+        clock = pygame.time.Clock()
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.display.quit()
+                    pygame.quit()
+                    exit()
+                if event.type == KEYDOWN:
+                    if event.key == pygame.K_TAB:
+                        return self.iniciar_partida()
+                    if event.key == pygame.K_ESCAPE:
+                        pygame.display.quit()
+                        pygame.quit()
+                        exit()
+            self.view_menu()
+            clock.tick(FPS)
 
-            # self.partida.tela.blit(bg_surface, (0, 0))
-            self.partida.draw_bg()
-            self.partida.desenhar_elementos()
-            self.partida.atualizar_nivel(self.jogador.velocidade.x)
-            jogador_group.draw(self.partida.tela)
-            jogador_group.update(self.partida.elementos)
+    def iniciar_partida(self):
+        pygame.init()
 
-        if keys_pressed[pygame.K_r]:
-            self.jogador.resetar()
-            return True
-        else:
-            return False
+        FPS = 60
+        clock = pygame.time.Clock()
+
+        self.partida.elementos.clear()
+        # bg_surface = pygame.image.load(f'{file_path_image}/bg.png')
+        self.fase.bg = pygame.transform.smoothscale(
+            self.fase.bg.convert(), (1000, 480))
+        mapa = self.partida.fase.mapear_fase()
+        self.partida.desenhar_nivel(mapa)
+        self.partida.fase.toca_musica()
+        jogador_group = pygame.sprite.Group()
+        jogador_group.add(self.jogador)
+
+        while True:
+
+            pygame.display.update()
+
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.display.quit()
+                    pygame.quit()
+                    exit()
+                if event.type == KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        return self.inicio_jogo()
+
+            keys_pressed = pygame.key.get_pressed()
+
+            if self.jogador.morte or self.jogador.vitoria:
+                self.tela_fim_de_jogo()
+
+            else:
+                if keys_pressed[pygame.K_SPACE]:
+                    self.jogador.pular()
+
+                # self.partida.tela.blit(bg_surface, (0, 0))
+                self.partida.draw_bg()
+                self.partida.desenhar_elementos()
+                self.partida.atualizar_nivel(self.jogador.velocidade.x)
+                jogador_group.draw(self.partida.tela)
+                jogador_group.update(self.partida.elementos)
+
+            if keys_pressed[pygame.K_ESCAPE]:
+                pygame.display.quit()
+                pygame.quit()
+                exit()
+
+            if keys_pressed[pygame.K_r]:
+                self.jogador.resetar()
+                self.iniciar_partida()
+
+            clock.tick(FPS)
