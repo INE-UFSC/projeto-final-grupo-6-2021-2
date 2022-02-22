@@ -3,6 +3,7 @@ from pygame.locals import *
 import os
 from pygame.math import Vector2
 from obstaculos import *
+from skin import Skin
 
 
 current_directory = os.path.dirname(__file__)
@@ -21,9 +22,10 @@ class Jogador(pygame.sprite.Sprite):
         self.__morte = False
         self.__vitoria = False
         self.__angulo = 0
+        self.__skin_atual = Skin('Padrão', 'geo.png') # Skin padrão
 
         # Criação do retângulo
-        self.__image = pygame.image.load(f"{file_path_image}/geo.png")
+        self.__image = pygame.image.load(f"{file_path_image}/{self.__skin_atual.arquivo}")
         self.__image = pygame.transform.scale(self.__image, (24, 24))
         self.__rect = self.image.get_rect()
 
@@ -128,6 +130,14 @@ class Jogador(pygame.sprite.Sprite):
     def mask(self, value):
         self.__mask = value
 
+    @property
+    def skin_atual(self):
+        return self.__skin_atual
+
+    @skin_atual.setter
+    def skin_atual(self, value):
+        self.__skin_atual = value
+
     def pular(self):
         if self.nochao:
             self.pulando = True
@@ -202,3 +212,15 @@ class Jogador(pygame.sprite.Sprite):
         self.rect.topleft = (self.x, self.y)
         self.image, self.rect = self.rotate(
             self.image, self.rect, -self.angulo)
+
+    def muda_skin(self, skin):
+        # Criação do retângulo
+        self.__skin_atual = skin
+        self.__image = pygame.image.load(f"{file_path_image}/{self.__skin_atual.arquivo}")
+        self.__image = pygame.transform.scale(self.__image, (24, 24))
+        self.__rect = self.image.get_rect()
+
+        self.__mask = pygame.mask.Mask(fill=True, size=self.__image.get_size())
+
+        # Posicionamento do retângulo
+        self.__rect.topleft = (self.__x, self.__y)

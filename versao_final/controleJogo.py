@@ -2,10 +2,12 @@ import pygame
 from pygame.locals import *
 from pygame import mixer
 import os
+from random import choice
 from jogador import Jogador
 from fase import Fase
 from partida import Partida
 from menuView import menuView
+from skin import Skin
 
 
 current_directory = os.path.dirname(__file__)
@@ -18,6 +20,8 @@ file_path_mapa = os.path.join(current_directory, 'mapas')
 class ControleJogo():
     def __init__(self):
         self.__jogador = Jogador()
+        self.__skins = [Skin('Quadrado Preto', 'quadrado preto.png'),
+                        Skin('Azul', 'geo blue.jpg')]
         self.__fase = Fase(
             'Fase 1',
             f'{file_path_musica}/undertale-megalovania.mp3',
@@ -56,6 +60,11 @@ class ControleJogo():
                         pygame.display.quit()
                         pygame.quit()
                         exit()
+                    if event.key == pygame.K_s:
+                        if self.__jogador.skin_atual.nome == 'Padrão':
+                            self.__jogador.muda_skin(choice(self.__skins))
+                        else:
+                            self.__jogador.muda_skin(Skin('Padrão', 'geo.png'))
             self.__menu_view.desenha()
             clock.tick(FPS)
 

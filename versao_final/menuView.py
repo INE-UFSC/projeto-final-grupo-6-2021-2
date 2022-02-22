@@ -12,7 +12,7 @@ class menuView():
         pygame.mixer.music.stop()
         self.__tela.fill((0, 0, 0))
         texto_mensagem = 'MENU'
-        texto_opcoes = 'Aperte tab para iniciar e ESC para sair'
+        texto_opcoes = "Aperte tab para iniciar, 'S' para mudar de skin e ESC para sair"
         fontesys60 = pygame.font.SysFont('calibri', 60)
         fontesys24 = pygame.font.SysFont('calibri', 24)
         tela_texto_mensagem = fontesys60.render(
