@@ -47,3 +47,19 @@ class Partida():
     def desenhar_elementos(self):
         for x in self.elementos:
             self.tela.blit(x.image, (x.rect.x, x.rect.y))
+
+    def desenha_fim_de_jogo(self):
+        pygame.mixer.music.stop()
+        if self.jogador.morte:
+            texto_mensagem = 'Você morreu!'
+        else:
+            texto_mensagem = 'Você venceu!'
+        texto_opcoes = 'Aperte R para reiniciar e ESC para sair'
+        fontesys60 = pygame.font.SysFont('calibri', 60)
+        fontesys24 = pygame.font.SysFont('calibri', 24)
+        tela_texto_mensagem = fontesys60.render(
+            texto_mensagem, 1, (255, 255, 255))
+        tela_texto_opcoes = fontesys24.render(texto_opcoes, 1, (255, 255, 255))
+        self.tela.blit(tela_texto_mensagem, (240, 200))
+        self.tela.blit(tela_texto_opcoes, (220, 280))
+        pygame.display.update()
