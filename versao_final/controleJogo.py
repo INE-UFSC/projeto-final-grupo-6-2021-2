@@ -86,6 +86,7 @@ class ControleJogo():
                     exit()
                 if event.type == KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
+                        self.jogador.resetar()
                         return self.inicio_jogo()
 
             keys_pressed = pygame.key.get_pressed()
