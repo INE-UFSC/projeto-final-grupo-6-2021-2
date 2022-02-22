@@ -2,4 +2,4 @@ from controleJogo import *
 
 controle_jogo = ControleJogo()
 
-controle_jogo.inicia_jogo()
+controle_jogo.inicio_jogo()
