@@ -115,11 +115,6 @@ class ControleJogo():
                 jogador_group.draw(self.partida.tela)
                 jogador_group.update(self.partida.elementos)
 
-            if keys_pressed[pygame.K_ESCAPE]:
-                pygame.display.quit()
-                pygame.quit()
-                exit()
-
             if keys_pressed[pygame.K_r]:
                 self.jogador.resetar()
                 self.partida.para_musica()
