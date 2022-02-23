@@ -80,7 +80,7 @@ class ControleJogo():
             self.fase.bg.convert(), (1000, 480))
         mapa = self.partida.fase.mapear_fase()
         self.partida.desenhar_nivel(mapa)
-        self.partida.fase.toca_musica()
+        self.partida.toca_musica()
         jogador_group = pygame.sprite.Group()
         jogador_group.add(self.jogador)
 
@@ -96,6 +96,7 @@ class ControleJogo():
                 if event.type == KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         self.jogador.resetar()
+                        self.partida.para_musica()
                         return self.inicio_jogo()
 
             keys_pressed = pygame.key.get_pressed()
@@ -121,6 +122,7 @@ class ControleJogo():
 
             if keys_pressed[pygame.K_r]:
                 self.jogador.resetar()
+                self.partida.para_musica()
                 self.iniciar_partida()
 
             clock.tick(FPS)

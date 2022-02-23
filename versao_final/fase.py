@@ -1,7 +1,6 @@
 import os
 import pygame
 import json
-from pygame import mixer
 
 
 class Fase():
@@ -32,11 +31,6 @@ class Fase():
     @bg.setter
     def bg(self, valor):
         self.__bg = valor
-
-    def toca_musica(self):
-        mixer.init()
-        mixer.music.load(self.musica)
-        mixer.music.play()
 
     def mapear_fase(self):
         # Carrega a lista com os dados do mapa e converte em uma matriz

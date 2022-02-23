@@ -1,5 +1,6 @@
 import os
 from obstaculos import *
+from pygame import mixer
 
 
 class Partida():
@@ -63,3 +64,13 @@ class Partida():
         self.tela.blit(tela_texto_mensagem, (240, 200))
         self.tela.blit(tela_texto_opcoes, (220, 280))
         pygame.display.update()
+
+    def toca_musica(self):
+        mixer.init()
+        mixer.music.load(self.fase.musica)
+        mixer.music.play()
+
+    def para_musica(self):
+        # diferente de pausar, ela para e da unload.
+        mixer.music.stop()
+        mixer.music.unload()

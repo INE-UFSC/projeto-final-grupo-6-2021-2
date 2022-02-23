@@ -9,7 +9,6 @@ class menuView():
             (800, 480))
 
     def desenha(self):
-        pygame.mixer.music.stop()
         self.__tela.fill((0, 0, 0))
         texto_mensagem = 'MENU'
         texto_opcoes = "Aperte tab para iniciar, 'S' para mudar de skin e ESC para sair"
