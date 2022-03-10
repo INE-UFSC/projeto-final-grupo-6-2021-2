@@ -1,16 +1,14 @@
 import pygame
 from pygame.locals import *
-import os
+from filePaths import file_paths
 from pygame.math import Vector2
 from obstaculos import *
 from skin import Skin
 
 
-current_directory = os.path.dirname(__file__)
-file_path_image = os.path.join(current_directory, 'imagens')
-
 
 class Jogador(pygame.sprite.Sprite):
+    
     def __init__(self):
         super().__init__()
         self.__x = 100
@@ -25,7 +23,7 @@ class Jogador(pygame.sprite.Sprite):
         self.__skin_atual = Skin('Padrão', 'geo.png') # Skin padrão
 
         # Criação do retângulo
-        self.__image = pygame.image.load(f"{file_path_image}/{self.__skin_atual.arquivo}")
+        self.__image = pygame.image.load(f"{file_paths.imagens}/{self.__skin_atual.arquivo}")
         self.__image = pygame.transform.scale(self.__image, (24, 24))
         self.__rect = self.image.get_rect()
 
@@ -216,7 +214,7 @@ class Jogador(pygame.sprite.Sprite):
     def muda_skin(self, skin):
         # Criação do retângulo
         self.__skin_atual = skin
-        self.__image = pygame.image.load(f"{file_path_image}/{self.__skin_atual.arquivo}")
+        self.__image = pygame.image.load(f"{file_paths.imagens}/{self.__skin_atual.arquivo}")
         self.__image = pygame.transform.scale(self.__image, (24, 24))
         self.__rect = self.image.get_rect()
 

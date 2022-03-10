@@ -1,11 +1,9 @@
 from abc import ABC
 import pygame
 from pygame.locals import *
-import os
+from filePaths import file_paths
 
 
-current_directory = os.path.dirname(__file__)
-file_path_image = os.path.join(current_directory, 'imagens')
 
 
 class Obstaculo(ABC):
@@ -40,21 +38,21 @@ class Obstaculo(ABC):
 class Spike(Obstaculo):
 
     def __init__(self, pos) -> None:
-        image = pygame.image.load(f'{file_path_image}/FakeSpike01.png')
+        image = pygame.image.load(f'{file_paths.imagens}/FakeSpike01.png')
         super().__init__(image, pos)
 
 
 class Block(Obstaculo):
 
     def __init__(self, pos) -> None:
-        image = pygame.image.load(f'{file_path_image}/block1.png')
+        image = pygame.image.load(f'{file_paths.imagens}/block1.png')
         super().__init__(image, pos)
 
 
 class Win(Obstaculo):
 
     def __init__(self, pos) -> None:
-        image = pygame.image.load(f'{file_path_image}/win.png')
+        image = pygame.image.load(f'{file_paths.imagens}/win.png')
         image = pygame.transform.smoothscale(
             image.convert(), (16, 16))
         super().__init__(image, pos)

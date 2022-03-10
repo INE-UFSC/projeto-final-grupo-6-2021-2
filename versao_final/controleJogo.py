@@ -1,8 +1,8 @@
 import pygame
 from pygame.locals import *
 from pygame import mixer
-import os
 from random import choice
+from filePaths import file_paths
 from jogador import Jogador
 from fase import Fase
 from partida import Partida
@@ -10,23 +10,18 @@ from menuView import menuView
 from skin import Skin
 
 
-current_directory = os.path.dirname(__file__)
-file_path_musica = os.path.join(current_directory, 'musicas')
-file_path_fonts = os.path.join(current_directory, 'fonts')
-file_path_image = os.path.join(current_directory, 'imagens/tinified')
-file_path_mapa = os.path.join(current_directory, 'mapas')
-
 
 class ControleJogo():
+    
     def __init__(self):
         self.__jogador = Jogador()
         self.__skins = [Skin('Quadrado Preto', 'quadrado preto.png'),
                         Skin('Azul', 'geo blue.jpg')]
         self.__fase = Fase(
             'Fase 1',
-            f'{file_path_musica}/undertale-megalovania.mp3',
-            f'{file_path_mapa}/mapa_teste4.json',
-            f'{file_path_image}/bg.png')
+            f'{file_paths.musicas}/undertale-megalovania.mp3',
+            f'{file_paths.mapas}/mapa_teste4.json',
+            f'{file_paths.imagens}/bg.png')
         self.__partida = Partida(self.__fase, self.__jogador)
         self.__menu_view = menuView()
 

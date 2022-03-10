@@ -1,4 +1,3 @@
-import os
 from obstaculos import *
 from pygame import mixer
 
