@@ -15,6 +15,7 @@ class Jogador(pygame.sprite.Sprite):
         self.__velocidade = Vector2(3, 0)
         self.__gravidade = 0.7
         self.__pulando = False
+        self.__forca_pulo = 8.5
         self.__nochao = True
         self.__morte = False
         self.__vitoria = False
@@ -30,6 +31,14 @@ class Jogador(pygame.sprite.Sprite):
 
         # Posicionamento do retângulo
         self.__rect.topleft = (self.__x, self.__y)
+
+    @property
+    def forca_pulo(self):
+        return self.__forca_pulo
+
+    @forca_pulo.setter
+    def forca_pulo(self, valor):
+        self.__forca_pulo = valor
 
     @property
     def x(self):
@@ -136,9 +145,8 @@ class Jogador(pygame.sprite.Sprite):
         self.__skin_atual = value
 
     def pular(self):
-        if self.nochao:
-            self.pulando = True
-            self.velocidade.y = - 8.5
+        self.pulando = True
+        self.velocidade.y = - self.forca_pulo
 
     def rotate(self, image, rect, angulo):
         new_image = pygame.transform.rotate(image, angulo)
