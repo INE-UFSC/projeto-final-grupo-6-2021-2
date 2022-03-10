@@ -6,7 +6,6 @@ from obstaculos import *
 from skin import Skin
 
 
-
 class Jogador(pygame.sprite.Sprite):
     
     def __init__(self):
@@ -147,56 +146,6 @@ class Jogador(pygame.sprite.Sprite):
         rect = new_image.get_rect(center=rect.center)
         return new_image, rect
 
-    def collide(self, yvel, grupo):
-
-        # Verificação das colisões
-        for x in grupo:
-            if pygame.sprite.spritecollide(self, [x], False, pygame.sprite.collide_mask):
-                if isinstance(x, Block):
-                    if yvel > 0:
-                        self.rect.bottom = x.rect.top
-                        self.velocidade.y = 0
-                        self.pulando = False
-                        self.nochao = True
-                    elif yvel < 0:
-                        self.rect.top = x.rect.bottom
-                        self.morte = True
-                        self.velocidade.x = 0
-                    else:
-                        self.rect.right = x.rect.left
-                        self.morte = True
-                        self.velocidade.x = 0  # Caso o personagem morra, ele fica parado
-
-                if isinstance(x, Spike):
-                    self.morte = True
-                    self.velocidade.x = 0
-
-                if isinstance(x, Win):
-                    self.vitoria = True
-                    self.velocidade.x = 0
-
-                '''tirar o comentário e preencher após a criação do obstáculo de vitória
-                if isinstance(x, (Preencher com classe do obstáculo de vitória)):
-                    self.vitoria = True
-                    self.velocidade.x = 0
-                '''
-
-    def update(self, grupo):
-
-        # Caso não encoste no chão, a gravidade começa a agir no jogador
-        if not self.morte:
-            if not self.nochao:
-                self.velocidade.y += self.gravidade
-                # Verifica colisão no eixo X
-                self.collide(0, grupo)
-
-            if self.velocidade.y == - 8.5:
-                self.image, self.rect = self.rotate(self.image, self.rect, -90)
-
-            self.rect.top += self.velocidade.y
-            self.nochao = False
-            # Verifica colisão no eixo Y
-            self.collide(self.velocidade.y, grupo)
 
     def resetar(self):
         # Reseta todos os valores para os padrão para resetar a fase

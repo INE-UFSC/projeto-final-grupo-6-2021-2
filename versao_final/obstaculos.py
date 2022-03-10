@@ -60,7 +60,10 @@ class Win(Obstaculo):
 
 class Orb(Obstaculo):
 
-    def __init__(self, image, pos) -> None:
+    def __init__(self, pos) -> None:
+        image = pygame.image.load(f'{file_paths.imagens}/orb-yellow.png')
+        image = pygame.transform.smoothscale(
+            image.convert(), (16, 16))
         super().__init__(image, pos)
 
 

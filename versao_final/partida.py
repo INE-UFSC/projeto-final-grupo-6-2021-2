@@ -32,6 +32,9 @@ class Partida():
                 elif col == 3:
                     objeto = Win((x, y))
                     self.elementos.append(objeto)
+                elif col == 4:
+                    objeto = Orb((x, y))
+                    self.elementos.append(objeto)
                 x += 24
             y += 24
             x = 0
@@ -40,9 +43,6 @@ class Partida():
         # Movimenta o mapa inteiro para dar impressão de movimento
         for sprite in self.elementos:
             sprite.rect.x -= velocidade
-        #self.bg_x -= velocidade
-        # if self.bg_x <= -990:
-        #    self.bg_x = 0
 
     def desenhar_elementos(self):
         for x in self.elementos:

@@ -8,8 +8,7 @@ from fase import Fase
 from partida import Partida
 from menuView import menuView
 from skin import Skin
-
-
+from updater import Updater
 
 class ControleJogo():
     
@@ -22,12 +21,17 @@ class ControleJogo():
             f'{file_paths.musicas}/undertale-megalovania.mp3',
             f'{file_paths.mapas}/mapa_teste4.json',
             f'{file_paths.imagens}/bg.png')
-        self.__partida = Partida(self.__fase, self.__jogador)
         self.__menu_view = menuView()
+        self.__partida = Partida(self.__fase, self.__jogador)
+        self.__updater = Updater(self.__jogador, self.__partida)
 
     @property
     def jogador(self):
         return self.__jogador
+
+    @property
+    def colisao(self):
+        return self.__colisao
 
     @property
     def fase(self):
@@ -106,9 +110,9 @@ class ControleJogo():
                 # self.partida.tela.blit(bg_surface, (0, 0))
                 self.partida.draw_bg()
                 self.partida.desenhar_elementos()
-                self.partida.atualizar_nivel(self.jogador.velocidade.x)
+                self.__updater.update_partida(self.jogador.velocidade.x)
                 jogador_group.draw(self.partida.tela)
-                jogador_group.update(self.partida.elementos)
+                self.__updater.update_jogador(self.partida.elementos, keys_pressed)
 
             if keys_pressed[pygame.K_r]:
                 self.jogador.resetar()
