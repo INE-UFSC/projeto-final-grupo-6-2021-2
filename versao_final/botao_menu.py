@@ -1,4 +1,7 @@
 
+import pygame
+
+
 class Botao():
     # FALTA ENCAPSULAR
     def __init__(self, imagem, x_pos, y_pos, mensagem, fonte, 
@@ -36,6 +39,9 @@ class Botao():
         if posicao[0] in range(self.rect.left, self.rect.right) and posicao[1] in range(self.rect.top, self.rect.bottom):
             return True
         return False
+    
+    def is_clicked(self):
+        return pygame.mouse.get_pressed()[0] and self.rect.collidepoint(pygame.mouse.get_pos())
 
     '''
 	Mesma funcionalidade da função acima, porém é feita para rodar sempre

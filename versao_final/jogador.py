@@ -177,3 +177,11 @@ class Jogador(pygame.sprite.Sprite):
         self.__image = imagem
         self.__mask = mask
         self.__rect = rect
+        
+    def parar_jogador(self):
+        self.velocidade = Vector2(0, 0)        
+        self.pulando = False
+        self.nochao = True
+    
+    def continuar_jogador(self):
+        self.velocidade = Vector2(3, 0)
