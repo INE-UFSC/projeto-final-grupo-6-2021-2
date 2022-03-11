@@ -8,7 +8,7 @@ class pauseView():
 
     def __init__(self) -> None:
         fonte_botao = pygame.font.SysFont('calibri', 20)
-        self.tela = pygame.Surface([400, 200], SRCALPHA, 32)
+        self.tela = pygame.Surface([500, 200], SRCALPHA, 32)
         self.tela = self.tela.convert_alpha()
         self.tela.fill((255, 255, 255, 95))
 
@@ -21,13 +21,16 @@ class pauseView():
             'ret_menu.png', 100, 30)
 
         self.lista_botoes = [
-            Botao(imagem=self.fundo_botao, x_pos=290, y_pos=280,
-                  mensagem='Voltar', fonte=fonte_botao,
+            Botao(imagem=self.fundo_botao, x_pos=240, y_pos=280,
+                  mensagem='Continuar', fonte=fonte_botao,
                   cor_base_texto=(255, 255, 255), cor_mouse=(255, 137, 6)),
-            Botao(imagem=self.fundo_botao, x_pos=400, y_pos=280,
+            Botao(imagem=self.fundo_botao, x_pos=350, y_pos=280,
                   mensagem='Menu', fonte=fonte_botao,
                   cor_base_texto=(255, 255, 255), cor_mouse=(255, 137, 6)),
-            Botao(imagem=self.fundo_botao, x_pos=510, y_pos=280,
+            Botao(imagem=self.fundo_botao, x_pos=460, y_pos=280,
+                  mensagem='Resetar', fonte=fonte_botao,
+                  cor_base_texto=(255, 255, 255), cor_mouse=(255, 137, 6)),
+            Botao(imagem=self.fundo_botao, x_pos=570, y_pos=280,
                   mensagem='Sair', fonte=fonte_botao,
                   cor_base_texto=(255, 255, 255), cor_mouse=(255, 137, 6)),
         ]
@@ -43,7 +46,7 @@ class pauseView():
             botao.update(tela)
             botao.muda_cor(pygame.mouse.get_pos())
 
-        tela.blit(self.tela_texto_mensagem, (330, 200))
+        tela.blit(self.tela_texto_mensagem, (320, 200))
 
         pygame.display.update()
 

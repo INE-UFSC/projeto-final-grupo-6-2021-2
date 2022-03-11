@@ -55,7 +55,7 @@ class ControleJogo():
                         (botao.mensagem for botao in self.__menu_view.lista_botoes if botao.is_clicked()), False)
 
                     if botao_selecionado == 'Jogar':
-                        return self.iniciar_partida()
+                        return self.escolha_fase()
 
                     if botao_selecionado == 'Sair':
                         pygame.display.quit()
@@ -153,16 +153,21 @@ class ControleJogo():
         self.partida.para_musica()
         self.jogador.parar_jogador()
 
-        self.partida.tela.blit(self.__pause_view.tela, (200, 140))
+        self.partida.tela.blit(self.__pause_view.tela, (150, 140))
         self.__pause_view.desenha(self.partida.tela)
         pygame.display.update()
 
         for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.display.quit()
+                pygame.quit()
+                exit()
+
             if event.type == MOUSEBUTTONDOWN:
                 botao_selecionado = next(
                     (botao.mensagem for botao in self.__pause_view.lista_botoes if botao.is_clicked()), False)
 
-                if botao_selecionado == 'Voltar':
+                if botao_selecionado == 'Continuar':
                     self.jogador.continuar_jogador()
                     self.partida.toca_musica()
                     return True
@@ -170,7 +175,12 @@ class ControleJogo():
                 if botao_selecionado == 'Menu':
                     self.jogador.resetar()
                     self.partida.para_musica()
-                    return self.inicio_jogo()
+                    self.inicio_jogo()
+                
+                if botao_selecionado == 'Resetar':
+                    self.jogador.resetar()
+                    self.partida.para_musica()
+                    self.iniciar_partida()
                     
                 if botao_selecionado == 'Sair':
                     self.jogador.resetar()
