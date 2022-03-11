@@ -13,6 +13,7 @@ class Fase():
         self.__bg = bg
         self.__bg = pygame.transform.smoothscale(
             self.__bg.convert(), (1000, 480))
+        self.mapa = self.mapear_fase()
 
     @property
     def nome(self):

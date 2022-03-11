@@ -14,8 +14,7 @@ class Partida():
     def inicia(self):
         '''chama todos seus métodos necessários'''
         self.elementos.clear()
-        mapa = self.fase.mapear_fase()
-        self.desenhar_nivel(mapa)
+        self.desenhar_nivel(self.fase.mapa)
         self.toca_musica()
 
     def draw_bg(self):
