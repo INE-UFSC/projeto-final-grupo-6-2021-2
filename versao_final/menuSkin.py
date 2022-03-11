@@ -28,4 +28,5 @@ class MenuSkin():
 
             for botao in self.__lista_botoes:
                 botao.muda_cor(mouse_pos)
+                botao.update(tela)
 
