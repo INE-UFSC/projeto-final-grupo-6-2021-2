@@ -48,5 +48,7 @@ class Colisao():
                     self.jogador.vitoria = True
                     self.jogador.velocidade.x = 0
                 
-                if isinstance(x, Orb) and keys[pygame.K_SPACE] and self.jogador.pulando:
-                    self.jogador.velocidade.y = - 10
+                if (isinstance(x, Orb) and keys[pygame.K_SPACE] and yvel > 0):
+                    self.jogador.forca_pulo = 10
+                    self.jogador.pular()
+                    self.jogador.forca_pulo = 8.5
