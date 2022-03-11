@@ -9,6 +9,7 @@ from partida import Partida
 from menuView import menuView
 from skin import Skin
 from updater import Updater
+from escolhaFasesView import EscolhaFasesView
 
 
 class ControleJogo():
@@ -21,12 +22,9 @@ class ControleJogo():
         self.__jogador = Jogador()
         self.__skins = [Skin('Quadrado Preto', 'quadrado preto.png'),
                         Skin('Azul', 'geo blue.jpg')]
-        self.__fase = Fase(
-            'Fase 1',
-            f'{file_paths.musicas}/undertale-megalovania.mp3',
-            f'{file_paths.mapas}/mapa_teste4.json',
-            f'{file_paths.imagens}/bg.png')
+        self.__fase = None
         self.__menu_view = menuView(self.tela)
+        self.escolha_fase_view = EscolhaFasesView(self.tela)
         self.__partida = Partida(self.__fase, self.__jogador, self.tela)
         self.__updater = Updater(self.__jogador, self.__partida)
         self.FPS = 60
@@ -67,7 +65,7 @@ class ControleJogo():
                     if detecta_mouse is not None:
                         if detecta_mouse[0]:
                             if detecta_mouse[1].mensagem == 'Jogar':
-                                return self.iniciar_partida()
+                                return self.escolha_fase()
                             elif detecta_mouse[1].mensagem == 'Skins':
                                 if self.__jogador.skin_atual.nome == 'Padrão':
                                     self.__jogador.muda_skin(
@@ -81,6 +79,33 @@ class ControleJogo():
                                 pygame.display.quit()
                                 pygame.quit()
                                 exit()
+
+            clock.tick(self.FPS)
+
+    def escolha_fase(self):
+        clock = pygame.time.Clock()
+        while True:
+            mouse_pos = pygame.mouse.get_pos()
+            detecta = self.escolha_fase_view.desenha(mouse_pos)
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.display.quit()
+                    pygame.quit()
+                    exit()
+                # detectao de cliques
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    for botao_tup in self.escolha_fase_view.lista_botoes:
+                        if botao_tup[0].detecta_mouse(mouse_pos):
+                            detecta = botao_tup[0].detecta_mouse(
+                                mouse_pos), botao_tup[1]
+                            break
+                    if detecta is not None:
+                        if detecta[0] and detecta[1] == 'Voltar':
+                            return self.inicio_jogo()
+                        elif detecta[0]:
+                            self.__fase = detecta[1]
+                            self.__partida.fase = self.__fase
+                            return self.iniciar_partida()
 
             clock.tick(self.FPS)
 
