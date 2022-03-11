@@ -4,12 +4,18 @@ from pygame import mixer
 
 class Partida():
 
-    def __init__(self, fase, jogador) -> None:
+    def __init__(self, fase, jogador, tela) -> None:
         self.fase = fase
         self.elementos = []
         self.jogador = jogador
-        self.tela = pygame.display.set_mode((800, 480))
+        self.tela = tela
         self.bg_x = 0
+
+    def inicia(self):
+        '''chama todos seus métodos necessários'''
+        self.elementos.clear()
+        self.desenhar_nivel(self.fase.mapa)
+        self.toca_musica()
 
     def draw_bg(self):
         # desenha o fundo da fase com x variavel para dar movimento

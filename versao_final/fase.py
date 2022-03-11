@@ -9,6 +9,9 @@ class Fase():
         self.__musica = musica
         self.__arquivo = arquivo
         self.__bg = pygame.image.load(bg)
+        self.__bg = pygame.transform.smoothscale(
+            self.__bg.convert(), (1000, 480))
+        self.mapa = self.mapear_fase()
 
     @property
     def nome(self):
