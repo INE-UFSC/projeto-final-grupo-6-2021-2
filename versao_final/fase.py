@@ -11,6 +11,8 @@ class Fase():
         self.__arquivo = arquivo
         bg = pygame.image.load(bg)
         self.__bg = bg
+        self.__bg = pygame.transform.smoothscale(
+            self.__bg.convert(), (1000, 480))
 
     @property
     def nome(self):

@@ -6,17 +6,15 @@ from filePaths import file_paths
 
 class menuView():
 
-    def __init__(self) -> None:
-        pygame.init()
+    def __init__(self, tela) -> None:
      #      fontesys60 = pygame.font.SysFont('calibri', 60)
         fonte_botao = pygame.font.SysFont('calibri', 20)
-        self.__tela = pygame.display.set_mode(
-            (800, 500))
+        self.__tela = tela
 
         self.fundo_menu = pygame.image.load(
             f'{file_paths.imagens}/menu_view/fundo_menu.png')
         self.fundo_menu = pygame.transform.smoothscale(
-            self.fundo_menu.convert(), (800, 480))
+            self.fundo_menu.convert(), (800, 500))
 
         self.fundo_botao = pygame.image.load(
             f'{file_paths.imagens}/menu_view/ret_menu.png')
