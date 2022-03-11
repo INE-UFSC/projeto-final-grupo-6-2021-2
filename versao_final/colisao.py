@@ -1,5 +1,6 @@
 import pygame
-from obstaculos import *
+from obstaculos import Block, Spike, Win, Orb
+
 
 class Colisao():
 
@@ -11,11 +12,11 @@ class Colisao():
     @property
     def jogador(self):
         return self.__jogador
-    
+
     @property
     def tela(self):
         return self.__tela
-    
+
     @property
     def elementos(self):
         return self.__elementos
@@ -47,7 +48,7 @@ class Colisao():
                 if isinstance(x, Win):
                     self.jogador.vitoria = True
                     self.jogador.velocidade.x = 0
-                
+
                 if (isinstance(x, Orb) and keys[pygame.K_SPACE] and yvel > 0):
                     self.jogador.forca_pulo = 10
                     self.jogador.pular()

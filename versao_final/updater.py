@@ -1,11 +1,13 @@
 from colisao import Colisao
 
+
 class Updater():
 
     def __init__(self, jogador, partida) -> None:
         self.__jogador = jogador
         self.__partida = partida
-        self.__colisor = Colisao(self.__jogador, self.__partida.tela, self.__partida.elementos)
+        self.__colisor = Colisao(
+            self.__jogador, self.__partida.tela, self.__partida.elementos)
 
     def update_jogador(self, grupo, key):
         jogador = self.__jogador
@@ -17,7 +19,8 @@ class Updater():
                 self.__colisor.collide(0, key)
 
             if jogador.velocidade.y == - 8.5:
-                jogador.image, jogador.rect = jogador.rotate(jogador.image, jogador.rect, -90)
+                jogador.image, jogador.rect = jogador.rotate(
+                    jogador.image, jogador.rect, -90)
 
             jogador.rect.top += jogador.velocidade.y
             jogador.nochao = False

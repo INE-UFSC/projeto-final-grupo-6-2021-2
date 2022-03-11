@@ -1,6 +1,5 @@
 import pygame
 from pygame.locals import *
-from pygame import mixer
 from random import choice
 from filePaths import file_paths
 from jogador import Jogador
@@ -29,10 +28,6 @@ class ControleJogo():
     @property
     def jogador(self):
         return self.__jogador
-
-    @property
-    def colisao(self):
-        return self.__colisao
 
     @property
     def fase(self):
@@ -87,7 +82,6 @@ class ControleJogo():
         clock = pygame.time.Clock()
 
         self.partida.elementos.clear()
-        # bg_surface = pygame.image.load(f'{file_path_image}/bg.png')
         self.fase.bg = pygame.transform.smoothscale(
             self.fase.bg.convert(), (1000, 480))
         mapa = self.partida.fase.mapear_fase()
@@ -97,7 +91,6 @@ class ControleJogo():
         jogador_group.add(self.jogador)
 
         while True:
-
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -122,7 +115,6 @@ class ControleJogo():
                     if self.jogador.nochao:
                         self.jogador.pular()
 
-                # self.partida.tela.blit(bg_surface, (0, 0))
                 self.partida.draw_bg()
                 self.partida.desenhar_elementos()
                 self.__updater.update_partida(self.jogador.velocidade.x)

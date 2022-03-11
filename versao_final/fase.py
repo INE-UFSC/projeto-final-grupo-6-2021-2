@@ -1,4 +1,3 @@
-import os
 import pygame
 import json
 
@@ -9,8 +8,7 @@ class Fase():
         self.__nome = nome
         self.__musica = musica
         self.__arquivo = arquivo
-        bg = pygame.image.load(bg)
-        self.__bg = bg
+        self.__bg = pygame.image.load(bg)
 
     @property
     def nome(self):

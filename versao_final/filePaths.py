@@ -2,9 +2,8 @@ import os
 from singleton import Singleton
 
 
-
 class FilePaths(Singleton):
-    
+
     def __init__(self):
         super().__init__()
         current_directory = os.path.dirname(__file__)

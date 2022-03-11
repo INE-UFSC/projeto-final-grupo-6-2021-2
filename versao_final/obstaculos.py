@@ -4,8 +4,6 @@ from pygame.locals import *
 from filePaths import file_paths
 
 
-
-
 class Obstaculo(ABC):
 
     def __init__(self, image, pos) -> None:

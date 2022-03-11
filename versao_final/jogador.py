@@ -7,7 +7,7 @@ from skin import Skin
 
 
 class Jogador(pygame.sprite.Sprite):
-    
+
     def __init__(self):
         super().__init__()
         self.__x = 100
@@ -20,17 +20,12 @@ class Jogador(pygame.sprite.Sprite):
         self.__morte = False
         self.__vitoria = False
         self.__angulo = 0
-        self.__skin_atual = Skin('Padrão', 'geo.png') # Skin padrão
+        self.__skin_atual = Skin('Padrão', 'geo.png')  # Skin padrão
 
-        # Criação do retângulo
-        self.__image = pygame.image.load(f"{file_paths.imagens}/{self.__skin_atual.arquivo}")
-        self.__image = pygame.transform.scale(self.__image, (24, 24))
-        self.__rect = self.image.get_rect()
-
-        self.__mask = pygame.mask.Mask(fill=True, size=self.__image.get_size())
-
-        # Posicionamento do retângulo
-        self.__rect.topleft = (self.__x, self.__y)
+        imagem, mask, rect = self.__cria_e_posiciona_retangulo()
+        self.__image = imagem
+        self.__mask = mask
+        self.__rect = rect
 
     @property
     def forca_pulo(self):
@@ -144,6 +139,15 @@ class Jogador(pygame.sprite.Sprite):
     def skin_atual(self, value):
         self.__skin_atual = value
 
+    def __cria_e_posiciona_retangulo(self):
+        imagem = pygame.image.load(
+            f"{file_paths.imagens}/{self.__skin_atual.arquivo}")
+        imagem_escalonada = pygame.transform.scale(imagem, (24, 24))
+        rect = imagem_escalonada.get_rect()
+        mask = pygame.mask.Mask(fill=True, size=imagem_escalonada.get_size())
+        rect.topleft = (self.__x, self.__y)
+        return imagem_escalonada, mask, rect
+
     def pular(self):
         self.pulando = True
         self.velocidade.y = - self.forca_pulo
@@ -153,7 +157,6 @@ class Jogador(pygame.sprite.Sprite):
         self.angulo += angulo
         rect = new_image.get_rect(center=rect.center)
         return new_image, rect
-
 
     def resetar(self):
         # Reseta todos os valores para os padrão para resetar a fase
@@ -169,13 +172,8 @@ class Jogador(pygame.sprite.Sprite):
             self.image, self.rect, -self.angulo)
 
     def muda_skin(self, skin):
-        # Criação do retângulo
-        self.__skin_atual = skin
-        self.__image = pygame.image.load(f"{file_paths.imagens}/{self.__skin_atual.arquivo}")
-        self.__image = pygame.transform.scale(self.__image, (24, 24))
-        self.__rect = self.image.get_rect()
-
-        self.__mask = pygame.mask.Mask(fill=True, size=self.__image.get_size())
-
-        # Posicionamento do retângulo
-        self.__rect.topleft = (self.__x, self.__y)
+        self.skin_atual = skin
+        imagem, mask, rect = self.__cria_e_posiciona_retangulo()
+        self.__image = imagem
+        self.__mask = mask
+        self.__rect = rect
