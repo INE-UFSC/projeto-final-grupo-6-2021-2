@@ -41,6 +41,12 @@ class Partida():
                 elif col == 4:
                     objeto = Orb((x, y))
                     self.elementos.append(objeto)
+                elif col == 5:
+                    objeto = Portal((x, y))
+                    self.elementos.append(objeto)
+                elif col == 6:
+                    objeto = PortalSaida((x, y))
+                    self.elementos.append(objeto)
                 x += 24
             y += 24
             x = 0

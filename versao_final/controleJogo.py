@@ -19,8 +19,6 @@ class ControleJogo():
 
         self.tela = pygame.display.set_mode((800, 480))
         self.__jogador = Jogador()
-        self.__skins = [Skin('Quadrado Preto', 'quadrado preto.png'),
-                        Skin('Azul', 'geo blue.jpg')]
         self.__fase = None
         self.__menu_view = menuView(self.tela)
         self.escolha_fase_view = EscolhaFasesView(self.tela)
@@ -122,6 +120,7 @@ class ControleJogo():
 
     def iniciar_partida(self):
         clock = pygame.time.Clock()
+        self.jogador.muda_skin(self.jogador.skin_atual)
         self.partida.inicia()
 
         jogador_group = pygame.sprite.Group()
@@ -152,8 +151,12 @@ class ControleJogo():
             else:
 
                 if keys_pressed[K_SPACE]:
-                    if self.jogador.nochao:
-                        self.jogador.pular()
+                    if self.jogador.voo:
+                        self.jogador.velocidade.y = 0   
+                        self.jogador.pular() 
+                    else:
+                        if self.jogador.nochao:
+                            self.jogador.pular()
 
                 self.partida.draw_bg()
                 self.partida.desenhar_elementos()
