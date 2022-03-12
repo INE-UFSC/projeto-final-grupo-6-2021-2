@@ -7,8 +7,6 @@ from filePaths import file_paths
 class Obstaculo(ABC):
 
     def __init__(self, image, pos) -> None:
-
-        image = pygame.transform.smoothscale(image, (24, 24))
         self.__image = image
         self.__rect = self.image.get_rect(topleft=pos)
         self.__mask = pygame.mask.from_surface(self.image)
@@ -38,6 +36,7 @@ class Spike(Obstaculo):
 
     def __init__(self, pos) -> None:
         image = file_paths.imagens_obtaculos['Spike']
+        image = pygame.transform.smoothscale(image, (24, 24))
         super().__init__(image, pos)
 
 
@@ -45,6 +44,7 @@ class Block(Obstaculo):
 
     def __init__(self, pos) -> None:
         image = file_paths.imagens_obtaculos['Block']
+        image = pygame.transform.smoothscale(image, (24, 24))
         super().__init__(image, pos)
 
 
@@ -52,8 +52,21 @@ class Win(Obstaculo):
 
     def __init__(self, pos) -> None:
         image = file_paths.imagens_obtaculos['Win']
+        image = pygame.transform.smoothscale(image, (24, 24))
         image = pygame.transform.smoothscale(
             image.convert(), (16, 16))
+        super().__init__(image, pos)
+
+class Portal(Obstaculo):
+
+    def __init__(self, pos) -> None:
+        image = file_paths.imagens_obtaculos['Portal']
+        super().__init__(image, pos)
+
+class PortalSaida(Obstaculo):
+
+    def __init__(self, pos) -> None:
+        image = file_paths.imagens_obtaculos['PortalSaida']
         super().__init__(image, pos)
 
 
@@ -61,8 +74,7 @@ class Orb(Obstaculo):
 
     def __init__(self, pos) -> None:
         image = file_paths.imagens_obtaculos['Orb']
-        image = pygame.transform.smoothscale(
-            image.convert(), (16, 16))
+        image = pygame.transform.smoothscale(image, (24, 24))
         super().__init__(image, pos)
 
 

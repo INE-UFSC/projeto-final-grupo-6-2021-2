@@ -16,11 +16,11 @@ class Updater():
             if not jogador.nochao:
                 jogador.velocidade.y += jogador.gravidade
                 # Verifica colisão no eixo X
-                self.__colisor.collide(0, key)
-
-            if jogador.velocidade.y == - 8.5:
-                jogador.image, jogador.rect = jogador.rotate(
-                    jogador.image, jogador.rect, -90)
+                self.__colisor.collide(0, key) 
+                if not jogador.voo:      
+                    if jogador.velocidade.y == - 8.5:
+                        jogador.image, jogador.rect = jogador.rotate(
+                            jogador.image, jogador.rect, -90)
 
             jogador.rect.top += jogador.velocidade.y
             jogador.nochao = False

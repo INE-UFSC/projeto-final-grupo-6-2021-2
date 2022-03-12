@@ -12,7 +12,7 @@ class EscolhaFasesView():
         self.fase01 = Fase(
             'Fase 1',
             f'{file_paths.musicas}/undertale-megalovania.mp3',
-            f'{file_paths.mapas}/mapa_teste4.json',
+            f'{file_paths.mapas}/teste_voo.json',
             f'{file_paths.imagens}/bg.png')
 
         fonte_botao = pygame.font.SysFont('calibri', 20)

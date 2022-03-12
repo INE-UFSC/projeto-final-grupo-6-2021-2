@@ -19,6 +19,7 @@ class Jogador(pygame.sprite.Sprite):
         self.__nochao = True
         self.__morte = False
         self.__vitoria = False
+        self.__voo = False
         self.__angulo = 0
         self.__skin_atual = Skin('Padrão', 'geo.png')  # Skin padrão
 
@@ -26,6 +27,14 @@ class Jogador(pygame.sprite.Sprite):
         self.__image = imagem
         self.__mask = mask
         self.__rect = rect
+
+    @property
+    def voo(self):
+        return self.__voo
+    
+    @voo.setter
+    def voo(self, valor):
+        self.__voo = valor
 
     @property
     def forca_pulo(self):
@@ -167,6 +176,8 @@ class Jogador(pygame.sprite.Sprite):
         self.pulando = False
         self.nochao = True
         self.morte = False
+        self.voo = False
+        self.forca_pulo = 8.5
         self.rect.topleft = (self.x, self.y)
         self.image, self.rect = self.rotate(
             self.image, self.rect, -self.angulo)

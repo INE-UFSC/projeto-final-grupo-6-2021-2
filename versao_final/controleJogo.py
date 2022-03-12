@@ -152,8 +152,12 @@ class ControleJogo():
             else:
 
                 if keys_pressed[K_SPACE]:
-                    if self.jogador.nochao:
-                        self.jogador.pular()
+                    if self.jogador.voo:
+                        self.jogador.velocidade.y = 0   
+                        self.jogador.pular() 
+                    else:
+                        if self.jogador.nochao:
+                            self.jogador.pular()
 
                 self.partida.draw_bg()
                 self.partida.desenhar_elementos()

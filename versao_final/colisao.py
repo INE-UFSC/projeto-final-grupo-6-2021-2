@@ -1,6 +1,6 @@
 import pygame
-from obstaculos import Block, Spike, Win, Orb
-
+from obstaculos import Block, Spike, Win, Orb, Portal, PortalSaida
+from skin import Skin
 
 class Colisao():
 
@@ -32,6 +32,9 @@ class Colisao():
                         self.jogador.velocidade.y = 0
                         self.jogador.pulando = False
                         self.jogador.nochao = True
+                        if self.jogador.voo:
+                            self.jogador.morte = True
+                            self.jogador.velocidade.x = 0
                     elif yvel < 0:
                         self.jogador.rect.top = x.rect.bottom
                         self.jogador.morte = True
@@ -53,3 +56,13 @@ class Colisao():
                     self.jogador.forca_pulo = 10
                     self.jogador.pular()
                     self.jogador.forca_pulo = 8.5
+                
+                if isinstance(x, Portal):
+                        self.jogador.forca_pulo = 5
+                        self.jogador.voo = True
+                        self.jogador.gravidade = 0.3
+
+                if isinstance(x, PortalSaida):
+                        self.jogador.voo = False
+                        self.jogador.gravidade = 0.7
+                        self.jogador.forca_pulo = 8.5

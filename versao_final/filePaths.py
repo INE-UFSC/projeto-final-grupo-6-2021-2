@@ -16,7 +16,9 @@ class FilePaths(Singleton):
         self.imagens_obtaculos = {'Spike': pygame.image.load(f'{self.imagens}/FakeSpike01.png'),
                                   'Win': pygame.image.load(f'{self.imagens}/win.png'),
                                   'Orb': pygame.image.load(f'{self.imagens}/orb-yellow.png'),
-                                  'Block': pygame.image.load(f'{self.imagens}/block1.png')
+                                  'Block': pygame.image.load(f'{self.imagens}/block1.png'),
+                                  'Portal': pygame.image.load(f'{self.imagens}/portal.png'),
+                                  'PortalSaida': pygame.image.load(f'{self.imagens}/portal-saida.png')
                                   }
 
 
