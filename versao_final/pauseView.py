@@ -44,7 +44,7 @@ class pauseView():
     def desenha(self, tela):
         for botao in self.lista_botoes:
             botao.update(tela)
-            botao.muda_cor(pygame.mouse.get_pos())
+            botao.muda_cor()
 
         tela.blit(self.tela_texto_mensagem, (320, 200))
 

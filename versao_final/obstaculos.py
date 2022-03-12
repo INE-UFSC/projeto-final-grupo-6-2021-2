@@ -1,7 +1,9 @@
 from abc import ABC
+from json import load
 import pygame
 from pygame.locals import *
 from filePaths import file_paths
+from LoadedImages import loaded_images
 
 
 class Obstaculo(ABC):
@@ -35,7 +37,7 @@ class Obstaculo(ABC):
 class Spike(Obstaculo):
 
     def __init__(self, pos) -> None:
-        image = file_paths.imagens_obtaculos['Spike']
+        image = loaded_images.imagens_obtaculos['Spike']
         image = pygame.transform.smoothscale(image, (24, 24))
         super().__init__(image, pos)
 
@@ -43,7 +45,7 @@ class Spike(Obstaculo):
 class Block(Obstaculo):
 
     def __init__(self, pos) -> None:
-        image = file_paths.imagens_obtaculos['Block']
+        image = loaded_images.imagens_obtaculos['Block']
         image = pygame.transform.smoothscale(image, (24, 24))
         super().__init__(image, pos)
 
@@ -51,29 +53,31 @@ class Block(Obstaculo):
 class Win(Obstaculo):
 
     def __init__(self, pos) -> None:
-        image = file_paths.imagens_obtaculos['Win']
+        image = loaded_images.imagens_obtaculos['Win']
         image = pygame.transform.smoothscale(image, (24, 24))
         image = pygame.transform.smoothscale(
             image.convert(), (16, 16))
         super().__init__(image, pos)
 
+
 class Portal(Obstaculo):
 
     def __init__(self, pos) -> None:
-        image = file_paths.imagens_obtaculos['Portal']
+        image = loaded_images.imagens_obtaculos['Portal']
         super().__init__(image, pos)
+
 
 class PortalSaida(Obstaculo):
 
     def __init__(self, pos) -> None:
-        image = file_paths.imagens_obtaculos['PortalSaida']
+        image = loaded_images.imagens_obtaculos['PortalSaida']
         super().__init__(image, pos)
 
 
 class Orb(Obstaculo):
 
     def __init__(self, pos) -> None:
-        image = file_paths.imagens_obtaculos['Orb']
+        image = loaded_images.imagens_obtaculos['Orb']
         image = pygame.transform.smoothscale(image, (24, 24))
         super().__init__(image, pos)
 
