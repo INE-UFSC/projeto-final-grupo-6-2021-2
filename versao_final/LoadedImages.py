@@ -9,6 +9,11 @@ class LoadedImages(Singleton):
 
     def __init__(self):
         super().__init__()
+
+        # temporario ate resolver problema
+        pygame.init()
+        tela = pygame.display.set_mode((800, 480))
+
         current_directory = os.path.dirname(__file__)
         self.imagens_obtaculos = {'Spike': pygame.image.load(f'{file_paths.imagens}/FakeSpike01.png'),
                                   'Win': pygame.image.load(f'{file_paths.imagens}/win.png'),
@@ -17,6 +22,23 @@ class LoadedImages(Singleton):
                                   'Portal': pygame.image.load(f'{file_paths.imagens}/portal.png'),
                                   'PortalSaida': pygame.image.load(f'{file_paths.imagens}/portal-saida.png')
                                   }
+
+        self.imagens_telas = {
+            'Menu_skin': self.__add_imagem('/menu_view/fundo_menuskins.png', 800, 480),
+            'Menu_principal': self.__add_imagem('/menu_view/fundo_menu.png', 800, 480),
+            'Menu_fases': self.__add_imagem('/menu_view/tela_fases.png', 800, 500)
+        }
+
+        self.imagens_botoes = {
+            'Ret_fase': self.__add_imagem('/menu_view/ret_menu.png', 100, 100),
+            'Ret_select_rosa': self.__add_imagem('/menu_view/ret_menu.png', 100, 30)
+        }
+
+    def __add_imagem(self, file_name, size_x, size_y):
+        image = pygame.image.load(
+            f'{file_paths.imagens}/{file_name}')
+        return pygame.transform.smoothscale(
+            image.convert(), (size_x, size_y))
 
 
 loaded_images = LoadedImages()

@@ -3,6 +3,7 @@ from pygame.locals import *
 from botao_menu import Botao
 from skin import Skin
 from filePaths import file_paths
+from LoadedImages import loaded_images
 
 
 class MenuSkin():
@@ -11,10 +12,8 @@ class MenuSkin():
         self.__tela = tela
 
         fonte_botao = pygame.font.SysFont('calibri', 20)
-        self.fundo_menu = self.__adiciona_e_transforma_imagem(
-            'fundo_menuskins.png', 800, 480)
-        self.fundo_botao = self.__adiciona_e_transforma_imagem(
-            'ret_menu.png', 100, 30)
+        self.fundo_menu = loaded_images.imagens_telas['Menu_skin']
+        self.fundo_botao = loaded_images.imagens_botoes['Ret_select_rosa']
 
         self.__skin_selec = Skin('Padrão', 'geo.png')
         self.skins = [
@@ -45,12 +44,6 @@ class MenuSkin():
             (Botao(imagem=self.fundo_botao, x_pos=50, y_pos=25,
                    mensagem='Voltar', fonte=fonte_botao,
                    cor_base_texto=(255, 255, 255), cor_mouse=(255, 137, 6)), 'Voltar'))
-
-    def __adiciona_e_transforma_imagem(self, file_name, size_x, size_y):
-        image = pygame.image.load(
-            f'{file_paths.imagens}/menu_view/{file_name}')
-        return pygame.transform.smoothscale(
-            image.convert(), (size_x, size_y))
 
     def __adiciona_e_transforma_skin(self, arquivo, size_x, size_y):
         imagem = pygame.image.load(

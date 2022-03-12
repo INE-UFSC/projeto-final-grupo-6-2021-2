@@ -3,6 +3,7 @@ from pygame.locals import *
 from botao_menu import Botao
 from filePaths import file_paths
 from fase import Fase
+from LoadedImages import loaded_images
 
 
 class EscolhaFasesView():
@@ -18,17 +19,10 @@ class EscolhaFasesView():
         fonte_botao = pygame.font.SysFont('calibri', 20)
         self.__tela = tela
 
-        self.fundo = pygame.image.load(
-            f'{file_paths.imagens}/menu_view/tela_fases.png')
-        self.fundo = pygame.transform.smoothscale(
-            self.fundo.convert(), (800, 500))
+        self.fundo = loaded_images.imagens_telas['Menu_fases']
 
         # só colocar texto não funcionou por enquanto
-        self.fundo_fase = pygame.image.load(
-            f'{file_paths.imagens}/menu_view/ret_menu.png')
-
-        self.fundo_fase = pygame.transform.smoothscale(
-            self.fundo_fase.convert(), (100, 100))
+        self.fundo_fase = loaded_images.imagens_botoes['Ret_fase']
 
         # Lista deve ser automatizada no futuro. Atualmente, tuple com botao e fase (ou key voltar)
         self.lista_botoes = [
