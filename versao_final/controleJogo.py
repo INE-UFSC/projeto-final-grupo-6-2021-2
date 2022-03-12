@@ -78,17 +78,14 @@ class ControleJogo():
                     pygame.quit()
                     exit()
                 if event.type == MOUSEBUTTONDOWN:
-                    botao_selecionado = next(
-                        (botao.mensagem for botao in self.__menu_skin.lista_botoes if botao.is_clicked()), False)
-
-                    skins_nomes = self.__menu_skin.lista_nomes_skins()
-
-                    if botao_selecionado in skins_nomes:
-                        skin = self.__menu_skin.selecina_skin(
-                            botao_selecionado)
-                        self.__jogador.muda_skin(skin)
-                    if botao_selecionado == 'Voltar':
-                        return self.inicio_jogo()
+                    for botao_tup in self.__menu_skin.lista_botoes:
+                        if botao_tup[0].is_clicked() and botao_tup[0].mensagem == 'Voltar':
+                            return self.inicio_jogo()
+                        elif botao_tup[0].is_clicked():
+                            # clicou em um botão e não é o de voltar
+                            self.__jogador.muda_skin(botao_tup[1])
+                            self.__menu_skin.selecina_skin(
+                                botao_tup[1])
 
             clock.tick(self.FPS)
 
