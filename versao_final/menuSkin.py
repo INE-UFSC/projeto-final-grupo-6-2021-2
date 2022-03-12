@@ -5,7 +5,6 @@ from skin import Skin
 from filePaths import file_paths
 
 
-
 class MenuSkin():
 
     def __init__(self, tela):
@@ -46,7 +45,7 @@ class MenuSkin():
                   mensagem='Voltar', fonte=fonte_botao,
                   cor_base_texto=(255, 255, 255), cor_mouse=(255, 137, 6))
         ]
-    
+
     def __adiciona_e_transforma_imagem(self, file_name, size_x, size_y):
         image = pygame.image.load(
             f'{file_paths.imagens}/menu_view/{file_name}')
@@ -64,17 +63,21 @@ class MenuSkin():
             if skin.nome == nome:
                 self.__skin_selec = skin
                 return skin
-    
+
     def desenha(self):
         self.__tela.blit(self.fundo_menu, (0, 0))
-        self.__tela.blit(self.__adiciona_e_transforma_skin(self.__skin_selec.arquivo, 30, 30), (700, 75))
-        self.__tela.blit(self.__adiciona_e_transforma_skin(self.skins[0].arquivo, 30, 30), (235, 150))
-        self.__tela.blit(self.__adiciona_e_transforma_skin(self.skins[1].arquivo, 30, 30), (385, 150))
-        self.__tela.blit(self.__adiciona_e_transforma_skin(self.skins[2].arquivo, 30, 30), (535, 150))
+        self.__tela.blit(self.__adiciona_e_transforma_skin(
+            self.__skin_selec.arquivo, 30, 30), (700, 75))
+        self.__tela.blit(self.__adiciona_e_transforma_skin(
+            self.skins[0].arquivo, 30, 30), (235, 150))
+        self.__tela.blit(self.__adiciona_e_transforma_skin(
+            self.skins[1].arquivo, 30, 30), (385, 150))
+        self.__tela.blit(self.__adiciona_e_transforma_skin(
+            self.skins[2].arquivo, 30, 30), (535, 150))
 
         for botao in self.lista_botoes:
             botao.update(self.__tela)
-            botao.muda_cor(pygame.mouse.get_pos())
+            botao.muda_cor()
 
         pygame.display.update()
 

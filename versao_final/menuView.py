@@ -36,13 +36,12 @@ class menuView():
         return pygame.transform.smoothscale(
             image.convert(), (size_x, size_y))
 
-
     def desenha(self):
         self.__tela.blit(self.fundo_menu, (0, 0))
 
         for botao in self.lista_botoes:
             botao.update(self.__tela)
-            botao.muda_cor(pygame.mouse.get_pos())
+            botao.muda_cor()
 
         pygame.display.update()  # tela
 

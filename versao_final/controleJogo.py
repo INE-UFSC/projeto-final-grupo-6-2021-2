@@ -21,7 +21,7 @@ class ControleJogo():
         self.__jogador = Jogador()
         self.__fase = None
         self.__menu_view = menuView(self.tela)
-        self.escolha_fase_view = EscolhaFasesView(self.tela)
+        self.__escolha_fase_view = EscolhaFasesView(self.tela)
         self.__pause_view = pauseView()
         self.__partida = Partida(self.__fase, self.__jogador, self.tela)
         self.__updater = Updater(self.__jogador, self.__partida)
@@ -84,18 +84,18 @@ class ControleJogo():
                     skins_nomes = self.__menu_skin.lista_nomes_skins()
 
                     if botao_selecionado in skins_nomes:
-                        skin = self.__menu_skin.selecina_skin(botao_selecionado)
+                        skin = self.__menu_skin.selecina_skin(
+                            botao_selecionado)
                         self.__jogador.muda_skin(skin)
                     if botao_selecionado == 'Voltar':
                         return self.inicio_jogo()
-        
+
             clock.tick(self.FPS)
 
     def escolha_fase(self):
         clock = pygame.time.Clock()
         while True:
-            mouse_pos = pygame.mouse.get_pos()
-            detecta = self.escolha_fase_view.desenha(mouse_pos)
+            self.__escolha_fase_view.desenha()
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.display.quit()
@@ -103,16 +103,13 @@ class ControleJogo():
                     exit()
                 # detectao de cliques
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    for botao_tup in self.escolha_fase_view.lista_botoes:
-                        if botao_tup[0].detecta_mouse(mouse_pos):
-                            detecta = botao_tup[0].detecta_mouse(
-                                mouse_pos), botao_tup[1]
-                            break
-                    if detecta is not None:
-                        if detecta[0] and detecta[1] == 'Voltar':
+                    for botao_tup in self.__escolha_fase_view.lista_botoes:
+                        if botao_tup[0].is_clicked() and botao_tup[0].mensagem == 'Voltar':
                             return self.inicio_jogo()
-                        elif detecta[0]:
-                            self.__fase = detecta[1]
+
+                        elif botao_tup[0].is_clicked():
+                            # clicou em um botão e não é o de voltar
+                            self.__fase = botao_tup[1]
                             self.__partida.fase = self.__fase
                             return self.iniciar_partida()
 
@@ -143,7 +140,8 @@ class ControleJogo():
 
             if pausar_jogo:
                 jogo_pausado = self.pausar_jogo()
-                if jogo_pausado: pausar_jogo = False
+                if jogo_pausado:
+                    pausar_jogo = False
 
             if self.jogador.morte or self.jogador.vitoria:
                 self.partida.desenha_fim_de_jogo()
@@ -152,8 +150,8 @@ class ControleJogo():
 
                 if keys_pressed[K_SPACE]:
                     if self.jogador.voo:
-                        self.jogador.velocidade.y = 0   
-                        self.jogador.pular() 
+                        self.jogador.velocidade.y = 0
+                        self.jogador.pular()
                     else:
                         if self.jogador.nochao:
                             self.jogador.pular()
@@ -171,7 +169,7 @@ class ControleJogo():
                 self.iniciar_partida()
 
             clock.tick(self.FPS)
-            
+
     def pausar_jogo(self):
         self.partida.para_musica()
         self.jogador.parar_jogador()
@@ -194,17 +192,17 @@ class ControleJogo():
                     self.jogador.continuar_jogador()
                     self.partida.toca_musica()
                     return True
-                    
+
                 if botao_selecionado == 'Menu':
                     self.jogador.resetar()
                     self.partida.para_musica()
                     self.inicio_jogo()
-                
+
                 if botao_selecionado == 'Resetar':
                     self.jogador.resetar()
                     self.partida.para_musica()
                     self.iniciar_partida()
-                    
+
                 if botao_selecionado == 'Sair':
                     self.jogador.resetar()
                     self.partida.para_musica()

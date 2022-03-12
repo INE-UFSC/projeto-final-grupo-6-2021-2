@@ -43,11 +43,11 @@ class EscolhaFasesView():
 
     '''param :mouse_pos: entregue pelo pygame dentro do loop'''
 
-    def desenha(self, mouse_pos):
+    def desenha(self):
         self.__tela.blit(self.fundo, (0, 0))
 
         for botao_tup in self.lista_botoes:
             botao_tup[0].update(self.__tela)
-            botao_tup[0].muda_cor(mouse_pos)
+            botao_tup[0].muda_cor()
 
         pygame.display.update()  # tela
