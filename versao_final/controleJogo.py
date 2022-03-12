@@ -8,6 +8,7 @@ from skin import Skin
 from updater import Updater
 from escolhaFasesView import EscolhaFasesView
 from pauseView import pauseView
+from menuSkin import MenuSkin
 
 
 class ControleJogo():
@@ -26,6 +27,7 @@ class ControleJogo():
         self.__pause_view = pauseView()
         self.__partida = Partida(self.__fase, self.__jogador, self.tela)
         self.__updater = Updater(self.__jogador, self.__partida)
+        self.__menu_skin = MenuSkin(self.tela)
         self.FPS = 60
 
     @property
@@ -57,20 +59,38 @@ class ControleJogo():
                     if botao_selecionado == 'Jogar':
                         return self.escolha_fase()
 
+                    if botao_selecionado == 'Skins':
+                        return self.selecao_skin()
+
                     if botao_selecionado == 'Sair':
                         pygame.display.quit()
                         pygame.quit()
                         exit()
-                        
-                    if botao_selecionado == 'Skins':
-                        if self.__jogador.skin_atual.nome == 'Padrão':
-                            self.__jogador.muda_skin(
-                                choice(self.__skins))
-                        else:
-                            self.__jogador.muda_skin(
-                                Skin('Padrão', 'geo.png'))
-                        print('Feedback: Mudou de skin!')
 
+            clock.tick(self.FPS)
+
+    def selecao_skin(self):
+        clock = pygame.time.Clock()
+        while True:
+            self.__menu_skin.desenha()
+
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.display.quit()
+                    pygame.quit()
+                    exit()
+                if event.type == MOUSEBUTTONDOWN:
+                    botao_selecionado = next(
+                        (botao.mensagem for botao in self.__menu_skin.lista_botoes if botao.is_clicked()), False)
+
+                    skins_nomes = self.__menu_skin.lista_nomes_skins()
+
+                    if botao_selecionado in skins_nomes:
+                        skin = self.__menu_skin.selecina_skin(botao_selecionado)
+                        self.__jogador.muda_skin(skin)
+                    if botao_selecionado == 'Voltar':
+                        return self.inicio_jogo()
+        
             clock.tick(self.FPS)
 
     def escolha_fase(self):
