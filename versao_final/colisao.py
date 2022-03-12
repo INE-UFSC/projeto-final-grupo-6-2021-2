@@ -58,11 +58,13 @@ class Colisao():
                     self.jogador.forca_pulo = 8.5
                 
                 if isinstance(x, Portal):
+                        self.jogador.transforma_nave()
                         self.jogador.forca_pulo = 5
                         self.jogador.voo = True
                         self.jogador.gravidade = 0.3
 
                 if isinstance(x, PortalSaida):
+                        self.jogador.transforma_jogador()
                         self.jogador.voo = False
                         self.jogador.gravidade = 0.7
                         self.jogador.forca_pulo = 8.5

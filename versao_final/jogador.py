@@ -22,6 +22,7 @@ class Jogador(pygame.sprite.Sprite):
         self.__voo = False
         self.__angulo = 0
         self.__skin_atual = Skin('Padrão', 'geo.png')  # Skin padrão
+        self.__skin_nave = Skin('Nave', 'nave teste.png')
 
         imagem, mask, rect = self.__cria_e_posiciona_retangulo()
         self.__image = imagem
@@ -148,6 +149,14 @@ class Jogador(pygame.sprite.Sprite):
     def skin_atual(self, value):
         self.__skin_atual = value
 
+    @property
+    def skin_nave(self):
+        return self.__skin_nave
+
+    @skin_nave.setter
+    def skin_nave(self, valor):
+        self.__skin_nave = valor
+
     def __cria_e_posiciona_retangulo(self):
         imagem = pygame.image.load(
             f"{file_paths.imagens}/{self.__skin_atual.arquivo}")
@@ -178,7 +187,7 @@ class Jogador(pygame.sprite.Sprite):
         self.morte = False
         self.voo = False
         self.forca_pulo = 8.5
-        self.rect.topleft = (self.x, self.y)
+        self.muda_skin(self.skin_atual)
         self.image, self.rect = self.rotate(
             self.image, self.rect, -self.angulo)
 
@@ -188,7 +197,31 @@ class Jogador(pygame.sprite.Sprite):
         self.__image = imagem
         self.__mask = mask
         self.__rect = rect
+
+    def transforma_nave(self):
+        imagem = pygame.image.load(
+            f"{file_paths.imagens}/{self.__skin_nave.arquivo}")
+        imagem_escalonada = pygame.transform.scale(imagem, (24, 24))
+        rect = imagem_escalonada.get_rect()
+        mask = pygame.mask.Mask(fill=True, size=imagem_escalonada.get_size())
+        coords = self.__rect.topleft
+        rect.topleft = coords
+        self.__image = imagem_escalonada
+        self.__mask = mask
+        self.__rect = rect
         
+    def transforma_jogador(self):
+        imagem = pygame.image.load(
+            f"{file_paths.imagens}/{self.__skin_atual.arquivo}")
+        imagem_escalonada = pygame.transform.scale(imagem, (24, 24))
+        rect = imagem_escalonada.get_rect()
+        mask = pygame.mask.Mask(fill=True, size=imagem_escalonada.get_size())
+        coords = self.__rect.topleft
+        rect.topleft = coords
+        self.__image = imagem_escalonada
+        self.__mask = mask
+        self.__rect = rect
+
     def parar_jogador(self):
         self.velocidade = Vector2(0, 0)        
         self.pulando = False
