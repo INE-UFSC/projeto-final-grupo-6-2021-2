@@ -85,3 +85,9 @@ class Partida():
         # diferente de pausar, ela para e da unload.
         mixer.music.stop()
         mixer.music.unload()
+
+    def pausa_musica(self):
+        mixer.music.pause()
+
+    def despausa_musica(self):
+        mixer.music.unpause()

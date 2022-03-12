@@ -168,7 +168,7 @@ class ControleJogo():
             clock.tick(self.FPS)
 
     def pausar_jogo(self):
-        self.partida.para_musica()
+        self.partida.pausa_musica()
         self.jogador.parar_jogador()
 
         self.partida.tela.blit(self.__pause_view.tela, (150, 140))
@@ -187,7 +187,7 @@ class ControleJogo():
 
                 if botao_selecionado == 'Continuar':
                     self.jogador.continuar_jogador()
-                    self.partida.toca_musica()
+                    self.partida.despausa_musica()
                     return True
 
                 if botao_selecionado == 'Menu':
