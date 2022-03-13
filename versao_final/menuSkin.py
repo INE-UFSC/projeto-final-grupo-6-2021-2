@@ -9,27 +9,25 @@ from containerSkins import ContainerSkins
 
 class MenuSkin():
 
-    def __init__(self, tela, container_skin: ContainerSkins):
+    def __init__(self, tela, lista_skins):
         self.__tela = tela
 
         fonte_botao = pygame.font.SysFont('calibri', 20)
         self.fundo_menu = loaded_images.imagens_telas['Menu_skin']
         self.fundo_botao = loaded_images.imagens_botoes['Ret_select_rosa']
 
-        self.skins = container_skin.skins_quadrado
-        self.__skin_selec = self.skins[0]
+        self.__skin_selec = lista_skins[0].arquivo
 
-        x_botao = 250
-        y_botao = 225
+        x_botao, y_botao = 250, 225
 
         self.lista_botoes = []
 
         # aviso: view nao automatizada para terceira linha.
-        for skin in self.skins:
+        for skin in lista_skins:
             self.lista_botoes.append(
                 (Botao(imagem=self.fundo_botao, x_pos=x_botao, y_pos=y_botao,
                        mensagem=skin.nome, fonte=fonte_botao,
-                       cor_base_texto=(255, 255, 255), cor_mouse=(255, 137, 6)), skin))
+                       cor_base_texto=(255, 255, 255), cor_mouse=(255, 137, 6)), lista_skins.index(skin)))
 
             x_botao += 150
             if x_botao > 550:
@@ -41,25 +39,23 @@ class MenuSkin():
                    mensagem='Voltar', fonte=fonte_botao,
                    cor_base_texto=(255, 255, 255), cor_mouse=(255, 137, 6)), 'Voltar'))
 
-    def __adiciona_e_transforma_skin(self, arquivo, size_x, size_y):
+    def __converte(self, arquivo, size_x, size_y):
         # imagem = pygame.image.load( f"{file_paths.imagens}/{arquivo}")
         return pygame.transform.smoothscale(
             arquivo.convert(), (size_x, size_y))
 
-    def selecina_skin(self, skin):
+    def seleciona_skin(self, skin):
+        '''recebe imagem loaded'''
         self.__skin_selec = skin
         return skin
 
     def desenha(self):
         self.__tela.blit(self.fundo_menu, (0, 0))
-        self.__tela.blit(self.__adiciona_e_transforma_skin(
-            self.__skin_selec.arquivo, 30, 30), (700, 75))
+        self.__tela.blit(self.__converte(self.__skin_selec, 30, 30), (700, 75))
 
-        x_skin = 235
-        y_skin = 150
-        for skin in self.skins:
-            self.__tela.blit(self.__adiciona_e_transforma_skin(
-                skin.arquivo, 30, 30), (x_skin, y_skin))
+        x_skin, y_skin = 235, 150
+        for skin in loaded_images.imagens_skins.values():
+            self.__tela.blit(self.__converte(skin, 30, 30), (x_skin, y_skin))
             x_skin += 150
 
             if x_skin > 535:

@@ -198,7 +198,7 @@ class Jogador(pygame.sprite.Sprite):
         self.__rect = rect
 
     def transforma_nave(self):
-        imagem = loaded_images.imagens_skins['Nave_01']
+        imagem = loaded_images.skin_nave
         imagem_escalonada = pygame.transform.scale(imagem, (24, 24))
         rect = imagem_escalonada.get_rect()
         mask = pygame.mask.Mask(fill=True, size=imagem_escalonada.get_size())

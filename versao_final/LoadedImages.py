@@ -30,13 +30,13 @@ class LoadedImages(Singleton):
             'Ret_select_rosa': self.__add_imagem('/menu_view/ret_menu.png', 100, 30)
         }
 
-        self.imagens_skins = {
-            'Nave_01': pygame.image.load(
-                f"{file_paths.imagens}/nave teste.png"),
-            'Padrão': pygame.image.load(f'{file_paths.imagens}/geo.png'),
-            'Azul': pygame.image.load(f'{file_paths.imagens}/geo blue.jpg'),
-            'Beta': pygame.image.load(f'{file_paths.imagens}/quadrado preto.png'),
-        }
+        self.skin_nave = pygame.image.load(
+            f"{file_paths.imagens}/nave teste.png")
+
+        self.imagens_skins = {'Padrão': pygame.image.load(f'{file_paths.imagens}/geo.png'),
+                              'Azul': pygame.image.load(f'{file_paths.imagens}/geo blue.jpg'),
+                              'Beta': pygame.image.load(f'{file_paths.imagens}/quadrado preto.png'),
+                              'Beta': pygame.image.load(f'{file_paths.imagens}/quadrado preto.png')}
 
     def __add_imagem(self, file_name, size_x, size_y):
         image = pygame.image.load(

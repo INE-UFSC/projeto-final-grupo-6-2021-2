@@ -26,7 +26,8 @@ class ControleJogo():
         self.__pause_view = pauseView()
         self.__partida = Partida(self.__fase, self.__jogador, self.tela)
         self.__updater = Updater(self.__jogador, self.__partida)
-        self.__menu_skin = MenuSkin(self.tela, self.__container_skin)
+        self.__menu_skin = MenuSkin(
+            self.tela, self.__container_skin.skins_quadrado)
 
         self.FPS = 60
 
@@ -85,9 +86,9 @@ class ControleJogo():
                             return self.inicio_jogo()
                         elif botao_tup[0].is_clicked():
                             # clicou em um botão e não é o de voltar
-                            self.__jogador.muda_skin(botao_tup[1])
-                            self.__menu_skin.selecina_skin(
-                                botao_tup[1])
+                            skin = self.__container_skin.skins_quadrado[botao_tup[1]]
+                            self.__jogador.muda_skin(skin)
+                            self.__menu_skin.seleciona_skin(skin.arquivo)
 
             clock.tick(self.FPS)
 
