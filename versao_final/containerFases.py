@@ -1,18 +1,17 @@
 from fase import Fase
+import os
+from filePaths import file_paths
 
+class ContainerFases():
 
-class containerFases():
-
-    def __init__(self, arquivoContainer) -> None:
-        # fazer um metodo para pegar as fases de um .json
-        #self.fases = pegar_fases(arquivoContainer)
-        pass
-
-    def criar_fase(self, nome, musica, arquivo):
-        novafase = Fase(nome, musica, arquivo)
-        # self.fases.append(novafase)
-        # manda essa nova fase pro arquivo json também
-
-    def pegar_fases(arquivoContainer):
-        # pegas os mapas de um .json ou cria um caso não exista
-        pass
+    def __init__(self) -> None:
+        self.fases = [
+            Fase('Fase 1',
+            f'{file_paths.musicas}/undertale-megalovania.mp3',
+            f'{file_paths.mapas}/mapa_teste4.json',
+            f'{file_paths.imagens}/bg.png'),
+            Fase('Fase 2',
+            f'{file_paths.musicas}/undertale-megalovania.mp3',
+            f'{file_paths.mapas}/teste_voo.json',
+            f'{file_paths.imagens}/bg.png')
+        ]
