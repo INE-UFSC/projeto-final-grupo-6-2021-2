@@ -137,16 +137,10 @@ class ControleJogo():
 
             keys_pressed = pygame.key.get_pressed()
 
-            if pausar_jogo:
-                jogo_pausado = self.pausar_jogo()
-                if jogo_pausado:
-                    pausar_jogo = False
-
             if self.jogador.morte or self.jogador.vitoria:
                 self.partida.desenha_fim_de_jogo()
 
             else:
-
                 if keys_pressed[K_SPACE]:
                     if self.jogador.voo:
                         self.jogador.velocidade.y = 0
@@ -167,6 +161,11 @@ class ControleJogo():
                 self.partida.para_musica()
                 self.iniciar_partida()
 
+            if pausar_jogo:
+                jogo_pausado = self.pausar_jogo()
+                if jogo_pausado:
+                    pausar_jogo = False
+
             clock.tick(self.FPS)
 
     def pausar_jogo(self):
@@ -175,7 +174,6 @@ class ControleJogo():
 
         self.partida.tela.blit(self.__pause_view.tela, (150, 140))
         self.__pause_view.desenha(self.partida.tela)
-        pygame.display.update()
 
         for event in pygame.event.get():
             if event.type == QUIT:
