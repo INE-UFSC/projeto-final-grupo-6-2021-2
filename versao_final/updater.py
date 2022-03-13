@@ -25,6 +25,9 @@ class Updater():
             jogador.rect.top += jogador.velocidade.y
             jogador.nochao = False
             # Verifica colisão no eixo Y
+            if jogador.rect.bottom >= 456:
+                jogador.nochao = True
+                jogador.rect.bottom = 456
             self.__colisor.collide(jogador.velocidade.y, key)
 
     def update_partida(self, velocidade):
