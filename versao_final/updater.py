@@ -34,3 +34,6 @@ class Updater():
         # Movimenta o mapa inteiro para dar impressão de movimento
         for sprite in self.__partida.elementos:
             sprite.rect.x -= velocidade
+        self.__partida.floor_x -= velocidade
+        if self.__partida.floor_x <= -990:
+            self.__partida.floor_x = 0

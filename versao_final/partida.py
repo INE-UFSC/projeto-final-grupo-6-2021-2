@@ -10,6 +10,7 @@ class Partida():
         self.jogador = jogador
         self.tela = tela
         self.bg_x = 0
+        self.floor_x = 0
 
     def inicia(self):
         '''chama todos seus métodos necessários'''
@@ -21,8 +22,8 @@ class Partida():
         # desenha o fundo da fase com x variavel para dar movimento
         self.tela.blit(self.fase.bg, (self.bg_x, 0))
         self.tela.blit(self.fase.bg, (self.bg_x+990, 0))
-        self.tela.blit(self.fase.floor, (self.bg_x, 456))
-        self.tela.blit(self.fase.floor, (self.bg_x+990, 456))
+        self.tela.blit(self.fase.floor, (self.floor_x, 456))
+        self.tela.blit(self.fase.floor, (self.floor_x+990, 456))
 
     def desenhar_nivel(self, mapa):
         # Lê a matriz do mapa e instancia os objetos
@@ -52,12 +53,6 @@ class Partida():
                 x += 24
             y += 24
             x = 0
-
-    def atualizar_nivel(self, velocidade):
-        # Movimenta o mapa inteiro para dar impressão de movimento
-        for sprite in self.elementos:
-            sprite.rect.x -= velocidade
-        self.fase.floor.x -= velocidade
 
     def desenhar_elementos(self):
         for x in self.elementos:
