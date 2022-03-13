@@ -11,7 +11,7 @@ class ContainerFases():
             f'{file_paths.mapas}/mapa_teste4.json',
             f'{file_paths.imagens}/bg.png'),
             Fase('Fase 2',
-            f'{file_paths.musicas}/undertale-megalovania.mp3',
+            f'{file_paths.musicas}/music_bossfight-Vextron.mp3',
             f'{file_paths.mapas}/teste_voo.json',
-            f'{file_paths.imagens}/bg.png')
+            f'{file_paths.imagens}/bg2.jpg')
         ]
