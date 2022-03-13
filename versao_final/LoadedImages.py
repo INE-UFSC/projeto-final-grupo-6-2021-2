@@ -9,12 +9,8 @@ class LoadedImages(Singleton):
 
     def __init__(self):
         super().__init__()
+        self.tela = pygame.display.set_mode((800, 480))
 
-        # temporario ate resolver problema
-        pygame.init()
-        tela = pygame.display.set_mode((800, 480))
-
-        current_directory = os.path.dirname(__file__)
         self.imagens_obtaculos = {'Spike': pygame.image.load(f'{file_paths.imagens}/FakeSpike01.png'),
                                   'Win': pygame.image.load(f'{file_paths.imagens}/win.png'),
                                   'Orb': pygame.image.load(f'{file_paths.imagens}/orb-yellow.png'),
@@ -32,6 +28,14 @@ class LoadedImages(Singleton):
         self.imagens_botoes = {
             'Ret_fase': self.__add_imagem('/menu_view/ret_menu.png', 100, 100),
             'Ret_select_rosa': self.__add_imagem('/menu_view/ret_menu.png', 100, 30)
+        }
+
+        self.imagens_skins = {
+            'Nave_01': pygame.image.load(
+                f"{file_paths.imagens}/nave teste.png"),
+            'Padrão': pygame.image.load(f'{file_paths.imagens}/geo.png'),
+            'Azul': pygame.image.load(f'{file_paths.imagens}/geo blue.jpg'),
+            'Beta': pygame.image.load(f'{file_paths.imagens}/quadrado preto.png'),
         }
 
     def __add_imagem(self, file_name, size_x, size_y):

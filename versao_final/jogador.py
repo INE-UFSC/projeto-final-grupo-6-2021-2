@@ -4,11 +4,12 @@ from filePaths import file_paths
 from pygame.math import Vector2
 from obstaculos import *
 from skin import Skin
+from containerSkins import *
 
 
 class Jogador(pygame.sprite.Sprite):
 
-    def __init__(self):
+    def __init__(self, container_skin: ContainerSkins):
         super().__init__()
         self.__x = 100
         self.__y = 432
@@ -21,9 +22,8 @@ class Jogador(pygame.sprite.Sprite):
         self.__vitoria = False
         self.__voo = False
         self.__angulo = 0
-        self.__skin_atual = Skin('Padrão', 'geo.png')  # Skin padrão
-        self.__skin_nave = Skin('Nave', 'nave teste.png')
-
+        self.__skin_atual = container_skin.skins_quadrado[0]
+        self.__skin_nave = container_skin.skin_nave
         imagem, mask, rect = self.__cria_e_posiciona_retangulo()
         self.__image = imagem
         self.__mask = mask
@@ -32,7 +32,7 @@ class Jogador(pygame.sprite.Sprite):
     @property
     def voo(self):
         return self.__voo
-    
+
     @voo.setter
     def voo(self, valor):
         self.__voo = valor
@@ -158,8 +158,7 @@ class Jogador(pygame.sprite.Sprite):
         self.__skin_nave = valor
 
     def __cria_e_posiciona_retangulo(self):
-        imagem = pygame.image.load(
-            f"{file_paths.imagens}/{self.__skin_atual.arquivo}")
+        imagem = self.__skin_atual.arquivo
         imagem_escalonada = pygame.transform.scale(imagem, (24, 24))
         rect = imagem_escalonada.get_rect()
         mask = pygame.mask.Mask(fill=True, size=imagem_escalonada.get_size())
@@ -199,8 +198,7 @@ class Jogador(pygame.sprite.Sprite):
         self.__rect = rect
 
     def transforma_nave(self):
-        imagem = pygame.image.load(
-            f"{file_paths.imagens}/{self.__skin_nave.arquivo}")
+        imagem = loaded_images.imagens_skins['Nave_01']
         imagem_escalonada = pygame.transform.scale(imagem, (24, 24))
         rect = imagem_escalonada.get_rect()
         mask = pygame.mask.Mask(fill=True, size=imagem_escalonada.get_size())
@@ -209,10 +207,9 @@ class Jogador(pygame.sprite.Sprite):
         self.__image = imagem_escalonada
         self.__mask = mask
         self.__rect = rect
-        
+
     def transforma_jogador(self):
-        imagem = pygame.image.load(
-            f"{file_paths.imagens}/{self.__skin_atual.arquivo}")
+        imagem = self.__skin_atual.arquivo
         imagem_escalonada = pygame.transform.scale(imagem, (24, 24))
         rect = imagem_escalonada.get_rect()
         mask = pygame.mask.Mask(fill=True, size=imagem_escalonada.get_size())
@@ -223,9 +220,9 @@ class Jogador(pygame.sprite.Sprite):
         self.__rect = rect
 
     def parar_jogador(self):
-        self.velocidade = Vector2(0, 0)        
+        self.velocidade = Vector2(0, 0)
         self.pulando = False
         self.nochao = True
-    
+
     def continuar_jogador(self):
         self.velocidade = Vector2(3, 0)

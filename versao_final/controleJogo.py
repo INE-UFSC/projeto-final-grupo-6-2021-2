@@ -9,23 +9,25 @@ from updater import Updater
 from escolhaFasesView import EscolhaFasesView
 from pauseView import pauseView
 from menuSkin import MenuSkin
+from LoadedImages import loaded_images
+from containerSkins import ContainerSkins
 
 
 class ControleJogo():
 
     def __init__(self):
-
         pygame.init()
-
-        self.tela = pygame.display.set_mode((800, 480))
-        self.__jogador = Jogador()
+        self.tela = loaded_images.tela
+        self.__container_skin = ContainerSkins()
+        self.__jogador = Jogador(self.__container_skin)
         self.__fase = None
         self.__menu_view = menuView(self.tela)
         self.__escolha_fase_view = EscolhaFasesView(self.tela)
         self.__pause_view = pauseView()
         self.__partida = Partida(self.__fase, self.__jogador, self.tela)
         self.__updater = Updater(self.__jogador, self.__partida)
-        self.__menu_skin = MenuSkin(self.tela)
+        self.__menu_skin = MenuSkin(self.tela, self.__container_skin)
+
         self.FPS = 60
 
     @property
@@ -57,10 +59,10 @@ class ControleJogo():
                     if botao_selecionado == 'Jogar':
                         return self.escolha_fase()
 
-                    if botao_selecionado == 'Skins':
+                    elif botao_selecionado == 'Skins':
                         return self.selecao_skin()
 
-                    if botao_selecionado == 'Sair':
+                    elif botao_selecionado == 'Sair':
                         pygame.display.quit()
                         pygame.quit()
                         exit()
@@ -190,17 +192,17 @@ class ControleJogo():
                     self.partida.despausa_musica()
                     return True
 
-                if botao_selecionado == 'Menu':
+                elif botao_selecionado == 'Menu':
                     self.jogador.resetar()
                     self.partida.para_musica()
                     self.inicio_jogo()
 
-                if botao_selecionado == 'Resetar':
+                elif botao_selecionado == 'Resetar':
                     self.jogador.resetar()
                     self.partida.para_musica()
                     self.iniciar_partida()
 
-                if botao_selecionado == 'Sair':
+                elif botao_selecionado == 'Sair':
                     self.jogador.resetar()
                     self.partida.para_musica()
                     pygame.display.quit()

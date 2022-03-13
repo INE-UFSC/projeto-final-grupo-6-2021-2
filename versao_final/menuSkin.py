@@ -4,24 +4,20 @@ from botao_menu import Botao
 from skin import Skin
 from filePaths import file_paths
 from LoadedImages import loaded_images
+from containerSkins import ContainerSkins
 
 
 class MenuSkin():
 
-    def __init__(self, tela):
+    def __init__(self, tela, container_skin: ContainerSkins):
         self.__tela = tela
 
         fonte_botao = pygame.font.SysFont('calibri', 20)
         self.fundo_menu = loaded_images.imagens_telas['Menu_skin']
         self.fundo_botao = loaded_images.imagens_botoes['Ret_select_rosa']
 
-        self.__skin_selec = Skin('Padrão', 'geo.png')
-        self.skins = [
-            Skin('Padrão', 'geo.png'),
-            Skin('Azul', 'geo blue.jpg'),
-            Skin('Beta', 'quadrado preto.png'),
-            Skin('Beta', 'quadrado preto.png')
-        ]
+        self.skins = container_skin.skins_quadrado
+        self.__skin_selec = self.skins[0]
 
         x_botao = 250
         y_botao = 225
@@ -46,10 +42,9 @@ class MenuSkin():
                    cor_base_texto=(255, 255, 255), cor_mouse=(255, 137, 6)), 'Voltar'))
 
     def __adiciona_e_transforma_skin(self, arquivo, size_x, size_y):
-        imagem = pygame.image.load(
-            f"{file_paths.imagens}/{arquivo}")
+        # imagem = pygame.image.load( f"{file_paths.imagens}/{arquivo}")
         return pygame.transform.smoothscale(
-            imagem.convert(), (size_x, size_y))
+            arquivo.convert(), (size_x, size_y))
 
     def selecina_skin(self, skin):
         self.__skin_selec = skin
