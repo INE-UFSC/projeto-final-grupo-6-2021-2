@@ -11,6 +11,7 @@ from pauseView import pauseView
 from menuSkin import MenuSkin
 from LoadedImages import loaded_images
 from containerSkins import ContainerSkins
+from instrucoesView import InstrucoesView
 
 
 class ControleJogo():
@@ -26,6 +27,7 @@ class ControleJogo():
         self.__pause_view = pauseView()
         self.__partida = Partida(self.__fase, self.__jogador, self.tela)
         self.__updater = Updater(self.__jogador, self.__partida)
+        self.__intrucoes_view = InstrucoesView(self.tela)
         self.__menu_skin = MenuSkin(
             self.tela, self.__container_skin.skins_quadrado)
 
@@ -63,6 +65,9 @@ class ControleJogo():
                     elif botao_selecionado == 'Skins':
                         return self.selecao_skin()
 
+                    elif botao_selecionado == 'Instruções':
+                        return self.mostra_intrucoes()
+
                     elif botao_selecionado == 'Sair':
                         pygame.display.quit()
                         pygame.quit()
@@ -70,6 +75,22 @@ class ControleJogo():
 
             clock.tick(self.FPS)
 
+    def mostra_intrucoes(self):
+        clock = pygame.time.Clock()
+        while True:
+            self.__intrucoes_view.desenha()
+
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.display.quit()
+                    pygame.quit()
+                    exit()
+                if event.type == MOUSEBUTTONDOWN:
+                    if self.__intrucoes_view.botao_voltar.is_clicked():
+                        return self.inicio_jogo()
+
+            clock.tick(self.FPS)
+    
     def selecao_skin(self):
         clock = pygame.time.Clock()
         while True:

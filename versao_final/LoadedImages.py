@@ -22,7 +22,8 @@ class LoadedImages(Singleton):
         self.imagens_telas = {
             'Menu_skin': self.__add_imagem('/menu_view/fundo_menuskins.png', 800, 480),
             'Menu_principal': self.__add_imagem('/menu_view/fundo_menu.png', 800, 480),
-            'Menu_fases': self.__add_imagem('/menu_view/tela_fases.png', 800, 500)
+            'Menu_fases': self.__add_imagem('/menu_view/tela_fases.png', 800, 500),
+            'Menu_instrucoes': self.__add_imagem('/menu_view/fundo_instrucoes.png', 800, 480)
         }
 
         self.imagens_botoes = {

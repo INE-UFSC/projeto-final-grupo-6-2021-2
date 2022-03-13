@@ -35,7 +35,7 @@ class MenuSkin():
                 y_botao = 350
 
         self.lista_botoes.append(
-            (Botao(imagem=self.fundo_botao, x_pos=50, y_pos=25,
+            (Botao(imagem=self.fundo_botao, x_pos=55, y_pos=25,
                    mensagem='Voltar', fonte=fonte_botao,
                    cor_base_texto=(255, 255, 255), cor_mouse=(255, 137, 6)), 'Voltar'))
 
