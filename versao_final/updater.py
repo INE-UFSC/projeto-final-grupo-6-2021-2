@@ -28,6 +28,8 @@ class Updater():
             if jogador.rect.bottom >= 456:
                 jogador.nochao = True
                 jogador.rect.bottom = 456
+                if self.__jogador.voo:
+                    self.__jogador.morte = True
             self.__colisor.collide(jogador.velocidade.y, key)
 
     def update_partida(self, velocidade):
