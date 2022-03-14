@@ -77,6 +77,7 @@ class Partida():
     def toca_musica(self):
         mixer.init()
         mixer.music.load(self.fase.musica)
+        mixer.music.set_volume(self.fase.volume_musica)
         mixer.music.play()
 
     def para_musica(self):
