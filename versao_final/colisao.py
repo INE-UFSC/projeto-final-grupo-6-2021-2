@@ -1,6 +1,6 @@
 import pygame
 from obstaculos import Block, Spike, Win, Orb, Portal, PortalSaida
-from skin import Skin
+
 
 class Colisao():
 
@@ -25,7 +25,7 @@ class Colisao():
         grupo = self.__elementos
         # Verificação das colisões
         for x in grupo:
-            if pygame.sprite.spritecollide(self.__jogador, [x], False, pygame.sprite.collide_mask):
+            if pygame.sprite.spritecollide(self.jogador, [x], False, pygame.sprite.collide_mask):
                 if isinstance(x, Block):
                     if yvel > 0:
                         self.jogador.rect.bottom = x.rect.top

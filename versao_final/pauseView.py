@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 from botao_menu import Botao
-from filePaths import file_paths
 from LoadedImages import loaded_images
 
 
@@ -28,7 +27,7 @@ class pauseView():
                   mensagem='Menu', fonte=fonte_botao,
                   cor_base_texto=(255, 255, 255), cor_mouse=(255, 137, 6)),
             Botao(imagem=self.fundo_botao, x_pos=460, y_pos=280,
-                  mensagem='Resetar', fonte=fonte_botao,
+                  mensagem='Reiniciar', fonte=fonte_botao,
                   cor_base_texto=(255, 255, 255), cor_mouse=(255, 137, 6)),
             Botao(imagem=self.fundo_botao, x_pos=570, y_pos=280,
                   mensagem='Sair', fonte=fonte_botao,
@@ -43,6 +42,3 @@ class pauseView():
         tela.blit(self.tela_texto_mensagem, (320, 200))
 
         pygame.display.update()
-
-    def removeView(self, tela):
-        self.tela.fill(0, 0, 0, 0)
