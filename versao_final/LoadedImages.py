@@ -14,7 +14,7 @@ class LoadedImages(Singleton):
         self.imagens_obtaculos = {'Spike': pygame.image.load(f'{file_paths.imagens}/FakeSpike01.png'),
                                   'Win': pygame.image.load(f'{file_paths.imagens}/win.png'),
                                   'Orb': pygame.image.load(f'{file_paths.imagens}/orb-yellow.png'),
-                                  'Block': pygame.image.load(f'{file_paths.imagens}/block1.png'),
+                                  'Block': pygame.image.load(f'{file_paths.imagens}/block2.png'),
                                   'Portal': pygame.image.load(f'{file_paths.imagens}/portal.png'),
                                   'PortalSaida': pygame.image.load(f'{file_paths.imagens}/portal-saida.png')
                                   }
