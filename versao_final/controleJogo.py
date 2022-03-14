@@ -12,6 +12,7 @@ from menuSkin import MenuSkin
 from LoadedImages import loaded_images
 from containerSkins import ContainerSkins
 from instrucoesView import InstrucoesView
+from containerFases import ContainerFases
 
 
 class ControleJogo():
@@ -20,10 +21,12 @@ class ControleJogo():
         pygame.init()
         self.tela = loaded_images.tela
         self.__container_skin = ContainerSkins()
+        self.__container_fase = ContainerFases()
         self.__jogador = Jogador(self.__container_skin)
         self.__fase = None
         self.__menu_view = menuView(self.tela)
-        self.__escolha_fase_view = EscolhaFasesView(self.tela)
+        self.__escolha_fase_view = EscolhaFasesView(
+            self.tela, self.__container_fase.fases)
         self.__pause_view = pauseView()
         self.__partida = Partida(self.__fase, self.__jogador, self.tela)
         self.__updater = Updater(self.__jogador, self.__partida)
@@ -90,7 +93,7 @@ class ControleJogo():
                         return self.inicio_jogo()
 
             clock.tick(self.FPS)
-    
+
     def selecao_skin(self):
         clock = pygame.time.Clock()
         while True:
@@ -130,7 +133,7 @@ class ControleJogo():
 
                         elif botao_tup[0].is_clicked():
                             # clicou em um botão e não é o de voltar
-                            self.__fase = botao_tup[1]
+                            self.__fase = self.__container_fase.fases[botao_tup[1]]
                             self.__partida.fase = self.__fase
                             return self.iniciar_partida()
 
