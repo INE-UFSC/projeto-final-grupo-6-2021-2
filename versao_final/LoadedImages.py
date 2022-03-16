@@ -37,7 +37,8 @@ class LoadedImages(Singleton):
         self.imagens_skins = {'Padrão': pygame.image.load(f'{file_paths.imagens}/geo.png'),
                               'Azul': pygame.image.load(f'{file_paths.imagens}/geo blue.jpg'),
                               'Beta': pygame.image.load(f'{file_paths.imagens}/quadrado preto.png'),
-                              'Beta': pygame.image.load(f'{file_paths.imagens}/quadrado preto.png')}
+                              'Mine': pygame.image.load(f'{file_paths.imagens}/mineblock.png'),
+                              'Cubo Mágico': pygame.image.load(f'{file_paths.imagens}/cubomagico.jpg')}
 
     def __add_imagem(self, file_name, size_x, size_y):
         image = pygame.image.load(
