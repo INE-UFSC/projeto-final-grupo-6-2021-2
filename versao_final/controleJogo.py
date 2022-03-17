@@ -1,6 +1,5 @@
 import pygame
 from pygame.locals import *
-from random import choice
 from jogador import Jogador
 from partida import Partida
 from menuView import menuView
@@ -22,12 +21,11 @@ class ControleJogo():
         self.__container_skin = ContainerSkins()
         self.__container_fase = ContainerFases()
         self.__jogador = Jogador(self.__container_skin)
-        self.__fase = None
         self.__menu_view = menuView(self.tela)
         self.__escolha_fase_view = EscolhaFasesView(
             self.tela, self.__container_fase.fases)
         self.__pause_view = pauseView()
-        self.__partida = Partida(self.__fase, self.__jogador, self.tela)
+        self.__partida = Partida(None, self.__jogador, self.tela)
         self.__updater = Updater(self.__jogador, self.__partida)
         self.__intrucoes_view = InstrucoesView(self.tela)
         self.__menu_skin = MenuSkin(
@@ -38,10 +36,6 @@ class ControleJogo():
     @property
     def jogador(self):
         return self.__jogador
-
-    @property
-    def fase(self):
-        return self.__fase
 
     @property
     def partida(self):
@@ -132,8 +126,7 @@ class ControleJogo():
 
                         elif botao_tup[0].is_clicked():
                             # clicou em um botão e não é o de voltar
-                            self.__fase = self.__container_fase.fases[botao_tup[1]]
-                            self.__partida.fase = self.__fase
+                            self.__partida.fase = self.__container_fase.fases[botao_tup[1]]
                             return self.iniciar_partida()
 
             clock.tick(self.FPS)
