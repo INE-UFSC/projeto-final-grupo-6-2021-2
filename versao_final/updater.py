@@ -1,4 +1,5 @@
 from colisao import Colisao
+from pygame.math import Vector2
 
 
 class Updater():
@@ -14,13 +15,13 @@ class Updater():
         # Caso não encoste no chão, a gravidade começa a agir no jogador
         if not jogador.morte:
             if not jogador.nochao:
-                jogador.velocidade.y += jogador.gravidade
-                # Verifica colisão no eixo X
-                self.__colisor.collide(0, key) 
                 if not jogador.voo:      
                     if jogador.velocidade.y == - 8.5:
                         jogador.image, jogador.rect = jogador.rotate(
                             jogador.image, jogador.rect, -90)
+                jogador.velocidade.y += jogador.gravidade
+                # Verifica colisão no eixo X
+                self.__colisor.collide(0, key)
 
             jogador.rect.top += jogador.velocidade.y
             jogador.nochao = False
@@ -28,6 +29,7 @@ class Updater():
             if jogador.rect.bottom >= 456:
                 jogador.nochao = True
                 jogador.rect.bottom = 456
+                jogador.velocidade.y = 0
                 if self.__jogador.voo:
                     self.__jogador.morte = True
             self.__colisor.collide(jogador.velocidade.y, key)

@@ -1,9 +1,7 @@
 import pygame
 from pygame.locals import *
-from filePaths import file_paths
 from pygame.math import Vector2
 from obstaculos import *
-from skin import Skin
 from containerSkins import *
 
 
