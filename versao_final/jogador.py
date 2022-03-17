@@ -185,6 +185,7 @@ class Jogador(pygame.sprite.Sprite):
         self.nochao = True
         self.morte = False
         self.voo = False
+        self.vitoria = False
         self.forca_pulo = 8.5
         self.muda_skin(self.skin_atual)
         self.image, self.rect = self.rotate(
