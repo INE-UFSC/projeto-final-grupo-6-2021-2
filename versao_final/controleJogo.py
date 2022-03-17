@@ -4,7 +4,6 @@ from random import choice
 from jogador import Jogador
 from partida import Partida
 from menuView import menuView
-from skin import Skin
 from updater import Updater
 from escolhaFasesView import EscolhaFasesView
 from pauseView import pauseView
