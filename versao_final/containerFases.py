@@ -17,5 +17,10 @@ class ContainerFases():
                  f'{file_paths.mapas}/teste_voo.json',
                  f'{file_paths.imagens}/bg_purple.jpg',
                  f'{file_paths.imagens}/floor_purple.png', volume=0.2),
+            Fase('Fase 3',
+                 f'{file_paths.musicas}/DigEx - Fall In Love [NCS Release].mp3',
+                 f'{file_paths.mapas}/mapa_green.json',
+                 f'{file_paths.imagens}/bg_green.png',
+                 f'{file_paths.imagens}/floor_green.png', volume=0.2)
 
         ]
