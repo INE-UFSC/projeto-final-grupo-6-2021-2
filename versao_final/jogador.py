@@ -166,6 +166,8 @@ class Jogador(pygame.sprite.Sprite):
     def pular(self):
         self.pulando = True
         self.velocidade.y = - self.forca_pulo
+        if not self.voo:      
+            self.image, self.rect = self.rotate(self.image, self.rect, -90)
 
     def rotate(self, image, rect, angulo):
         new_image = pygame.transform.rotate(image, angulo)

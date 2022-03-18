@@ -15,10 +15,10 @@ class Updater():
         # Caso não encoste no chão, a gravidade começa a agir no jogador
         if not jogador.morte:
             if not jogador.nochao:
-                if not jogador.voo:      
+                '''if not jogador.voo:      
                     if jogador.velocidade.y == - 8.5:
                         jogador.image, jogador.rect = jogador.rotate(
-                            jogador.image, jogador.rect, -90)
+                            jogador.image, jogador.rect, -90)'''
                 jogador.velocidade.y += jogador.gravidade
                 # Verifica colisão no eixo X
                 self.__colisor.collide(0, key)
