@@ -176,7 +176,7 @@ class Jogador(pygame.sprite.Sprite):
         return new_image, rect
 
     def resetar(self):
-        # Reseta todos os valores para os padrão para resetar a fase
+        # Reseta todos os valores para os valores default do jogador
         self.x = 100
         self.y = 432
         self.velocidade = Vector2(3, 0)
