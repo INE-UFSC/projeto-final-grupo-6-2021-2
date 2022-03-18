@@ -56,7 +56,8 @@ class Partida():
 
     def desenhar_elementos(self):
         for x in self.elementos:
-            self.tela.blit(x.image, (x.rect.x, x.rect.y))
+            if (x.rect.x <= 850) and (x.rect.x >= -50):
+                self.tela.blit(x.image, (x.rect.x, x.rect.y))
 
     def toca_musica(self):
         mixer.init()
