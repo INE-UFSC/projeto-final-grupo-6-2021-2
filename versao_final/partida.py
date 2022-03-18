@@ -1,4 +1,3 @@
-from fimDeJogoView import fimDeJogoView
 from obstaculos import *
 from pygame import mixer
 

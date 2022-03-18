@@ -4,7 +4,7 @@ from botao_menu import Botao
 from LoadedImages import loaded_images
 
 
-class fimDeJogoView():
+class fimDeFaseView():
 
     def __init__(self) -> None:
         fonte_botao = pygame.font.SysFont('calibri', 20)
@@ -13,13 +13,9 @@ class fimDeJogoView():
         pygame.draw.rect(tela, (250, 250, 250, 50), tela.get_rect(), 99)
         self.tela = tela
 
-        texto_parabens = 'Parabéns!'
-        texto_mensagem = 'Você terminou o jogo'
-        
+        texto_mensagem = 'Você morreu!'
         fontesys24 = pygame.font.SysFont('calibri', 24)
-        fontesys18 = pygame.font.SysFont('calibri', 18)
-        self.tela_texto_parabens = fontesys24.render(texto_parabens, 1, (0, 0, 0))
-        self.tela_texto_mensagem = fontesys18.render(texto_mensagem, 1, (0, 0, 0))
+        self.tela_texto_mensagem = fontesys24.render(texto_mensagem, 1, (0, 0, 0))
 
         self.fundo_botao = loaded_images.imagens_botoes['Ret_select_rosa']
 
@@ -40,7 +36,6 @@ class fimDeJogoView():
             botao.update(tela)
             botao.muda_cor()
 
-        tela.blit(self.tela_texto_parabens, (350, 160))
         tela.blit(self.tela_texto_mensagem, (320, 200))
 
         pygame.display.update()

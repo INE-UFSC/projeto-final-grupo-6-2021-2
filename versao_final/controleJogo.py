@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from fimDeJogoView import fimDeJogoView
+from fimDeFaseView import fimDeFaseView
 from jogador import Jogador
 from partida import Partida
 from menuView import menuView
@@ -12,6 +12,8 @@ from LoadedImages import loaded_images
 from containerSkins import ContainerSkins
 from instrucoesView import InstrucoesView
 from containerFases import ContainerFases
+from proximaFaseView import proximaFaseView
+from fimDeJogoView import fimDeJogoView
 
 
 class ControleJogo():
@@ -31,7 +33,10 @@ class ControleJogo():
         self.__intrucoes_view = InstrucoesView(self.tela)
         self.__menu_skin = MenuSkin(
             self.tela, self.__container_skin.skins_quadrado)
-        self.tela_fim_de_jogo = fimDeJogoView()
+        self.fim_de_fase = fimDeFaseView()
+        self.proxima_fase = proximaFaseView()
+        self.fim_de_jogo = fimDeJogoView()
+        self.flag_transparencia = False
 
         self.FPS = 60
 
@@ -146,7 +151,8 @@ class ControleJogo():
         jogando = True
 
         while True:
-            if not flag_pausar_jogo:
+            pygame.display.update()
+            if not flag_pausar_jogo and not self.jogador.morte and not self.jogador.vitoria:
                 for event in pygame.event.get():
                     if event.type == QUIT:
                         pygame.display.quit()
@@ -155,21 +161,44 @@ class ControleJogo():
                     if event.type == KEYDOWN:
                         if event.key == K_ESCAPE:
                             if not self.jogador.morte and not self.jogador.vitoria and not flag_pausar_jogo:
+                                self.partida.tela.blit(
+                                    self.__pause_view.tela, (150, 140))
                                 flag_pausar_jogo = True
                                 jogando = False
 
             keys_pressed = pygame.key.get_pressed()
 
+            if flag_pausar_jogo:
+                jogando = False
+                sair_do_jogo_pausado = self.pausar_jogo()
+                if sair_do_jogo_pausado:
+                    flag_pausar_jogo = False
+                    jogando = True
+
             if self.jogador.morte:
                 jogando = False
-                self.fim_de_jogo('Você morreu!')
-                
-            if self.jogador.vitoria:
+                self.tela.blit(self.fim_de_fase.tela, (150, 140)
+                               ) if not self.flag_transparencia else None
+                self.flag_transparencia = True
+                self.perdeu_a_fase()
+
+            index_fase_atual = self.__container_fase.fases.index(self.fase)
+            if self.jogador.vitoria and index_fase_atual+1 == len(self.__container_fase.fases):
                 jogando = False
-                self.fim_de_jogo('Você venceu!')
+                self.tela.blit(self.fim_de_jogo.tela, (150, 140)
+                               ) if not self.flag_transparencia else None
+                self.flag_transparencia = True
+                self.terminou_o_jogo()
+
+            if self.jogador.vitoria and not index_fase_atual+1 == len(self.__container_fase.fases):
+                jogando = False
+                self.tela.blit(self.proxima_fase.tela, (150, 140)
+                               ) if not self.flag_transparencia else None
+                self.flag_transparencia = True
+                self.passou_de_fase()
 
             if jogando:
-                pygame.display.update()
+                self.flag_transparencia = False
                 if keys_pressed[K_SPACE]:
                     if self.jogador.voo:
                         self.jogador.velocidade.y = 0
@@ -185,21 +214,12 @@ class ControleJogo():
                 self.__updater.update_jogador(
                     self.partida.elementos, keys_pressed)
 
-            if flag_pausar_jogo:
-                jogando = False
-                jogo_pausado = self.pausar_jogo()
-                if jogo_pausado:
-                    flag_pausar_jogo = False
-
             clock.tick(self.FPS)
-            
-            
-    def fim_de_jogo(self, titulo):
-        self.partida.para_musica()
 
-        self.tela_fim_de_jogo.titulo = titulo
-        self.tela.blit(self.tela_fim_de_jogo.tela, (150, 140))
-        self.tela_fim_de_jogo.desenha(self.tela)
+    def perdeu_a_fase(self):
+        self.partida.para_musica()
+        self.fim_de_fase.desenha(self.tela)
+        botao_selecionado = False
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -208,32 +228,109 @@ class ControleJogo():
                 exit()
 
             if event.type == MOUSEBUTTONDOWN:
-                botao_selecionado = next(
-                    (botao.mensagem for botao in self.tela_fim_de_jogo.lista_botoes if botao.is_clicked()), False)
+                if event.button == 1:
+                    botao_selecionado = next(
+                        (botao.mensagem for botao in self.fim_de_fase.lista_botoes if botao.is_clicked()), False)
 
-                if botao_selecionado == 'Menu':
-                    self.jogador.resetar()
-                    self.partida.para_musica()
-                    self.inicio_jogo()
+        if botao_selecionado:
+            if botao_selecionado == 'Menu':
+                self.jogador.resetar()
+                self.partida.para_musica()
+                self.inicio_jogo()
 
-                elif botao_selecionado == 'Reiniciar':
-                    self.jogador.resetar()
-                    self.partida.para_musica()
-                    self.iniciar_partida()
+            elif botao_selecionado == 'Reiniciar':
+                self.jogador.resetar()
+                self.partida.para_musica()
+                self.iniciar_partida()
 
-                elif botao_selecionado == 'Sair':
-                    self.jogador.resetar()
-                    self.partida.para_musica()
-                    pygame.display.quit()
-                    pygame.quit()
-                    exit()
+            elif botao_selecionado == 'Sair':
+                self.jogador.resetar()
+                self.partida.para_musica()
+                pygame.display.quit()
+                pygame.quit()
+                exit()
+
+    def passou_de_fase(self):
+        self.partida.para_musica()
+        self.proxima_fase.desenha(self.tela)
+        botao_selecionado = False
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.display.quit()
+                pygame.quit()
+                exit()
+
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    botao_selecionado = next(
+                        (botao.mensagem for botao in self.proxima_fase.lista_botoes if botao.is_clicked()), False)
+
+        if botao_selecionado:
+            if botao_selecionado == 'Proxima fase':
+                self.jogador.resetar()
+                self.partida.para_musica()
+                index_fase_atual = self.__container_fase.fases.index(self.fase)
+                self.__fase = self.__container_fase.fases[index_fase_atual+1]
+                self.partida.fase = self.__fase
+                self.iniciar_partida()
+
+            if botao_selecionado == 'Menu':
+                self.jogador.resetar()
+                self.partida.para_musica()
+                self.inicio_jogo()
+
+            elif botao_selecionado == 'Reiniciar':
+                self.jogador.resetar()
+                self.partida.para_musica()
+                self.iniciar_partida()
+
+            elif botao_selecionado == 'Sair':
+                self.jogador.resetar()
+                self.partida.para_musica()
+                pygame.display.quit()
+                pygame.quit()
+                exit()
+
+    def terminou_o_jogo(self):
+        self.partida.para_musica()
+        self.fim_de_jogo.desenha(self.tela)
+        botao_selecionado = False
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.display.quit()
+                pygame.quit()
+                exit()
+
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    botao_selecionado = next(
+                        (botao.mensagem for botao in self.fim_de_jogo.lista_botoes if botao.is_clicked()), False)
+
+        if botao_selecionado:
+            if botao_selecionado == 'Reiniciar':
+                self.jogador.resetar()
+                self.partida.para_musica()
+                self.iniciar_partida()
+
+            elif botao_selecionado == 'Menu':
+                self.jogador.resetar()
+                self.partida.para_musica()
+                self.inicio_jogo()
+
+            elif botao_selecionado == 'Sair':
+                self.jogador.resetar()
+                self.partida.para_musica()
+                pygame.display.quit()
+                pygame.quit()
+                exit()
 
     def pausar_jogo(self):
         self.partida.pausa_musica()
         self.jogador.parar_jogador()
-
-        self.partida.tela.blit(self.__pause_view.tela, (150, 140))
         self.__pause_view.desenha(self.partida.tela)
+        botao_selecionado = False
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -242,27 +339,29 @@ class ControleJogo():
                 exit()
 
             if event.type == MOUSEBUTTONDOWN:
-                botao_selecionado = next(
-                    (botao.mensagem for botao in self.__pause_view.lista_botoes if botao.is_clicked()), False)
+                if event.button == 1:
+                    botao_selecionado = next(
+                        (botao.mensagem for botao in self.__pause_view.lista_botoes if botao.is_clicked()), False)
 
-                if botao_selecionado == 'Continuar':
-                    self.jogador.continuar_jogador()
-                    self.partida.despausa_musica()
-                    return True
+        if botao_selecionado:
+            if botao_selecionado == 'Continuar':
+                self.jogador.continuar_jogador()
+                self.partida.despausa_musica()
+                return True
 
-                elif botao_selecionado == 'Menu':
-                    self.jogador.resetar()
-                    self.partida.para_musica()
-                    self.inicio_jogo()
+            elif botao_selecionado == 'Menu':
+                self.jogador.resetar()
+                self.partida.para_musica()
+                self.inicio_jogo()
 
-                elif botao_selecionado == 'Reiniciar':
-                    self.jogador.resetar()
-                    self.partida.para_musica()
-                    self.iniciar_partida()
+            elif botao_selecionado == 'Reiniciar':
+                self.jogador.resetar()
+                self.partida.para_musica()
+                self.iniciar_partida()
 
-                elif botao_selecionado == 'Sair':
-                    self.jogador.resetar()
-                    self.partida.para_musica()
-                    pygame.display.quit()
-                    pygame.quit()
-                    exit()
+            elif botao_selecionado == 'Sair':
+                self.jogador.resetar()
+                self.partida.para_musica()
+                pygame.display.quit()
+                pygame.quit()
+                exit()

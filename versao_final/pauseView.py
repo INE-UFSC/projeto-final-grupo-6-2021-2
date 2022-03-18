@@ -8,9 +8,10 @@ class pauseView():
 
     def __init__(self) -> None:
         fonte_botao = pygame.font.SysFont('calibri', 20)
-        self.tela = pygame.Surface([500, 200], SRCALPHA, 32)
-        self.tela = self.tela.convert_alpha()
-        self.tela.fill((255, 255, 255, 95))
+
+        tela = pygame.Surface((500, 200), pygame.SRCALPHA)
+        pygame.draw.rect(tela, (250, 250, 250, 50), tela.get_rect(), 99)
+        self.tela = tela
 
         texto_mensagem = 'Jogo pausado'
         fontesys24 = pygame.font.SysFont('calibri', 24)
