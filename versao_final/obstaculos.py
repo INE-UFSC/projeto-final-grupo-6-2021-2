@@ -55,8 +55,6 @@ class Win(Obstaculo):
     def __init__(self, pos) -> None:
         image = loaded_images.imagens_obtaculos['Win']
         image = pygame.transform.smoothscale(image, (24, 24))
-        image = pygame.transform.smoothscale(
-            image.convert(), (16, 16))
         super().__init__(image, pos)
 
 

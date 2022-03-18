@@ -11,12 +11,12 @@ class LoadedImages(Singleton):
         super().__init__()
         self.tela = pygame.display.set_mode((800, 480))
 
-        self.imagens_obtaculos = {'Spike': pygame.image.load(f'{file_paths.imagens}/FakeSpike01.png'),
-                                  'Win': pygame.image.load(f'{file_paths.imagens}/win.png'),
-                                  'Orb': pygame.image.load(f'{file_paths.imagens}/orb-yellow.png'),
-                                  'Block': pygame.image.load(f'{file_paths.imagens}/block2.png'),
-                                  'Portal': pygame.image.load(f'{file_paths.imagens}/portal.png'),
-                                  'PortalSaida': pygame.image.load(f'{file_paths.imagens}/portal-saida.png')
+        self.imagens_obtaculos = {'Spike': pygame.image.load(f'{file_paths.imagens}/FakeSpike01.png').convert_alpha(),
+                                  'Win': pygame.image.load(f'{file_paths.imagens}/win.png').convert_alpha(),
+                                  'Orb': pygame.image.load(f'{file_paths.imagens}/orb-yellow.png').convert_alpha(),
+                                  'Block': pygame.image.load(f'{file_paths.imagens}/block2.png').convert_alpha(),
+                                  'Portal': pygame.image.load(f'{file_paths.imagens}/portal.png').convert_alpha(),
+                                  'PortalSaida': pygame.image.load(f'{file_paths.imagens}/portal-saida.png').convert_alpha()
                                   }
 
         self.imagens_telas = {
@@ -32,14 +32,14 @@ class LoadedImages(Singleton):
         }
 
         self.skin_nave = pygame.image.load(
-            f"{file_paths.imagens}/nave teste.png")
+            f"{file_paths.imagens}/nave teste.png").convert_alpha()
 
-        self.imagens_skins = {'Padrão': pygame.image.load(f'{file_paths.imagens}/geo.png'),
-                              'Azul': pygame.image.load(f'{file_paths.imagens}/geo blue.jpg'),
-                              'Beta': pygame.image.load(f'{file_paths.imagens}/quadrado preto.png'),
-                              'Mine': pygame.image.load(f'{file_paths.imagens}/mineblock.png'),
-                              'Cubo Mágico': pygame.image.load(f'{file_paths.imagens}/cubomagico.jpg'),
-                              'Pride': pygame.image.load(f'{file_paths.imagens}/pride_skin.png')}
+        self.imagens_skins = {'Padrão': pygame.image.load(f'{file_paths.imagens}/geo.png').convert_alpha(),
+                              'Azul': pygame.image.load(f'{file_paths.imagens}/geo blue.jpg').convert_alpha(),
+                              'Beta': pygame.image.load(f'{file_paths.imagens}/quadrado preto.png').convert_alpha(),
+                              'Mine': pygame.image.load(f'{file_paths.imagens}/mineblock.png').convert_alpha(),
+                              'Cubo Mágico': pygame.image.load(f'{file_paths.imagens}/cubomagico.jpg').convert_alpha(),
+                              'Pride': pygame.image.load(f'{file_paths.imagens}/pride_skin.png').convert_alpha()}
 
         self.miniatura_fases = {
             'Blue': self.__add_imagem('/fase_01_miniatura.png', 100, 60),
@@ -49,23 +49,23 @@ class LoadedImages(Singleton):
         }
 
         self.bg_fase = {
-            'Blue': pygame.image.load(f'{file_paths.imagens}/bg_blue.png'),
-            'Purple': pygame.image.load(f'{file_paths.imagens}/bg_purple.jpg'),
-            'Green': pygame.image.load(f'{file_paths.imagens}/bg_green.png'),
-            'Orange': pygame.image.load(f'{file_paths.imagens}/bg_orange.png'),
+            'Blue': pygame.image.load(f'{file_paths.imagens}/bg_blue.png').convert_alpha(),
+            'Purple': pygame.image.load(f'{file_paths.imagens}/bg_purple.jpg').convert_alpha(),
+            'Green': pygame.image.load(f'{file_paths.imagens}/bg_green.png').convert_alpha(),
+            'Orange': pygame.image.load(f'{file_paths.imagens}/bg_orange.png').convert_alpha(),
 
         }
 
         self.floor_fase = {
-            'Blue': pygame.image.load(f'{file_paths.imagens}/floor_blue.png'),
-            'Purple': pygame.image.load(f'{file_paths.imagens}/floor_purple.png'),
-            'Green': pygame.image.load(f'{file_paths.imagens}/floor_green.png'),
-            'Orange': pygame.image.load(f'{file_paths.imagens}/floor_orange.png'),
+            'Blue': pygame.image.load(f'{file_paths.imagens}/floor_blue.png').convert_alpha(),
+            'Purple': pygame.image.load(f'{file_paths.imagens}/floor_purple.png').convert_alpha(),
+            'Green': pygame.image.load(f'{file_paths.imagens}/floor_green.png').convert_alpha(),
+            'Orange': pygame.image.load(f'{file_paths.imagens}/floor_orange.png').convert_alpha(),
         }
 
     def __add_imagem(self, file_name, size_x, size_y):
         image = pygame.image.load(
-            f'{file_paths.imagens}/{file_name}')
+            f'{file_paths.imagens}/{file_name}').convert_alpha()
         return pygame.transform.smoothscale(
             image.convert(), (size_x, size_y))
 
