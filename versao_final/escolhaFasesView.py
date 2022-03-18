@@ -22,7 +22,7 @@ class EscolhaFasesView(AbstractView):
             x += 150
             if x > 550:
                 x = 250
-                y = 350  # numeros nao testados
+                y = 360  # numeros nao testados
 
         self.lista_botoes.append(
             (Botao(

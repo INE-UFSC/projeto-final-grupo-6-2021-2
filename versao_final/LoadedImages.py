@@ -43,7 +43,8 @@ class LoadedImages(Singleton):
         self.miniatura_fases = {
             'Blue': self.__add_imagem('/fase_01_miniatura.png', 100, 60),
             'Purple': self.__add_imagem('/fase_02_miniatura.png', 100, 60),
-            'Green': self.__add_imagem('/fase_03_miniatura.png', 100, 60)
+            'Green': self.__add_imagem('/fase_03_miniatura.png', 100, 60),
+            'Orange': self.__add_imagem('/orange_miniatura.png', 100, 60)
         }
 
     def __add_imagem(self, file_name, size_x, size_y):
