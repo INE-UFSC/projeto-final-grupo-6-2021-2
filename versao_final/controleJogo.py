@@ -28,7 +28,7 @@ class ControleJogo():
         self.__escolha_fase_view = EscolhaFasesView(
             self.tela, self.__container_fase.fases)
         self.__pause_view = PauseView()
-        self.__partida = Partida(None, self.__jogador, self.tela)
+        self.__partida = Partida(self.__jogador, self.tela)
         self.__updater = Updater(self.__jogador, self.__partida)
         self.__intrucoes_view = InstrucoesView(self.tela)
         self.__menu_skin = MenuSkin(
