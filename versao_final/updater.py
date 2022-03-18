@@ -38,6 +38,8 @@ class Updater():
                 jogador.velocidade.y = 0
                 if self.__jogador.voo:
                     self.__jogador.morte = True
+            if jogador.rect.top <= -20 and jogador.voo:
+                self.__jogador.morte = True
 
             self.__colisor.collide(jogador.velocidade.y, key)
 
