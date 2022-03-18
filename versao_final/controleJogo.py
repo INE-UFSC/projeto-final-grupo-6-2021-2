@@ -182,7 +182,7 @@ class ControleJogo():
                 self.flag_transparencia = True
                 self.perdeu_a_fase()
 
-            index_fase_atual = self.__container_fase.fases.index(self.fase)
+            index_fase_atual = self.__container_fase.fases.index(self.__partida.fase)
             if self.jogador.vitoria and index_fase_atual+1 == len(self.__container_fase.fases):
                 jogando = False
                 self.tela.blit(self.fim_de_jogo.tela, (150, 140)
@@ -272,8 +272,8 @@ class ControleJogo():
             if botao_selecionado == 'Proxima fase':
                 self.jogador.resetar()
                 self.partida.para_musica()
-                index_fase_atual = self.__container_fase.fases.index(self.fase)
-                self.__fase = self.__container_fase.fases[index_fase_atual+1]
+                index_fase_atual = self.__container_fase.fases.index(self.__partida.fase)
+                self.__partida.fase = self.__container_fase.fases[index_fase_atual+1]
                 self.partida.fase = self.__fase
                 self.iniciar_partida()
 
