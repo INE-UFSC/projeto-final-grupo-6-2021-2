@@ -80,9 +80,3 @@ class Orb(Obstaculo):
         image = loaded_images.imagens_obtaculos['Orb']
         image = pygame.transform.smoothscale(image, (24, 24))
         super().__init__(image, pos)
-
-
-class Coin(Obstaculo):
-
-    def __init__(self, image, pos) -> None:
-        super().__init__(image, pos)
