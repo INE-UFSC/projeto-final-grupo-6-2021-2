@@ -33,7 +33,8 @@ class Colisao():
                 None
         '''
 
-        grupo = self.__elementos
+        grupo = self.elementos
+        
         for x in grupo:
             if pygame.sprite.spritecollide(self.jogador, [x], False, pygame.sprite.collide_mask):
                 if isinstance(x, Block):
