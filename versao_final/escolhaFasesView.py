@@ -16,13 +16,13 @@ class EscolhaFasesView(AbstractView):
         x, y = 250, 225
         for fase in lista_fases:
             self.lista_botoes.append(
-                (Botao(self.fundo_botao_fase, x, y, fase.nome, self.fonte_botao,
+                (Botao(self.fundo_botao, x, y, fase.nome, self.fonte_botao,
                        self.COR_BASE_TEXTO, self.COR_MOUSE), lista_fases.index(fase))
             )
             x += 150
             if x > 550:
                 x = 250
-                y = 375  # numeros nao testados
+                y = 350  # numeros nao testados
 
         self.lista_botoes.append(
             (Botao(
@@ -32,6 +32,14 @@ class EscolhaFasesView(AbstractView):
 
     def desenha(self):
         self.tela.blit(self.fundo_tela, (0, 0))
+        x_miniatura, y_miniatura = 200, 140
+        for miniatura in loaded_images.miniatura_fases.values():
+            self.tela.blit(miniatura, (x_miniatura, y_miniatura))
+            x_miniatura += 150
+
+            if x_miniatura > 535:
+                x_miniatura = 200
+                y_miniatura = 275
 
         for botao_tup in self.lista_botoes:
             botao_tup[0].update(self.tela)

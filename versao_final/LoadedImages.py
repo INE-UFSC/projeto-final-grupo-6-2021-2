@@ -40,6 +40,12 @@ class LoadedImages(Singleton):
                               'Mine': pygame.image.load(f'{file_paths.imagens}/mineblock.png'),
                               'Cubo Mágico': pygame.image.load(f'{file_paths.imagens}/cubomagico.jpg')}
 
+        self.miniatura_fases = {
+            'Blue': self.__add_imagem('/fase_01_miniatura.png', 100, 60),
+            'Purple': self.__add_imagem('/fase_02_miniatura.png', 100, 60),
+            'Green': self.__add_imagem('/fase_03_miniatura.png', 100, 60)
+        }
+
     def __add_imagem(self, file_name, size_x, size_y):
         image = pygame.image.load(
             f'{file_paths.imagens}/{file_name}')
