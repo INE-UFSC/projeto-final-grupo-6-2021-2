@@ -1,5 +1,4 @@
 from fase import Fase
-import os
 from filePaths import file_paths
 
 
