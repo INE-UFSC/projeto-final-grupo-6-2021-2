@@ -3,7 +3,6 @@ import pygame
 
 
 class Botao():
-    # FALTA ENCAPSULAR
     def __init__(self, imagem, x_pos, y_pos, mensagem, fonte,
                  cor_base_texto, cor_mouse):
         self.imagem = imagem

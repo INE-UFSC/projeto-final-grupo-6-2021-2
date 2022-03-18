@@ -8,15 +8,16 @@ class EscolhaFasesView(AbstractView):
 
     def __init__(self, tela, lista_fases) -> None:
         super().__init__(tela, 'Menu_fases')
-
         self.lista_botoes = []
         self.miniaturas = []
+
         x, y = 250, 225
         for fase in lista_fases:
             self.miniaturas.append(fase.miniatura)
             self.lista_botoes.append(
                 (Botao(self.fundo_botao, x, y, fase.nome, self.fonte_botao,
-                       self.COR_BASE_TEXTO, self.COR_MOUSE), lista_fases.index(fase))
+                       self.COR_BASE_TEXTO, self.COR_MOUSE),
+                 lista_fases.index(fase))
             )
             x += 150
             if x > 550:
@@ -25,9 +26,9 @@ class EscolhaFasesView(AbstractView):
 
         self.lista_botoes.append(
             (Botao(
-                self.fundo_botao, 55, 25, 'Voltar', self.fonte_botao, self.COR_BASE_TEXTO, self.COR_MOUSE), 'Voltar')
+                self.fundo_botao, 55, 25, 'Voltar', self.fonte_botao,
+                self.COR_BASE_TEXTO, self.COR_MOUSE), 'Voltar')
         )
-        # BOTÕES: jogar, skins, instrucoes, sair
 
     def desenha(self):
         self.tela.blit(self.fundo_tela, (0, 0))
@@ -44,4 +45,4 @@ class EscolhaFasesView(AbstractView):
             botao_tup[0].update(self.tela)
             botao_tup[0].muda_cor()
 
-        pygame.display.update()  # tela
+        pygame.display.update()

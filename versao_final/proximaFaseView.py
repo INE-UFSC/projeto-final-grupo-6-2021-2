@@ -20,16 +20,20 @@ class ProximaFaseView(AbstractView):
         self.lista_botoes = [
             Botao(imagem=self.fundo_botao_grande, x_pos=240, y_pos=280,
                   mensagem='Proxima fase', fonte=self.fonte_botao,
-                  cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE),
+                  cor_base_texto=self.COR_BASE_TEXTO,
+                  cor_mouse=self.COR_MOUSE),
             Botao(imagem=self.fundo_botao, x_pos=360, y_pos=280,
                   mensagem='Reiniciar', fonte=self.fonte_botao,
-                  cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE),
+                  cor_base_texto=self.COR_BASE_TEXTO,
+                  cor_mouse=self.COR_MOUSE),
             Botao(imagem=self.fundo_botao, x_pos=470, y_pos=280,
                   mensagem='Menu', fonte=self.fonte_botao,
-                  cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE),
+                  cor_base_texto=self.COR_BASE_TEXTO,
+                  cor_mouse=self.COR_MOUSE),
             Botao(imagem=self.fundo_botao, x_pos=580, y_pos=280,
                   mensagem='Sair', fonte=self.fonte_botao,
-                  cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE)
+                  cor_base_texto=self.COR_BASE_TEXTO,
+                  cor_mouse=self.COR_MOUSE)
         ]
 
     def desenha_mensagem(self, tela):

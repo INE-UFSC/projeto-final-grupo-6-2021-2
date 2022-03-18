@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 from botao_menu import Botao
-from LoadedImages import loaded_images
 from abstractView import AbstractView
 
 
@@ -21,16 +20,20 @@ class PauseView(AbstractView):
         self.lista_botoes = [
             Botao(imagem=self.fundo_botao, x_pos=240, y_pos=280,
                   mensagem='Continuar', fonte=self.fonte_botao,
-                  cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE),
+                  cor_base_texto=self.COR_BASE_TEXTO,
+                  cor_mouse=self.COR_MOUSE),
             Botao(imagem=self.fundo_botao, x_pos=350, y_pos=280,
                   mensagem='Menu', fonte=self.fonte_botao,
-                  cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE),
+                  cor_base_texto=self.COR_BASE_TEXTO,
+                  cor_mouse=self.COR_MOUSE),
             Botao(imagem=self.fundo_botao, x_pos=460, y_pos=280,
                   mensagem='Reiniciar', fonte=self.fonte_botao,
-                  cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE),
+                  cor_base_texto=self.COR_BASE_TEXTO,
+                  cor_mouse=self.COR_MOUSE),
             Botao(imagem=self.fundo_botao, x_pos=570, y_pos=280,
                   mensagem='Sair', fonte=self.fonte_botao,
-                  cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE),
+                  cor_base_texto=self.COR_BASE_TEXTO,
+                  cor_mouse=self.COR_MOUSE),
         ]
 
     def desenha_mensagem(self, tela):

@@ -23,13 +23,16 @@ class FimDeJogoView(AbstractView):
         self.lista_botoes = [
             Botao(imagem=self.fundo_botao, x_pos=300, y_pos=280,
                   mensagem='Reiniciar', fonte=self.fonte_botao,
-                  cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE),
+                  cor_base_texto=self.COR_BASE_TEXTO,
+                  cor_mouse=self.COR_MOUSE),
             Botao(imagem=self.fundo_botao, x_pos=410, y_pos=280,
                   mensagem='Menu', fonte=self.fonte_botao,
-                  cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE),
+                  cor_base_texto=self.COR_BASE_TEXTO,
+                  cor_mouse=self.COR_MOUSE),
             Botao(imagem=self.fundo_botao, x_pos=520, y_pos=280,
                   mensagem='Sair', fonte=self.fonte_botao,
-                  cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE),
+                  cor_base_texto=self.COR_BASE_TEXTO,
+                  cor_mouse=self.COR_MOUSE),
         ]
 
     def desenha_mensagem(self, tela):

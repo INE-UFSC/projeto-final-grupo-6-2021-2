@@ -16,7 +16,7 @@ class MenuSkin(AbstractView):
 
         self.lista_botoes = []
 
-        # aviso: view nao automatizada para terceira linha.
+        # Aviso: view nao automatizada para terceira linha.
         for skin in lista_skins:
             if skin.nome == 'Cubo Mágico':
                 fundo_botao_grande = loaded_images.imagens_botoes['Ret_select_rosa_120']
@@ -41,12 +41,11 @@ class MenuSkin(AbstractView):
                    cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE), 'Voltar'))
 
     def __converte(self, arquivo, size_x, size_y):
-        # imagem = pygame.image.load( f"{file_paths.imagens}/{arquivo}")
         return pygame.transform.smoothscale(
             arquivo.convert(), (size_x, size_y))
 
     def seleciona_skin(self, skin):
-        '''recebe imagem loaded'''
+        '''Recebe imagem da skin loaded e muda atributo self.skin'''
         self.__skin_selec = skin
         return skin
 
