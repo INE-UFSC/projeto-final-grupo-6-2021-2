@@ -1,6 +1,5 @@
 import pygame
 from pygame.locals import *
-from pygame import mixer
 import os
 from jogador import Jogador
 from fase import Fase

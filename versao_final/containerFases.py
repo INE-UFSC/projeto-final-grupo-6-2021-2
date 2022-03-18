@@ -6,7 +6,7 @@ from LoadedImages import loaded_images
 class ContainerFases():
 
     def __init__(self) -> None:
-        self.fases = [
+        self.__fases = [
             Fase('Fase 1',
                  f'{file_paths.musicas}/undertale-megalovania.mp3',
                  f'{file_paths.mapas}/mapa_teste4.json',
@@ -34,5 +34,8 @@ class ContainerFases():
                  loaded_images.floor_fase['Orange'],
                  loaded_images.miniatura_fases['Orange'],
                  volume=0.2)
-
         ]
+
+    @property
+    def fases(self):
+        return self.__fases

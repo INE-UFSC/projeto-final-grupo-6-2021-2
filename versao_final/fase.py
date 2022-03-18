@@ -9,8 +9,6 @@ class Fase():
         self.__arquivo = arquivo
         self.__volume_musica = volume
         self.__bg = bg
-        # self.__bg = pygame.transform.smoothscale(
-        #    self.__bg.convert(), (1000, 480))
         self.mapa = self.mapear_fase()
         self.floor = floor
         self.miniatura = miniatura
@@ -39,8 +37,8 @@ class Fase():
     def bg(self, valor):
         self.__bg = valor
 
-    def mapear_fase(self):
-        # Carrega a lista com os dados do mapa e converte em uma matriz
+    def mapear_fase(self) -> list:
+        '''Carrega a lista com os dados do mapa e converte em uma matriz'''
         with open(self.arquivo) as f:
             data = json.load(f)
             linha = []
