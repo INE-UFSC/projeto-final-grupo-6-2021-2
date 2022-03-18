@@ -166,7 +166,7 @@ class Jogador(pygame.sprite.Sprite):
     def pular(self):
         self.pulando = True
         self.velocidade.y = - self.forca_pulo
-        if not self.voo:      
+        if not self.voo:
             self.image, self.rect = self.rotate(self.image, self.rect, -90)
 
     def rotate(self, image, rect, angulo):
@@ -223,7 +223,6 @@ class Jogador(pygame.sprite.Sprite):
     def parar_jogador(self):
         self.velocidade = Vector2(0, 0)
         self.pulando = False
-        self.nochao = True
 
     def continuar_jogador(self):
         self.velocidade = Vector2(3, 0)

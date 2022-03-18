@@ -1,19 +1,19 @@
 import pygame
 from pygame.locals import *
-from fimDeFaseView import fimDeFaseView
+from fimDeFaseView import FimDeFaseView
 from jogador import Jogador
 from partida import Partida
 from menuView import menuView
 from updater import Updater
 from escolhaFasesView import EscolhaFasesView
-from pauseView import pauseView
+from pauseView import PauseView
 from menuSkin import MenuSkin
 from LoadedImages import loaded_images
 from containerSkins import ContainerSkins
 from instrucoesView import InstrucoesView
 from containerFases import ContainerFases
-from proximaFaseView import proximaFaseView
-from fimDeJogoView import fimDeJogoView
+from proximaFaseView import ProximaFaseView
+from fimDeJogoView import FimDeJogoView
 
 
 class ControleJogo():
@@ -27,15 +27,15 @@ class ControleJogo():
         self.__menu_view = menuView(self.tela)
         self.__escolha_fase_view = EscolhaFasesView(
             self.tela, self.__container_fase.fases)
-        self.__pause_view = pauseView()
+        self.__pause_view = PauseView()
         self.__partida = Partida(None, self.__jogador, self.tela)
         self.__updater = Updater(self.__jogador, self.__partida)
         self.__intrucoes_view = InstrucoesView(self.tela)
         self.__menu_skin = MenuSkin(
             self.tela, self.__container_skin.skins_quadrado)
-        self.fim_de_fase = fimDeFaseView()
-        self.proxima_fase = proximaFaseView()
-        self.fim_de_jogo = fimDeJogoView()
+        self.__fim_de_fase = FimDeFaseView()
+        self.__proxima_fase = ProximaFaseView()
+        self.__fim_de_jogo = FimDeJogoView()
         self.flag_transparencia = False
 
         self.FPS = 60
@@ -177,22 +177,23 @@ class ControleJogo():
 
             if self.jogador.morte:
                 jogando = False
-                self.tela.blit(self.fim_de_fase.tela, (150, 140)
+                self.tela.blit(self.__fim_de_fase.tela, (150, 140)
                                ) if not self.flag_transparencia else None
                 self.flag_transparencia = True
                 self.perdeu_a_fase()
 
-            index_fase_atual = self.__container_fase.fases.index(self.__partida.fase)
+            index_fase_atual = self.__container_fase.fases.index(
+                self.__partida.fase)
             if self.jogador.vitoria and index_fase_atual+1 == len(self.__container_fase.fases):
                 jogando = False
-                self.tela.blit(self.fim_de_jogo.tela, (150, 140)
+                self.tela.blit(self.__fim_de_jogo.tela, (150, 140)
                                ) if not self.flag_transparencia else None
                 self.flag_transparencia = True
                 self.terminou_o_jogo()
 
             if self.jogador.vitoria and not index_fase_atual+1 == len(self.__container_fase.fases):
                 jogando = False
-                self.tela.blit(self.proxima_fase.tela, (150, 140)
+                self.tela.blit(self.__proxima_fase.tela, (150, 140)
                                ) if not self.flag_transparencia else None
                 self.flag_transparencia = True
                 self.passou_de_fase()
@@ -218,8 +219,8 @@ class ControleJogo():
 
     def perdeu_a_fase(self):
         self.partida.para_musica()
-        self.fim_de_fase.desenha_mensagem(self.tela)
-        self.fim_de_fase.desenha(self.tela)
+        self.__fim_de_fase.desenha_mensagem(self.tela)
+        self.__fim_de_fase.desenha(self.tela)
         botao_selecionado = False
 
         for event in pygame.event.get():
@@ -231,7 +232,7 @@ class ControleJogo():
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:
                     botao_selecionado = next(
-                        (botao.mensagem for botao in self.fim_de_fase.lista_botoes if botao.is_clicked()), False)
+                        (botao.mensagem for botao in self.__fim_de_fase.lista_botoes if botao.is_clicked()), False)
 
         if botao_selecionado:
             if botao_selecionado == 'Menu':
@@ -253,8 +254,8 @@ class ControleJogo():
 
     def passou_de_fase(self):
         self.partida.para_musica()
-        self.proxima_fase.desenha_mensagem(self.tela)
-        self.proxima_fase.desenha(self.tela)
+        self.__proxima_fase.desenha_mensagem(self.tela)
+        self.__proxima_fase.desenha(self.tela)
         botao_selecionado = False
 
         for event in pygame.event.get():
@@ -266,13 +267,14 @@ class ControleJogo():
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:
                     botao_selecionado = next(
-                        (botao.mensagem for botao in self.proxima_fase.lista_botoes if botao.is_clicked()), False)
+                        (botao.mensagem for botao in self.__proxima_fase.lista_botoes if botao.is_clicked()), False)
 
         if botao_selecionado:
             if botao_selecionado == 'Proxima fase':
                 self.jogador.resetar()
                 self.partida.para_musica()
-                index_fase_atual = self.__container_fase.fases.index(self.__partida.fase)
+                index_fase_atual = self.__container_fase.fases.index(
+                    self.__partida.fase)
                 self.__partida.fase = self.__container_fase.fases[index_fase_atual+1]
                 self.partida.fase = self.__fase
                 self.iniciar_partida()
@@ -296,8 +298,8 @@ class ControleJogo():
 
     def terminou_o_jogo(self):
         self.partida.para_musica()
-        self.fim_de_jogo.desenha_mensagem(self.tela)
-        self.fim_de_jogo.desenha(self.tela)
+        self.__fim_de_jogo.desenha_mensagem(self.tela)
+        self.__fim_de_jogo.desenha(self.tela)
         botao_selecionado = False
 
         for event in pygame.event.get():
@@ -309,7 +311,7 @@ class ControleJogo():
             if event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:
                     botao_selecionado = next(
-                        (botao.mensagem for botao in self.fim_de_jogo.lista_botoes if botao.is_clicked()), False)
+                        (botao.mensagem for botao in self.__fim_de_jogo.lista_botoes if botao.is_clicked()), False)
 
         if botao_selecionado:
             if botao_selecionado == 'Reiniciar':
@@ -332,6 +334,7 @@ class ControleJogo():
     def pausar_jogo(self):
         self.partida.pausa_musica()
         self.jogador.parar_jogador()
+        self.__pause_view.desenha_mensagem(self.partida.tela)
         self.__pause_view.desenha(self.partida.tela)
         botao_selecionado = False
 
