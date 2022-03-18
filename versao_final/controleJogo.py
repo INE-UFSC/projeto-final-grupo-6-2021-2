@@ -276,7 +276,6 @@ class ControleJogo():
                 index_fase_atual = self.__container_fase.fases.index(
                     self.__partida.fase)
                 self.__partida.fase = self.__container_fase.fases[index_fase_atual+1]
-                self.partida.fase = self.__fase
                 self.iniciar_partida()
 
             if botao_selecionado == 'Menu':
