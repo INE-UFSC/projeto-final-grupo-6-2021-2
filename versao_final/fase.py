@@ -50,7 +50,7 @@ class Fase():
                 linha.append(x)
                 count += 1
                 # Json cria apenas uma lista unidimensional, o mapa tem 320 quadrados em uma linha, portanto transformo em uma matriz
-                if count == 360:
+                if count == 500:
                     count = 0
                     mapa.append(linha[:])
                     linha.clear()
