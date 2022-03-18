@@ -5,7 +5,6 @@ Este jogo tem como modelo o estilo de jogo de Geometry Dash, tendo jogabilidade 
 ## Instruções de jogo
 
 > **Pular:** Para pular você deve apertar a tecla `ESPAÇO` do teclado. <br>
-> **Reiniciar fase:** Para reiniciar a fase atual você deve apertar a tecla `R` do teclado. <br>
 > **Fechar o jogo:** Para fechar o jogo você deve apertar a tecla `ESC` do teclado. <br>
 
 ## Instalação
