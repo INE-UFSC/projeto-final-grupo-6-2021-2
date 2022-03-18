@@ -28,7 +28,8 @@ class LoadedImages(Singleton):
 
         self.imagens_botoes = {
             'Ret_fase': self.__add_imagem('/menu_view/ret_menu.png', 100, 100),
-            'Ret_select_rosa': self.__add_imagem('/menu_view/ret_menu.png', 100, 30)
+            'Ret_select_rosa': self.__add_imagem('/menu_view/ret_menu.png', 100, 30),
+            'Ret_select_rosa_120': self.__add_imagem('/menu_view/ret_menu.png', 120, 30),
         }
 
         self.skin_nave = pygame.image.load(
