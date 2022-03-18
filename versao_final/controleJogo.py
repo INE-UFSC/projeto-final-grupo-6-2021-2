@@ -218,6 +218,7 @@ class ControleJogo():
 
     def perdeu_a_fase(self):
         self.partida.para_musica()
+        self.fim_de_fase.desenha_mensagem(self.tela)
         self.fim_de_fase.desenha(self.tela)
         botao_selecionado = False
 
@@ -252,6 +253,7 @@ class ControleJogo():
 
     def passou_de_fase(self):
         self.partida.para_musica()
+        self.proxima_fase.desenha_mensagem(self.tela)
         self.proxima_fase.desenha(self.tela)
         botao_selecionado = False
 
@@ -294,6 +296,7 @@ class ControleJogo():
 
     def terminou_o_jogo(self):
         self.partida.para_musica()
+        self.fim_de_jogo.desenha_mensagem(self.tela)
         self.fim_de_jogo.desenha(self.tela)
         botao_selecionado = False
 
