@@ -1,6 +1,5 @@
 import os
 from singleton import Singleton
-import pygame
 from pygame.locals import *
 
 

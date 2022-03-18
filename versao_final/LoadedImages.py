@@ -1,4 +1,3 @@
-import os
 from singleton import Singleton
 import pygame
 from pygame.locals import *
@@ -20,16 +19,20 @@ class LoadedImages(Singleton):
                                   }
 
         self.imagens_telas = {
-            'Menu_skin': self.__add_imagem('/menu_view/fundo_menuskins.png', 800, 480),
-            'Menu_principal': self.__add_imagem('/menu_view/fundo_menu.png', 800, 480),
-            'Menu_fases': self.__add_imagem('/menu_view/tela_fases.png', 800, 500),
-            'Menu_instrucoes': self.__add_imagem('/menu_view/fundo_instrucoes.png', 800, 480)
-        }
+            'Menu_skin': self.__add_imagem(
+                '/menu_view/fundo_menuskins.png', 800, 480),
+            'Menu_principal': self.__add_imagem(
+                '/menu_view/fundo_menu.png', 800, 480),
+            'Menu_fases': self.__add_imagem(
+                '/menu_view/tela_fases.png', 800, 500),
+            'Menu_instrucoes': self.__add_imagem(
+                '/menu_view/fundo_instrucoes.png', 800, 480)}
 
         self.imagens_botoes = {
-            'Ret_select_rosa': self.__add_imagem('/menu_view/ret_menu.png', 100, 30),
-            'Ret_select_rosa_120': self.__add_imagem('/menu_view/ret_menu.png', 120, 30),
-        }
+            'Ret_select_rosa': self.__add_imagem(
+                '/menu_view/ret_menu.png', 100, 30),
+            'Ret_select_rosa_120': self.__add_imagem(
+                '/menu_view/ret_menu.png', 120, 30), }
 
         self.skin_nave = pygame.image.load(
             f"{file_paths.imagens}/nave teste.png").convert_alpha()
