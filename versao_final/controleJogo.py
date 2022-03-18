@@ -50,6 +50,7 @@ class ControleJogo():
 
     def inicio_jogo(self):
         clock = pygame.time.Clock()
+        pygame.display.set_caption('Pymetry Dash Menu')
         while True:
             self.__menu_view.desenha()
 
@@ -80,6 +81,7 @@ class ControleJogo():
 
     def mostra_intrucoes(self):
         clock = pygame.time.Clock()
+        pygame.display.set_caption('Menu Instruções')
         while True:
             self.__intrucoes_view.desenha()
 
@@ -96,6 +98,7 @@ class ControleJogo():
 
     def selecao_skin(self):
         clock = pygame.time.Clock()
+        pygame.display.set_caption('Menu Seleção de Skin')
         while True:
             self.__menu_skin.desenha()
 
@@ -119,6 +122,7 @@ class ControleJogo():
 
     def escolha_fase(self):
         clock = pygame.time.Clock()
+        pygame.display.set_caption('Menu Escolha de Fase')
         while True:
             self.__escolha_fase_view.desenha()
             for event in pygame.event.get():
@@ -142,6 +146,7 @@ class ControleJogo():
 
     def iniciar_partida(self):
         clock = pygame.time.Clock()
+        pygame.display.set_caption('Pymetry Dash')
         self.jogador.muda_skin(self.jogador.skin_atual)
         self.partida.inicia()
 

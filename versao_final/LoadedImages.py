@@ -39,7 +39,7 @@ class LoadedImages(Singleton):
 
         self.imagens_skins = {'Padrão': pygame.image.load(f'{file_paths.imagens}/geo.png').convert_alpha(),
                               'Azul': pygame.image.load(f'{file_paths.imagens}/geo blue.jpg').convert_alpha(),
-                              'Beta': pygame.image.load(f'{file_paths.imagens}/quadrado preto.png').convert_alpha(),
+                              'Glitch': pygame.image.load(f'{file_paths.imagens}/glitch.jpg').convert_alpha(),
                               'Mine': pygame.image.load(f'{file_paths.imagens}/mineblock.png').convert_alpha(),
                               'Cubo Mágico': pygame.image.load(f'{file_paths.imagens}/cubomagico.jpg').convert_alpha(),
                               'Pride': pygame.image.load(f'{file_paths.imagens}/pride_skin.png').convert_alpha()}

@@ -7,7 +7,7 @@ class ContainerSkins():
         self.skins_quadrado = [
             Skin('Padrão', loaded_images.imagens_skins['Padrão']),
             Skin('Azul', loaded_images.imagens_skins['Azul']),
-            Skin('Beta', loaded_images.imagens_skins['Beta']),
+            Skin('Glitch', loaded_images.imagens_skins['Glitch']),
             Skin('Mine', loaded_images.imagens_skins['Mine']),
             Skin('Cubo Mágico', loaded_images.imagens_skins['Cubo Mágico']),
             Skin('Pride', loaded_images.imagens_skins['Pride'])
