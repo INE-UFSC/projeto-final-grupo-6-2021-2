@@ -212,8 +212,7 @@ class ControleJogo():
                 self.partida.desenhar_elementos()
                 self.__updater.update_partida(self.jogador.velocidade.x)
                 jogador_group.draw(self.partida.tela)
-                self.__updater.update_jogador(
-                    self.partida.elementos, keys_pressed)
+                self.__updater.update_jogador(keys_pressed)
 
             clock.tick(self.FPS)
 

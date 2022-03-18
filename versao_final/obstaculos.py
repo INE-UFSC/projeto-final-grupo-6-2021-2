@@ -1,8 +1,6 @@
 from abc import ABC
-from json import load
 import pygame
 from pygame.locals import *
-from filePaths import file_paths
 from LoadedImages import loaded_images
 
 

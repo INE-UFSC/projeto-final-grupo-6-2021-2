@@ -21,9 +21,19 @@ class Colisao():
     def elementos(self):
         return self.__elementos
 
-    def collide(self, yvel, keys):
+    def collide(self, yvel, keys) -> None:
+        '''
+        Verifica a colisão do jogador com os objetos em tela.
+
+            Parameters:
+                yvel (int): Velocidade do jogador na ordenada
+                keys (int): Tecla clicada no teclado
+
+            Returns:
+                None
+        '''
+
         grupo = self.__elementos
-        # Verificação das colisões
         for x in grupo:
             if pygame.sprite.spritecollide(self.jogador, [x], False, pygame.sprite.collide_mask):
                 if isinstance(x, Block):
@@ -56,17 +66,17 @@ class Colisao():
                     self.jogador.forca_pulo = 10
                     self.jogador.pular()
                     self.jogador.forca_pulo = 8.5
-                
+
                 if isinstance(x, Portal):
-                        self.jogador.transforma_nave()
-                        self.jogador.velocidade.y = 0
-                        self.jogador.forca_pulo = 3
-                        self.jogador.voo = True
-                        self.jogador.gravidade = 0.2
+                    self.jogador.transforma_nave()
+                    self.jogador.velocidade.y = 0
+                    self.jogador.forca_pulo = 3
+                    self.jogador.voo = True
+                    self.jogador.gravidade = 0.2
 
                 if isinstance(x, PortalSaida):
-                        self.jogador.transforma_jogador()
-                        self.jogador.velocidade.y = 0
-                        self.jogador.voo = False
-                        self.jogador.gravidade = 0.7
-                        self.jogador.forca_pulo = 8.5
+                    self.jogador.transforma_jogador()
+                    self.jogador.velocidade.y = 0
+                    self.jogador.voo = False
+                    self.jogador.gravidade = 0.7
+                    self.jogador.forca_pulo = 8.5
