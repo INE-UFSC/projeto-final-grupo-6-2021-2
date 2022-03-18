@@ -48,6 +48,21 @@ class LoadedImages(Singleton):
             'Orange': self.__add_imagem('/orange_miniatura.png', 100, 60)
         }
 
+        self.bg_fase = {
+            'Blue': pygame.image.load(f'{file_paths.imagens}/bg_blue.png'),
+            'Purple': pygame.image.load(f'{file_paths.imagens}/bg_purple.jpg'),
+            'Green': pygame.image.load(f'{file_paths.imagens}/bg_green.png'),
+            'Orange': pygame.image.load(f'{file_paths.imagens}/bg_orange.png'),
+
+        }
+
+        self.floor_fase = {
+            'Blue': pygame.image.load(f'{file_paths.imagens}/floor_blue.png'),
+            'Purple': pygame.image.load(f'{file_paths.imagens}/floor_purple.png'),
+            'Green': pygame.image.load(f'{file_paths.imagens}/floor_green.png'),
+            'Orange': pygame.image.load(f'{file_paths.imagens}/floor_orange.png'),
+        }
+
     def __add_imagem(self, file_name, size_x, size_y):
         image = pygame.image.load(
             f'{file_paths.imagens}/{file_name}')

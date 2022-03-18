@@ -1,4 +1,3 @@
-import pygame
 import json
 
 
@@ -9,11 +8,11 @@ class Fase():
         self.__musica = musica
         self.__arquivo = arquivo
         self.__volume_musica = volume
-        self.__bg = pygame.image.load(bg)
+        self.__bg = bg
         # self.__bg = pygame.transform.smoothscale(
         #    self.__bg.convert(), (1000, 480))
         self.mapa = self.mapear_fase()
-        self.floor = pygame.image.load(floor)
+        self.floor = floor
         self.miniatura = miniatura
 
     @property
