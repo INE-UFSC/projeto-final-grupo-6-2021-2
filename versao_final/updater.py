@@ -9,6 +9,18 @@ class Updater():
         self.__colisor = Colisao(
             self.__jogador, self.__partida.tela, self.__partida.elementos)
 
+    @property
+    def jogador(self):
+        return self.__jogador
+    
+    @property
+    def partida(self):
+        return self.__partida
+
+    @property
+    def colisor(self):
+        return self.__colisor
+    
     def update_jogador(self, key) -> None:
         '''
         Atualiza o jogador em cima da gravidade e das colisões que ele faz.
@@ -19,29 +31,33 @@ class Updater():
             Returns:
                 None
         '''
-        jogador = self.__jogador
+        jogador = self.jogador
+        colisor = self.colisor
 
         # Caso não encoste no chão, a gravidade começa a agir no jogador
         if not jogador.morte:
             if not jogador.nochao:
                 jogador.velocidade.y += jogador.gravidade
                 # Verifica colisão no eixo X
-                self.__colisor.collide(0, key)
+                colisor.collide(0, key)
 
             jogador.rect.top += jogador.velocidade.y
             jogador.nochao = False
 
-            # Verifica colisão no eixo Y
+            #Define um chão
             if jogador.rect.bottom >= 456:
                 jogador.nochao = True
                 jogador.rect.bottom = 456
                 jogador.velocidade.y = 0
-                if self.__jogador.voo:
-                    self.__jogador.morte = True
+                if jogador.voo:
+                   jogador.morte = True
+            
+            #Não deixa o modo voador passar do teto
             if jogador.rect.top <= -20 and jogador.voo:
-                self.__jogador.morte = True
+                jogador.morte = True
 
-            self.__colisor.collide(jogador.velocidade.y, key)
+            # Verifica colisão no eixo Y
+            colisor.collide(jogador.velocidade.y, key)
 
     def update_partida(self, velocidade) -> None:
         '''
@@ -53,8 +69,8 @@ class Updater():
             Returns:
                 None
         '''
-        for sprite in self.__partida.elementos:
+        for sprite in self.partida.elementos:
             sprite.rect.x -= velocidade
-        self.__partida.floor_x -= velocidade
-        if self.__partida.floor_x <= -990:
-            self.__partida.floor_x = 0
+        self.partida.floor_x -= velocidade
+        if self.partida.floor_x <= -990:
+            self.partida.floor_x = 0
