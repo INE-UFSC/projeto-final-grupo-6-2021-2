@@ -4,7 +4,7 @@ import json
 
 class Fase():
 
-    def __init__(self, nome, musica, arquivo, bg, floor, volume=1) -> None:
+    def __init__(self, nome, musica, arquivo, bg, floor, miniatura, volume=1) -> None:
         self.__nome = nome
         self.__musica = musica
         self.__arquivo = arquivo
@@ -14,6 +14,7 @@ class Fase():
         #    self.__bg.convert(), (1000, 480))
         self.mapa = self.mapear_fase()
         self.floor = pygame.image.load(floor)
+        self.miniatura = miniatura
 
     @property
     def nome(self):
