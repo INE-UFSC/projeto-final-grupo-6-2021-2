@@ -1,4 +1,3 @@
-
 class Skin():
 
     def __init__(self, nome: str, arquivo: str):

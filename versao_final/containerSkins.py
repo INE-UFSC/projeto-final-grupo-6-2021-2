@@ -4,7 +4,6 @@ from LoadedImages import loaded_images
 
 class ContainerSkins():
     def __init__(self) -> None:
-        # Skin('Nave', 'nave teste.png')
         self.skins_quadrado = [
             Skin('Padrão', loaded_images.imagens_skins['Padrão']),
             Skin('Azul', loaded_images.imagens_skins['Azul']),
