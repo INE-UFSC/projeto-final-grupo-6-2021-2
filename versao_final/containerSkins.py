@@ -10,7 +10,8 @@ class ContainerSkins():
             Skin('Azul', loaded_images.imagens_skins['Azul']),
             Skin('Beta', loaded_images.imagens_skins['Beta']),
             Skin('Mine', loaded_images.imagens_skins['Mine']),
-            Skin('Cubo Mágico', loaded_images.imagens_skins['Cubo Mágico'])
+            Skin('Cubo Mágico', loaded_images.imagens_skins['Cubo Mágico']),
+            Skin('Pride', loaded_images.imagens_skins['Pride'])
         ]
 
         self.skin_nave = Skin('Nave', loaded_images.skin_nave)

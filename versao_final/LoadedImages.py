@@ -38,7 +38,8 @@ class LoadedImages(Singleton):
                               'Azul': pygame.image.load(f'{file_paths.imagens}/geo blue.jpg'),
                               'Beta': pygame.image.load(f'{file_paths.imagens}/quadrado preto.png'),
                               'Mine': pygame.image.load(f'{file_paths.imagens}/mineblock.png'),
-                              'Cubo Mágico': pygame.image.load(f'{file_paths.imagens}/cubomagico.jpg')}
+                              'Cubo Mágico': pygame.image.load(f'{file_paths.imagens}/cubomagico.jpg'),
+                              'Pride': pygame.image.load(f'{file_paths.imagens}/pride_skin.png')}
 
         self.miniatura_fases = {
             'Blue': self.__add_imagem('/fase_01_miniatura.png', 100, 60),
