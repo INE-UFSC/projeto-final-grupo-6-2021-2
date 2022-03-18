@@ -18,10 +18,17 @@ class MenuSkin(AbstractView):
 
         # aviso: view nao automatizada para terceira linha.
         for skin in lista_skins:
-            self.lista_botoes.append(
-                (Botao(imagem=self.fundo_botao, x_pos=x_botao, y_pos=y_botao,
-                       mensagem=skin.nome, fonte=self.fonte_botao,
-                       cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE), lista_skins.index(skin)))
+            if skin.nome == 'Cubo Mágico':
+                fundo_botao_grande = loaded_images.imagens_botoes['Ret_select_rosa_120']
+                self.lista_botoes.append(
+                    (Botao(imagem=fundo_botao_grande, x_pos=x_botao, y_pos=y_botao,
+                           mensagem=skin.nome, fonte=self.fonte_botao,
+                           cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE), lista_skins.index(skin)))
+            else:
+                self.lista_botoes.append(
+                    (Botao(imagem=self.fundo_botao, x_pos=x_botao, y_pos=y_botao,
+                           mensagem=skin.nome, fonte=self.fonte_botao,
+                           cor_base_texto=self.COR_BASE_TEXTO, cor_mouse=self.COR_MOUSE), lista_skins.index(skin)))
 
             x_botao += 150
             if x_botao > 550:
