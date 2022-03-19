@@ -1,11 +1,11 @@
-# Grupo 6 - Jogo baseado no Geometry Dash
+# Grupo 6 - Pymetry Dash
 
 Este jogo tem como modelo o estilo de jogo de Geometry Dash, tendo jogabilidade similiar. O jogador precisa atravessar uma série de obstáculos, sem colisão e assim conseguir chegar ao final da fase.
 
 ## Instruções de jogo
 
 > **Pular:** Para pular você deve apertar a tecla `ESPAÇO` do teclado. <br>
-> **Fechar o jogo:** Para fechar o jogo você deve apertar a tecla `ESC` do teclado. <br>
+> **Pausar o jogo:** Para pausa o jogo você deve apertar a tecla `ESC` do teclado. <br>
 
 ## Instalação
 
