@@ -33,7 +33,7 @@ class ContainerFases():
                  loaded_images.bg_fase['Orange'],
                  loaded_images.floor_fase['Orange'],
                  loaded_images.miniatura_fases['Orange'],
-                 volume=0.5)
+                 volume=0.4)
 
         ]
 
